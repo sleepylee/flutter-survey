@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
+import 'flavors.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(SurveyApp());
 }
 
-class MyApp extends StatelessWidget {
+class SurveyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: F.title,
       theme: ThemeData(
         // This is the theme of your application.
         //
