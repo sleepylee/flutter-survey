@@ -9,4 +9,4 @@ A survey conducting platform built with Flutter
    
    - Staging: `$ flutter run --flavor staging`
    
-   - Production: `$ flutter run --flavor staging`
+   - Production: `$ flutter run --flavor production`
