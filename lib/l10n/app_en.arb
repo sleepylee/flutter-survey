@@ -1,0 +1,22 @@
+{
+  "titleGeneralEmail": "Email",
+  "@titleGeneralEmail": {
+    "description": "Label of the Email text form field"
+  },
+  "titleGeneralPassword": "Password",
+  "@titleGeneralPassword": {
+    "description": "Label of the Password text form field"
+  },
+  "buttonLogin": "Login",
+  "@buttonLogin": {
+    "description": "Label of the Login button"
+  },
+  "errorValidationEmailEmpty": "Please enter your email",
+  "@errorValidationEmailEmpty": {
+    "description": "Error message when Email is empty"
+  },
+  "errorValidationEmailInvalid": "Please enter a valid email",
+  "@errorValidationEmailInvalid": {
+    "description": "Error message when Email is invalid"
+  }
+}
