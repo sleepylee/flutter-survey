@@ -26,14 +26,14 @@ jobs:
           channel: 'stable' # 'dev', 'alpha', default to: 'stable'
           # flutter-version: '1.12.x' # you can also specify exact version of flutter
 
-      # Get flutter dependencies.
-      - run: flutter pub get
+      - name: Get flutter dependencies.
+        run: flutter pub get
 
       # Check for any formatting issues in the code.
       - run: flutter format --set-exit-if-changed .
 
-      # Statically analyze the Dart code for any errors.
-      - run: flutter analyze .
+      - name: Statically analyze the Dart code for any errors.
+        run: flutter analyze .
 
-      # Run widget tests for our flutter project.
-      - run: flutter test
+      - name: Run widget tests, unit test for our flutter project.
+        run: flutter test
