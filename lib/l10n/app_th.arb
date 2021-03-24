@@ -1,0 +1,7 @@
+{
+  "titleGeneralEmail": "Email",
+  "titleGeneralPassword": "รหัสผ่าน",
+  "buttonLogin": "เข้าสู่ระบบ",
+  "errorValidationEmailEmpty": "กรุณากรอกอีเมลของคุณ",
+  "errorValidationEmailInvalid": "กรุณาใส่อีเมลที่ถูกต้อง"
+}

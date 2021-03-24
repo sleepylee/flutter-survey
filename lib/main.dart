@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:survey/pages/login_page.dart';
 import 'package:survey/themes.dart';
 
@@ -15,7 +17,19 @@ class SurveyApp extends StatelessWidget {
     return MaterialApp(
       title: F.title,
       theme: appTheme,
-      home: LoginPage(), // TODO: change to Splash later
+      home: LoginPage(),
+      // TODO: change to Splash later
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', ''),
+        const Locale('vi', ''),
+        const Locale('th', ''),
+      ],
     );
   }
 }
