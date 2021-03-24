@@ -4,6 +4,7 @@ final ThemeData appTheme = ThemeData(
   primaryColor: Colors.white,
   accentColor: Colors.white24,
   fontFamily: 'Neuzeit',
+  textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.white),
   textTheme: TextTheme(
       headline5: TextStyle(
           color: Colors.white,
