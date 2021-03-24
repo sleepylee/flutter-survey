@@ -10,7 +10,7 @@ void main() {
       starter += 1;
       expect(starter == 2, true);
 
-      starter -=1;
+      starter -= 1;
       expect(starter == 1, true);
     });
   });
