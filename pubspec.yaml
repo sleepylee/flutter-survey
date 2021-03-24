@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
 
   flutter_svg: ^0.19.3
+  email_validator: '^1.0.6'
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -49,6 +50,13 @@ flutter:
   assets:
    - assets/images/
 
+  fonts:
+    - family: Neuzeit
+      fonts:
+        - asset: assets/fonts/neuzeit.otf
+    - family: Neuzeit-Heavy
+      fonts:
+        - asset: assets/fonts/neuzeit-heavy.otf
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
