@@ -1,0 +1,7 @@
+{
+  "titleGeneralEmail": "Email",
+  "titleGeneralPassword": "Mật khẩu",
+  "buttonLogin": "Đăng nhập",
+  "errorValidationEmailEmpty": "Vui lòng nhập email",
+  "errorValidationEmailInvalid": "Vui lòng nhập đúng email"
+}
