@@ -1,9 +1,9 @@
 import 'dart:ui';
 
 import 'package:email_validator/email_validator.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LoginPage extends StatefulWidget {
@@ -48,13 +48,16 @@ class _LoginPageState extends State<LoginPage> {
                                 borderRadius: BorderRadius.circular(12.0)),
                             fillColor: Colors.white24,
                             filled: true,
-                            labelText: AppLocalizations.of(context).titleGeneralEmail),
+                            labelText:
+                                AppLocalizations.of(context).titleGeneralEmail),
                         style: TextStyle(color: Colors.white),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppLocalizations.of(context).errorValidationEmailEmpty;
+                            return AppLocalizations.of(context)
+                                .errorValidationEmailEmpty;
                           } else if (!EmailValidator.validate(value)) {
-                            return AppLocalizations.of(context).errorValidationEmailInvalid;
+                            return AppLocalizations.of(context)
+                                .errorValidationEmailInvalid;
                           }
                           return null;
                         },
@@ -70,12 +73,15 @@ class _LoginPageState extends State<LoginPage> {
                                 borderRadius: BorderRadius.circular(12.0)),
                             fillColor: Colors.white24,
                             filled: true,
-                            labelText: AppLocalizations.of(context).titleGeneralPassword),
+                            labelText: AppLocalizations.of(context)
+                                .titleGeneralPassword),
                         obscureText: true,
                         style: TextStyle(color: Colors.white),
                       ),
                       const SizedBox(height: 50),
-                      ElevatedButton(child: Text(AppLocalizations.of(context).buttonLogin), onPressed: () {})
+                      ElevatedButton(
+                          child: Text(AppLocalizations.of(context).buttonLogin),
+                          onPressed: () {})
                     ],
                   ),
                 ))),
