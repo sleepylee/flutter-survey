@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
                   fit: BoxFit.cover,
                   image: AssetImage('assets/images/sign_in_background.png'),
                   colorFilter: ColorFilter.mode(
-                      Color.fromRGBO(0, 0, 0, 0.4), BlendMode.overlay)),
+                      Colors.black.withOpacity(0.4), BlendMode.overlay)),
             ),
             child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
