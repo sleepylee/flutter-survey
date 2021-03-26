@@ -10,6 +10,10 @@ A survey conducting platform built with Flutter
    - Staging: `$ flutter run --flavor staging`
    
    - Production: `$ flutter run --flavor production`
+   
+- When adding a new model, generating the serializer by running:
+
+    - `$ flutter pub run build_runner build --delete-conflicting-outputs`
 
 ## License
 
