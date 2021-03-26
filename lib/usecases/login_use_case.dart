@@ -24,7 +24,7 @@ class LoginUseCase extends UseCase<AuthToken, LoginCredential> {
   Future<Result<AuthToken>> call(LoginCredential credential) async {
     try {
       final value =
-      await _repository.login(credential.email, credential.password);
+          await _repository.login(credential.email, credential.password);
       return Success(value);
     } catch (e) {
       final apiError = ApiError(NetworkExceptions.getDioException(e), e);
