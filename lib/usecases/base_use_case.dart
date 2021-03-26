@@ -1,3 +1,5 @@
+import 'package:survey/exception/network_exceptions.dart';
+
 part 'use_case_result.dart';
 
 abstract class BaseUseCase<T extends Result> {

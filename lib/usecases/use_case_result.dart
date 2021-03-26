@@ -8,8 +8,15 @@ class Success<T> extends Result<T> {
   Success(this.value);
 }
 
-class Failed<E extends Exception> extends Result<E> {
-  final E error;
+class ApiError implements Exception {
+  final NetworkExceptions networkExceptions;
+  final Exception actualException;
+
+  ApiError(this.networkExceptions, this.actualException);
+}
+
+class Failed<T> extends Result<T> {
+  final ApiError error;
 
   Failed(this.error);
 }
