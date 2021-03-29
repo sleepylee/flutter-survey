@@ -26,6 +26,6 @@ class LoginUseCase extends UseCase<AuthToken, LoginCredential> {
         .login((credential.email), credential.password)
         .then<Result<AuthToken>>((value) => Success(value))
         .onError((err, stackTrace) => Failed(
-            UseCaseException(NetworkExceptions.getDioException(err), err)));
+            UseCaseException(NetworkExceptions.fromDioException(err), err)));
   }
 }

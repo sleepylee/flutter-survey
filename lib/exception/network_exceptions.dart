@@ -41,7 +41,7 @@ abstract class NetworkExceptions with _$NetworkExceptions {
 
   const factory NetworkExceptions.unexpectedError() = UnexpectedError;
 
-  static NetworkExceptions getDioException(error) {
+  static NetworkExceptions fromDioException(error) {
     if (error is Exception) {
       try {
         NetworkExceptions networkExceptions;

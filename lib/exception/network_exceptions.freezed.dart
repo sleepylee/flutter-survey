@@ -129,7 +129,6 @@ mixin _$NetworkExceptions {
     @required TResult defaultError(String error),
     @required TResult unexpectedError(),
   });
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult requestCancelled(),
@@ -151,7 +150,6 @@ mixin _$NetworkExceptions {
     TResult unexpectedError(),
     @required TResult orElse(),
   });
-
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult requestCancelled(RequestCancelled value),
@@ -172,7 +170,6 @@ mixin _$NetworkExceptions {
     @required TResult defaultError(DefaultError value),
     @required TResult unexpectedError(UnexpectedError value),
   });
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult requestCancelled(RequestCancelled value),
@@ -209,7 +206,6 @@ class _$NetworkExceptionsCopyWithImpl<$Res>
   _$NetworkExceptionsCopyWithImpl(this._value, this._then);
 
   final NetworkExceptions _value;
-
   // ignore: unused_field
   final $Res Function(NetworkExceptions) _then;
 }
@@ -760,7 +756,6 @@ abstract class BadRequest implements NetworkExceptions {
 abstract class $NotFoundCopyWith<$Res> {
   factory $NotFoundCopyWith(NotFound value, $Res Function(NotFound) then) =
       _$NotFoundCopyWithImpl<$Res>;
-
   $Res call({String reason});
 }
 
@@ -957,7 +952,6 @@ abstract class NotFound implements NetworkExceptions {
   const factory NotFound(String reason) = _$NotFound;
 
   String get reason;
-
   @JsonKey(ignore: true)
   $NotFoundCopyWith<NotFound> get copyWith;
 }
@@ -2955,7 +2949,6 @@ abstract class $DefaultErrorCopyWith<$Res> {
   factory $DefaultErrorCopyWith(
           DefaultError value, $Res Function(DefaultError) then) =
       _$DefaultErrorCopyWithImpl<$Res>;
-
   $Res call({String error});
 }
 
@@ -3154,7 +3147,6 @@ abstract class DefaultError implements NetworkExceptions {
   const factory DefaultError(String error) = _$DefaultError;
 
   String get error;
-
   @JsonKey(ignore: true)
   $DefaultErrorCopyWith<DefaultError> get copyWith;
 }
