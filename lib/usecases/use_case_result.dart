@@ -10,15 +10,15 @@ class Success<T> extends Result<T> {
   Success(this.value) : super._();
 }
 
-class UseCaseError implements Exception {
+class UseCaseException implements Exception {
   final NetworkExceptions networkExceptions;
   final Exception actualException;
 
-  UseCaseError(this.networkExceptions, this.actualException);
+  UseCaseException(this.networkExceptions, this.actualException);
 }
 
 class Failed<T> extends Result<T> {
-  final UseCaseError error;
+  final UseCaseException exception;
 
-  Failed(this.error) : super._();
+  Failed(this.exception) : super._();
 }

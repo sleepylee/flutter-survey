@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:survey/exception/network_exceptions.dart';
 import 'package:survey/models/auth_token.dart';
@@ -26,7 +25,7 @@ class LoginUseCase extends UseCase<AuthToken, LoginCredential> {
     return _repository
         .login((credential.email), credential.password)
         .then<Result<AuthToken>>((value) => Success(value))
-        .onError<DioError>((error, stackTrace) => Failed(
-            UseCaseError(NetworkExceptions.getDioException(error), error)));
+        .onError((err, stackTrace) => Failed(
+            UseCaseException(NetworkExceptions.getDioException(err), err)));
   }
 }
