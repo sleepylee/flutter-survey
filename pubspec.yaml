@@ -35,6 +35,8 @@ dependencies:
   retrofit: any
   logger: any
   json_annotation: ^3.1.1
+  freezed: ^0.12.7
+  freezed_annotation: ^0.12.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
