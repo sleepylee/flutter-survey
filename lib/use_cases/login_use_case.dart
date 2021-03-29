@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:survey/exception/network_exceptions.dart';
 import 'package:survey/models/auth_token.dart';
 import 'package:survey/repositories/oauth_repository.dart';
-import 'package:survey/usecases/base_use_case.dart';
+import 'package:survey/use_cases/base_use_case.dart';
 
 class LoginCredential {
   @required
