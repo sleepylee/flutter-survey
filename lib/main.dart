@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:survey/pages/login_page.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get.dart';
+import 'package:survey/api/api_client_provider.dart';
+import 'package:survey/pages/home/home_page.dart';
+import 'package:survey/pages/login/login_binding.dart';
+import 'package:survey/pages/login/login_page.dart';
+import 'package:survey/pages/splash/splash_page.dart';
 import 'package:survey/themes.dart';
 
 import 'flavors.dart';
@@ -11,14 +16,19 @@ void main() {
 }
 
 class SurveyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    _initAppDependencies();
+
+    return GetMaterialApp(
       title: F.title,
       theme: appTheme,
-      home: LoginPage(),
-      // TODO: change to Splash later
+      home: SplashPage(),
+      getPages: [
+        GetPage(
+            name: "/login", page: () => LoginPage(), binding: LoginBinding()),
+        GetPage(name: "/home", page: () => HomePage()),
+      ],
       localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -31,5 +41,9 @@ class SurveyApp extends StatelessWidget {
         const Locale('th', ''),
       ],
     );
+  }
+
+  void _initAppDependencies() {
+    Get.put(ApiClientProvider().httpClient());
   }
 }

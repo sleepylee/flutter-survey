@@ -21,7 +21,7 @@ class LoginUseCase extends UseCase<AuthToken, LoginCredential> {
   const LoginUseCase(this._repository);
 
   @override
-  Future<Result<AuthToken>> call(LoginCredential credential) {
+  Future<Result<AuthToken>> call(LoginCredential credential) async {
     return _repository
         .login((credential.email), credential.password)
         .then<Result<AuthToken>>((value) => Success(value))

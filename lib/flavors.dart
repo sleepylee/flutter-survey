@@ -3,21 +3,24 @@ enum Flavor {
   STAGING,
 }
 
+// TODO: rework on this, keeping all detail in the binary isn't nice
 class F {
   static Flavor appFlavor;
 
   static String get title {
+    print("Flavor is: $appFlavor");
     switch (appFlavor) {
       case Flavor.PRODUCTION:
         return 'Survey';
       case Flavor.STAGING:
         return 'Survey-Staging';
       default:
-        return 'Survey';
+        return 'Survey-Staging';
     }
   }
 
   static String get restApiEndpoint {
+    print("Flavor is: $appFlavor");
     switch (appFlavor) {
       case Flavor.PRODUCTION:
         return 'https://survey-api.nimblehq.co/';

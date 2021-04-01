@@ -7,9 +7,9 @@ A survey conducting platform built with Flutter
 - Checkout the repository
 - Run the app with the desire app flavor:
    
-   - Staging: `$ flutter run --flavor staging`
+   - Staging: `$ flutter run --flavor staging -t lib/main-staging.dart`
    
-   - Production: `$ flutter run --flavor production`
+   - Production: `$ flutter run --flavor production -t lib/main-production.dart`
    
 - When adding a new model, generating the serializer by running:
 
