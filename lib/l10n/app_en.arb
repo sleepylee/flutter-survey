@@ -7,6 +7,10 @@
   "@titleGeneralPassword": {
     "description": "Label of the Password text form field"
   },
+  "titleGeneralError": "Error",
+  "@titleGeneralError": {
+    "description": "A generic Error label"
+  },
   "buttonLogin": "Login",
   "@buttonLogin": {
     "description": "Label of the Login button"
@@ -18,5 +22,9 @@
   "errorValidationEmailInvalid": "Please enter a valid email",
   "@errorValidationEmailInvalid": {
     "description": "Error message when Email is invalid"
+  },
+  "errorLoginFailed": "Login failed! Please recheck your email or password",
+  "@errorLoginFailed": {
+    "description": "Error message when login credential is invalid"
   }
 }

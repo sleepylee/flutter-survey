@@ -3,6 +3,7 @@ enum Flavor {
   STAGING,
 }
 
+// TODO: rework on this, keeping all detail in the binary isn't nice
 class F {
   static Flavor appFlavor;
 
@@ -13,7 +14,7 @@ class F {
       case Flavor.STAGING:
         return 'Survey-Staging';
       default:
-        return 'Survey';
+        return 'Survey-Staging';
     }
   }
 

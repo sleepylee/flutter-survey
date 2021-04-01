@@ -7,7 +7,7 @@ abstract class OAuthRepository {
   Future<AuthToken> login(String email, String password);
 }
 
-class OAuthRepositoryImpl extends OAuthRepository {
+class OAuthRepositoryImpl implements OAuthRepository {
   ApiClient _restApiClient;
 
   OAuthRepositoryImpl(this._restApiClient);
