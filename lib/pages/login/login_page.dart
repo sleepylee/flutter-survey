@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:survey/navigator/navigator.dart';
 import 'package:survey/pages/login/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
@@ -65,10 +66,12 @@ class LoginPage extends StatelessWidget {
                     GetBuilder<LoginController>(
                       builder: (state) => ElevatedButton(
                         child: Text(AppLocalizations.of(context).buttonLogin),
-                        onPressed: () => {
-                          state.isLoading.value
-                              ? null
-                              : _loginController.attemptLogin()
+                        onPressed: () {
+                          Get.focusScope.unfocus();
+                          if (state.isLoading.value) {
+                            return null;
+                          }
+                          return _attemptLogin();
                         },
                       ),
                     ),
@@ -101,5 +104,20 @@ class LoginPage extends StatelessWidget {
       return AppLocalizations.of(Get.context).errorValidationEmailInvalid;
     }
     return null;
+  }
+
+  void _attemptLogin() {
+    _loginController.attemptLogin(
+      onSuccess: () {
+        final navigator = Get.find<AppNavigator>();
+        navigator.popAndNavigateToHome();
+      },
+      onFailed: () {
+        Get.snackbar(
+          AppLocalizations.of(Get.context).titleGeneralError,
+          AppLocalizations.of(Get.context).errorLoginFailed,
+        );
+      },
+    );
   }
 }

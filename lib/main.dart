@@ -17,11 +17,14 @@ void main() {
   runApp(SurveyApp());
 }
 
-class SurveyApp extends StatelessWidget {
+class SurveyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _AppState();
+}
+
+class _AppState extends State<SurveyApp> {
   @override
   Widget build(BuildContext context) {
-    _initAppDependencies();
-
     return GetMaterialApp(
       title: F.title,
       theme: appTheme,
@@ -43,6 +46,12 @@ class SurveyApp extends StatelessWidget {
         const Locale('th', ''),
       ],
     );
+  }
+
+  @override
+  void initState() {
+    _initAppDependencies();
+    super.initState();
   }
 
   void _initAppDependencies() {
