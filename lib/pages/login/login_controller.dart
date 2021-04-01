@@ -1,9 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:survey/navigator/navigator.dart';
 import 'package:survey/use_cases/base_use_case.dart';
 import 'package:survey/use_cases/login_use_case.dart';
 
 class LoginController extends GetxController {
+  final AppNavigator _appNavigator = Get.find();
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -17,12 +20,12 @@ class LoginController extends GetxController {
 
       loginUseCase.call(credential).then(
             (result) => {
-              if (result is Success)
-                Get.offAndToNamed('/home')
+          if (result is Success)
+            _appNavigator.popAndNavigateToHome()
               else
-                Get.snackbar('Error', 'Login failed')
-            },
-          );
+            Get.snackbar('Error', 'Login failed')
+        },
+      );
     }
   }
 }

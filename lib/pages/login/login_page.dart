@@ -45,15 +45,8 @@ class LoginPage extends StatelessWidget {
                     TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       controller: _loginController.emailController,
-                      decoration: InputDecoration(
-                          labelStyle: TextStyle(color: Colors.white30),
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(12.0)),
-                          fillColor: Colors.white24,
-                          filled: true,
-                          labelText:
+                      decoration: _formInputDecoration(
+                          label:
                               AppLocalizations.of(context).titleGeneralEmail),
                       style: TextStyle(color: Colors.white),
                       validator: _emailValidator,
@@ -62,15 +55,8 @@ class LoginPage extends StatelessWidget {
                     TextFormField(
                       keyboardType: TextInputType.text,
                       controller: _loginController.passwordController,
-                      decoration: InputDecoration(
-                          labelStyle: TextStyle(color: Colors.white30),
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(12.0)),
-                          fillColor: Colors.white24,
-                          filled: true,
-                          labelText: AppLocalizations.of(context)
+                      decoration: _formInputDecoration(
+                          label: AppLocalizations.of(context)
                               .titleGeneralPassword),
                       obscureText: true,
                       style: TextStyle(color: Colors.white),
@@ -92,10 +78,22 @@ class LoginPage extends StatelessWidget {
     );
   }
 
+  InputDecoration _formInputDecoration({String label}) => InputDecoration(
+        labelStyle: TextStyle(color: Colors.white30),
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        border: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(12.0)),
+        fillColor: Colors.white24,
+        filled: true,
+        labelText: label,
+      );
+
   String _emailValidator(String value) {
     if (value == null || value.isEmpty) {
       return AppLocalizations.of(Get.context).errorValidationEmailEmpty;
-    } else if (!EmailValidator.validate(value)) {
+    }
+    if (!EmailValidator.validate(value)) {
       return AppLocalizations.of(Get.context).errorValidationEmailInvalid;
     }
     return null;
