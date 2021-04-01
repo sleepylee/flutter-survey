@@ -8,6 +8,8 @@ import 'package:survey/use_cases/login_use_case.dart';
 class LoginController extends GetxController {
   final AppNavigator _appNavigator = Get.find();
 
+  final isLoading = false.obs;
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -15,17 +17,21 @@ class LoginController extends GetxController {
   void attemptLogin() {
     if (formKey.currentState.validate()) {
       Get.focusScope.unfocus();
+      isLoading.value = true;
+
       final loginUseCase = Get.find<LoginUseCase>();
       final credential =
           LoginCredential(emailController.text, passwordController.text);
 
-      loginUseCase.call(credential).then((result) => {
-            if (result is Success)
-              _appNavigator.popAndNavigateToHome()
-            else
-              Get.snackbar(AppLocalizations.of(Get.context).titleGeneralError,
-                  AppLocalizations.of(Get.context).errorLoginFailed)
-          });
+      loginUseCase.call(credential).then((result) {
+        if (result is Success) {
+          _appNavigator.popAndNavigateToHome();
+        } else {
+          Get.snackbar(AppLocalizations.of(Get.context).titleGeneralError,
+              AppLocalizations.of(Get.context).errorLoginFailed);
+          isLoading.value = false;
+        }
+      });
     }
   }
 

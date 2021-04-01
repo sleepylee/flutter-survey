@@ -62,11 +62,15 @@ class LoginPage extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     ),
                     const SizedBox(height: 50),
-                    ElevatedButton(
-                      child: Text(AppLocalizations.of(context).buttonLogin),
-                      onPressed: () {
-                        _loginController.attemptLogin();
-                      },
+                    GetBuilder<LoginController>(
+                      builder: (state) => ElevatedButton(
+                        child: Text(AppLocalizations.of(context).buttonLogin),
+                        onPressed: () => {
+                          state.isLoading.value
+                              ? null
+                              : _loginController.attemptLogin()
+                        },
+                      ),
                     ),
                   ],
                 ),
