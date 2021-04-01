@@ -64,11 +64,8 @@ class LoginPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 50),
                     GetX<LoginController>(builder: (state) {
-                      if (state.isLoading.isTrue) {
-                        return _disableLogin(context);
-                      } else {
-                        return _enableLogin(context);
-                      }
+                      return _loginButton(
+                          context: context, enable: !state.isLoading.value);
                     }),
                   ],
                 ),
@@ -80,23 +77,22 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  ElevatedButton _disableLogin(BuildContext context) {
+  ElevatedButton _loginButton({BuildContext context, bool enable = true}) {
     return ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.white24),
-        foregroundColor: MaterialStateProperty.all<Color>(Colors.white70),
-      ),
-      child: Text(AppLocalizations.of(context).buttonLogin),
-      onPressed: () => null,
-    );
-  }
-
-  ElevatedButton _enableLogin(BuildContext context) {
-    return ElevatedButton(
+      style: enable
+          ? ButtonStyle()
+          : ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.white24),
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.white70),
+            ),
       child: Text(AppLocalizations.of(context).buttonLogin),
       onPressed: () {
-        Get.focusScope.unfocus();
-        return _attemptLogin();
+        if (enable) {
+          Get.focusScope.unfocus();
+          return _attemptLogin();
+        } else {
+          return null;
+        }
       },
     );
   }
