@@ -11,70 +11,70 @@ import 'package:survey/navigator/navigator.dart';
 import 'package:survey/pages/login/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
-  final LoginController _loginController = Get.put(LoginController());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage('assets/images/sign_in_background.png'),
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.4), BlendMode.overlay),
-            ),
-          ),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24),
-              child: Form(
-                key: _loginController.formKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 150.0),
-                      child: SvgPicture.asset('assets/images/logo.svg'),
+        resizeToAvoidBottomInset: false,
+        body: GetBuilder(
+          init: LoginController(),
+          builder: (controller) => Center(
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/images/sign_in_background.png'),
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.4), BlendMode.overlay),
+                ),
+              ),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 24, right: 24),
+                  child: Form(
+                    key: controller.formKey,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(top: 150.0),
+                          child: SvgPicture.asset('assets/images/logo.svg'),
+                        ),
+                        const SizedBox(height: 100),
+                        TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          controller: controller.emailController,
+                          decoration: _formInputDecoration(
+                              label: AppLocalizations.of(context)
+                                  .titleGeneralEmail),
+                          style: TextStyle(color: Colors.white),
+                          validator: _emailValidator,
+                        ),
+                        const SizedBox(height: 20),
+                        TextFormField(
+                          keyboardType: TextInputType.text,
+                          controller: controller.passwordController,
+                          decoration: _formInputDecoration(
+                              label: AppLocalizations.of(context)
+                                  .titleGeneralPassword),
+                          obscureText: true,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        const SizedBox(height: 50),
+                        GetX<LoginController>(builder: (state) {
+                          return _loginButton(
+                              context: context, enable: !state.isLoading.value);
+                        }),
+                      ],
                     ),
-                    const SizedBox(height: 100),
-                    TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: _loginController.emailController,
-                      decoration: _formInputDecoration(
-                          label:
-                              AppLocalizations.of(context).titleGeneralEmail),
-                      style: TextStyle(color: Colors.white),
-                      validator: _emailValidator,
-                    ),
-                    const SizedBox(height: 20),
-                    TextFormField(
-                      keyboardType: TextInputType.text,
-                      controller: _loginController.passwordController,
-                      decoration: _formInputDecoration(
-                          label: AppLocalizations.of(context)
-                              .titleGeneralPassword),
-                      obscureText: true,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    const SizedBox(height: 50),
-                    GetX<LoginController>(builder: (state) {
-                      return _loginButton(
-                          context: context, enable: !state.isLoading.value);
-                    }),
-                  ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 
   ElevatedButton _loginButton({BuildContext context, bool enable = true}) {
@@ -119,7 +119,7 @@ class LoginPage extends StatelessWidget {
   }
 
   void _attemptLogin() {
-    _loginController.attemptLogin(
+    Get.find<LoginController>().attemptLogin(
       onSuccess: () {
         final navigator = Get.find<AppNavigator>();
         navigator.popAndNavigateToHome();
