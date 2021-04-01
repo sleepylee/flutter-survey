@@ -12,7 +12,7 @@ class LoginCredential {
   @required
   final String password;
 
-  LoginCredential(this.email, this.password);
+  LoginCredential({this.email, this.password});
 }
 
 class LoginUseCase extends UseCase<AuthToken, LoginCredential> {

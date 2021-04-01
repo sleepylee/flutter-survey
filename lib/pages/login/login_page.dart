@@ -63,7 +63,7 @@ class LoginPage extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     ),
                     const SizedBox(height: 50),
-                    GetBuilder<LoginController>(builder: (state) {
+                    GetX<LoginController>(builder: (state) {
                       if (state.isLoading.isTrue) {
                         return _disableLogin(context);
                       } else {
