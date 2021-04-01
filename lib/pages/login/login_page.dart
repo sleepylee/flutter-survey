@@ -63,18 +63,13 @@ class LoginPage extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     ),
                     const SizedBox(height: 50),
-                    GetBuilder<LoginController>(
-                      builder: (state) => ElevatedButton(
-                        child: Text(AppLocalizations.of(context).buttonLogin),
-                        onPressed: () {
-                          Get.focusScope.unfocus();
-                          if (state.isLoading.value) {
-                            return null;
-                          }
-                          return _attemptLogin();
-                        },
-                      ),
-                    ),
+                    GetBuilder<LoginController>(builder: (state) {
+                      if (state.isLoading.isTrue) {
+                        return _disableLogin(context);
+                      } else {
+                        return _enableLogin(context);
+                      }
+                    }),
                   ],
                 ),
               ),
@@ -82,6 +77,27 @@ class LoginPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  ElevatedButton _disableLogin(BuildContext context) {
+    return ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.white24),
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white70),
+      ),
+      child: Text(AppLocalizations.of(context).buttonLogin),
+      onPressed: () => null,
+    );
+  }
+
+  ElevatedButton _enableLogin(BuildContext context) {
+    return ElevatedButton(
+      child: Text(AppLocalizations.of(context).buttonLogin),
+      onPressed: () {
+        Get.focusScope.unfocus();
+        return _attemptLogin();
+      },
     );
   }
 

@@ -14,7 +14,7 @@ class LoginController extends GetxController {
   void attemptLogin({VoidCallback onSuccess, VoidCallback onFailed}) {
     if (formKey.currentState.validate()) {
       isLoading.value = true;
-
+      update();
       final loginUseCase = Get.find<LoginUseCase>();
       final credential =
           LoginCredential(emailController.text, passwordController.text);
@@ -24,6 +24,7 @@ class LoginController extends GetxController {
           onSuccess.call();
         } else {
           isLoading.value = false;
+          update();
           onFailed.call();
         }
       });
