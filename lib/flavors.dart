@@ -8,7 +8,6 @@ class F {
   static Flavor appFlavor;
 
   static String get title {
-    print("Flavor is: $appFlavor");
     switch (appFlavor) {
       case Flavor.PRODUCTION:
         return 'Survey';
@@ -20,7 +19,6 @@ class F {
   }
 
   static String get restApiEndpoint {
-    print("Flavor is: $appFlavor");
     switch (appFlavor) {
       case Flavor.PRODUCTION:
         return 'https://survey-api.nimblehq.co/';
