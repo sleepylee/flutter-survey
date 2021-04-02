@@ -34,7 +34,7 @@ class LoginUseCase extends UseCase<void, LoginCredential> {
   Result<dynamic> _persistTokenData(AuthToken data) {
     _sharedPreferencesStorage.saveTokenType(data.tokenType);
     _sharedPreferencesStorage.saveAccessToken(data.accessToken);
-    _sharedPreferencesStorage.saveAccessToken(data.refreshToken);
+    _sharedPreferencesStorage.saveRefreshToken(data.refreshToken);
     return Success(null);
   }
 }
