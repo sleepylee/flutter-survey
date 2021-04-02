@@ -8,6 +8,7 @@ import 'package:survey/pages/home/home_page.dart';
 import 'package:survey/pages/login/login_binding.dart';
 import 'package:survey/pages/login/login_page.dart';
 import 'package:survey/pages/splash/splash_page.dart';
+import 'package:survey/preferences/shared_preferences.dart';
 import 'package:survey/themes.dart';
 
 import 'api/api_client.dart';
@@ -55,7 +56,8 @@ class _AppState extends State<SurveyApp> {
   }
 
   void _initAppDependencies() {
-    Get.lazyPut<ApiClient>(() => ApiClientProvider().httpClient());
-    Get.lazyPut<AppNavigator>(() => AppNavigatorImpl());
+    Get.put<SharedPreferencesStorage>(LocalSharedPreferencesStorage());
+    Get.put<ApiClient>(ApiClientProvider().httpClient());
+    Get.put<AppNavigator>(AppNavigatorImpl());
   }
 }
