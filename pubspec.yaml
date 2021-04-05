@@ -29,7 +29,6 @@ dependencies:
   intl: ^0.17.0
 
   flutter_svg: ^0.19.3
-  email_validator: ^2.0.1
 
   dio: ^3.0.10
   dio_http_cache: ^0.2.11
