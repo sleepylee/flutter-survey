@@ -22,7 +22,7 @@ class LocalSharedPreferencesStorage implements SharedPreferencesStorage {
   @override
   Future<void> saveTokenType(String tokenType) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.setString(_PREF_KEY_TYPE, tokenType);
+    return await prefs.setString(_PREF_KEY_TYPE, tokenType);
   }
 
   @override
@@ -40,7 +40,7 @@ class LocalSharedPreferencesStorage implements SharedPreferencesStorage {
   @override
   Future<void> saveAccessToken(String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.setString(_PREF_KEY_ACCESS_TOKEN, token);
+    return await prefs.setString(_PREF_KEY_ACCESS_TOKEN, token);
   }
 
   @override
@@ -52,6 +52,6 @@ class LocalSharedPreferencesStorage implements SharedPreferencesStorage {
   @override
   Future<void> saveRefreshToken(String refreshToken) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.setString(_PREF_KEY_REFRESH_TOKEN, refreshToken);
+    return await prefs.setString(_PREF_KEY_REFRESH_TOKEN, refreshToken);
   }
 }
