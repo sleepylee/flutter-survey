@@ -13,7 +13,7 @@ import 'login_use_case_test.mocks.dart';
 
 @GenerateMocks([OAuthRepository])
 void main() {
-  group('test use case', () {
+  group('Validate login use case', () {
     final mockRepository = MockOAuthRepository();
     final mockStorage = FakeSharedPreferencesStorage();
 
@@ -29,14 +29,14 @@ void main() {
 
     final loginUseCase = LoginUseCase(mockRepository, mockStorage);
 
-    test('positive', () async {
+    test('When login with valid credential, it returns Success', () async {
       final result = await loginUseCase
           .call(LoginCredential(email: 'positive', password: 'test'));
 
       expect(result, isA<Success>());
     });
 
-    test('negative', () async {
+    test('When login with invalid credential, it returns Failed', () async {
       final result = await loginUseCase
           .call(LoginCredential(email: 'negative', password: 'meh'));
 
