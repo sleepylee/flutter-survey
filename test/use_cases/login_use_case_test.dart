@@ -23,8 +23,8 @@ void main() {
             tokenType: 'bearer',
             refreshToken: 'refresh token'));
 
-    when(mockRepository.login('negative', any)).thenAnswer((_) async =>
-        Future.error(DioError(
+    when(mockRepository.login('negative', any)).thenAnswer((_) => Future.error(
+        DioError(
             response: Response(statusCode: 400), type: DioErrorType.RESPONSE)));
 
     final loginUseCase = LoginUseCase(mockRepository, mockStorage);
