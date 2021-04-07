@@ -10,6 +10,8 @@ import 'package:survey/navigator/navigator.dart';
 import 'package:survey/pages/login/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,18 +22,18 @@ class LoginPage extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/images/sign_in_background.png'),
-                  colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.4), BlendMode.overlay),
-                ),
-              ),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 24, right: 24),
-                  child: Form(
-                    key: controller.formKey,
+                      fit: BoxFit.cover,
+                      image: AssetImage('assets/images/sign_in_background.png'),
+                      colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(0.4), BlendMode.overlay),
+                    ),
+                  ),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 24, right: 24),
+                      child: Form(
+                        key: _formKey,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -43,36 +45,36 @@ class LoginPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 100),
                         TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          controller: controller.emailController,
-                          decoration: _formInputDecoration(
-                              label: AppLocalizations.of(context)
-                                  .titleGeneralEmail),
-                          style: TextStyle(color: Colors.white),
-                          validator: _emailValidator,
+                              keyboardType: TextInputType.emailAddress,
+                              controller: controller.emailController,
+                              decoration: _formInputDecoration(
+                                  label: AppLocalizations.of(context)
+                                      .titleGeneralEmail),
+                              style: TextStyle(color: Colors.white),
+                              validator: _emailValidator,
+                            ),
+                            const SizedBox(height: 20),
+                            TextFormField(
+                              keyboardType: TextInputType.text,
+                              controller: controller.passwordController,
+                              decoration: _formInputDecoration(
+                                  label: AppLocalizations.of(context)
+                                      .titleGeneralPassword),
+                              obscureText: true,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            const SizedBox(height: 50),
+                            GetX<LoginController>(builder: (state) {
+                              return _loginButton(
+                                  context: context, enable: !state.isLoading.value);
+                            }),
+                          ],
                         ),
-                        const SizedBox(height: 20),
-                        TextFormField(
-                          keyboardType: TextInputType.text,
-                          controller: controller.passwordController,
-                          decoration: _formInputDecoration(
-                              label: AppLocalizations.of(context)
-                                  .titleGeneralPassword),
-                          obscureText: true,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        const SizedBox(height: 50),
-                        GetX<LoginController>(builder: (state) {
-                          return _loginButton(
-                              context: context, enable: !state.isLoading.value);
-                        }),
-                      ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ),
         ));
   }
 
@@ -81,12 +83,12 @@ class LoginPage extends StatelessWidget {
       style: enable
           ? ButtonStyle()
           : ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.white24),
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.white70),
-            ),
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.white24),
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white70),
+      ),
       child: Text(AppLocalizations.of(context).buttonLogin),
       onPressed: () {
-        if (enable) {
+        if (enable && _formKey.currentState.validate()) {
           Get.focusScope.unfocus();
           return _attemptLogin();
         } else {
@@ -97,15 +99,15 @@ class LoginPage extends StatelessWidget {
   }
 
   InputDecoration _formInputDecoration({String label}) => InputDecoration(
-        labelStyle: TextStyle(color: Colors.white30),
-        floatingLabelBehavior: FloatingLabelBehavior.never,
-        border: OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(12.0)),
-        fillColor: Colors.white24,
-        filled: true,
-        labelText: label,
-      );
+    labelStyle: TextStyle(color: Colors.white30),
+    floatingLabelBehavior: FloatingLabelBehavior.never,
+    border: OutlineInputBorder(
+        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.circular(12.0)),
+    fillColor: Colors.white24,
+    filled: true,
+    labelText: label,
+  );
 
   String _emailValidator(String value) {
     if (value == null || value.isEmpty) {
