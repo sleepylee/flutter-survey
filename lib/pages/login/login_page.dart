@@ -10,6 +10,8 @@ import 'package:survey/navigator/navigator.dart';
 import 'package:survey/pages/login/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +33,7 @@ class LoginPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 24, right: 24),
                   child: Form(
-                    key: controller.formKey,
+                    key: _formKey,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -86,7 +88,7 @@ class LoginPage extends StatelessWidget {
             ),
       child: Text(AppLocalizations.of(context).buttonLogin),
       onPressed: () {
-        if (enable) {
+        if (enable && _formKey.currentState.validate()) {
           Get.focusScope.unfocus();
           return _attemptLogin();
         } else {
