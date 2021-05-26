@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Text(
-          'Hello ${F.title}',
+          'Home Page ${F.title}',
         ),
       ),
     );

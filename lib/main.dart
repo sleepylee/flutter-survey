@@ -7,6 +7,7 @@ import 'package:survey/navigator/navigator.dart';
 import 'package:survey/pages/home/home_page.dart';
 import 'package:survey/pages/login/login_binding.dart';
 import 'package:survey/pages/login/login_page.dart';
+import 'package:survey/pages/splash/splash_binding.dart';
 import 'package:survey/pages/splash/splash_page.dart';
 import 'package:survey/preferences/shared_preferences.dart';
 import 'package:survey/themes.dart';
@@ -29,8 +30,8 @@ class _AppState extends State<SurveyApp> {
     return GetMaterialApp(
       title: F.title,
       theme: appTheme,
-      home: SplashPage(),
       getPages: [
+        GetPage(name: "/", page: () => SplashPage(), binding: SplashBinding()),
         GetPage(
             name: "/login", page: () => LoginPage(), binding: LoginBinding()),
         GetPage(name: "/home", page: () => HomePage()),
