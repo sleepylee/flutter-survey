@@ -1,0 +1,9 @@
+{
+  "titleGeneralEmail": "Email",
+  "titleGeneralPassword": "รหัสผ่าน",
+  "titleGeneralError": "ข้อผิดพลาด",
+  "buttonLogin": "เข้าสู่ระบบ",
+  "errorValidationEmailEmpty": "กรุณากรอกอีเมลของคุณ",
+  "errorValidationEmailInvalid": "กรุณาใส่อีเมลที่ถูกต้อง",
+  "errorLoginFailed": "เข้าสู่ระบบล้มเหลว! โปรดตรวจสอบอีเมลหรือรหัสผ่านของคุณอีกครั้ง"
+}
