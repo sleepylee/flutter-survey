@@ -1,5 +1,6 @@
-import 'package:survey/api/api_client.dart';
-import 'package:survey/api/request/oauth_token_request.dart';
+import 'package:survey/api/http/api_client.dart';
+import 'package:survey/api/http/request/oauth_token_request.dart';
+import 'package:survey/converters/auth_token_converter.dart';
 import 'package:survey/flavors.dart';
 import 'package:survey/models/auth_token.dart';
 
@@ -20,6 +21,6 @@ class OAuthRepositoryImpl implements OAuthRepository {
             password: password,
             clientId: F.basicAuthClientId,
             clientSecret: F.basicAuthClientSecret))
-        .then((value) => value.data.authToken);
+        .then((value) => value.data.authToken.toAuthToken());
   }
 }

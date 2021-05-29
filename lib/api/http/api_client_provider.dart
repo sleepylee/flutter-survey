@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/foundation.dart';
 
-import '../flavors.dart';
+import '../../flavors.dart';
 import 'api_client.dart';
 
 class ApiClientProvider {
