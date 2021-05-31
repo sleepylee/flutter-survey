@@ -17,4 +17,4 @@ jobs:
           SLACK_ICON: https://picsum.photos/200
           SLACK_CHANNEL: flutter-guild
           SLACK_USERNAME: trung
-          SLACK_MESSAGE: '@Manh @Mark: a PR is ready for review :robot_face: '
+          SLACK_MESSAGE: "<@UTNNG4FGU> <@U01GJML61NC>: a [Pull Request](https://github.com/sleepylee/flutter-survey/pull/${{ github.event.number }}) is ready for review :robot_face:: "
