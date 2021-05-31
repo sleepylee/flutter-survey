@@ -1,0 +1,20 @@
+name: Notify Slack for Reviewer
+
+on:
+  # Trigger the workflow only when a PR opened
+  pull_request:
+    types: opened
+jobs:
+  notify_slack:
+    name: Notify flutter-guild Slack channel
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notify
+        uses: rtCamp/action-slack-notify@v2.1.3
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_ICON: https://picsum.photos/200
+          SLACK_CHANNEL: flutter-guild
+          SLACK_USERNAME: trung
+          SLACK_MESSAGE: '@Manh @Mark: a PR is ready for review :robot_face: '
