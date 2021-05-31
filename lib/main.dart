@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:survey/api/graphql/graphql_client_provider.dart';
 import 'package:survey/api/http/api_client_provider.dart';
 import 'package:survey/navigator/navigator.dart';
+import 'package:survey/pages/home/home_binding.dart';
 import 'package:survey/pages/home/home_page.dart';
 import 'package:survey/pages/login/login_binding.dart';
 import 'package:survey/pages/login/login_page.dart';
@@ -34,7 +36,7 @@ class _AppState extends State<SurveyApp> {
         GetPage(name: "/", page: () => SplashPage(), binding: SplashBinding()),
         GetPage(
             name: "/login", page: () => LoginPage(), binding: LoginBinding()),
-        GetPage(name: "/home", page: () => HomePage()),
+        GetPage(name: "/home", page: () => HomePage(), binding: HomeBinding()),
       ],
       localizationsDelegates: [
         AppLocalizations.delegate,
@@ -59,6 +61,7 @@ class _AppState extends State<SurveyApp> {
   void _initAppDependencies() {
     Get.put<SharedPreferencesStorage>(LocalSharedPreferencesStorage());
     Get.put<ApiClient>(ApiClientProvider().httpClient());
+    Get.put<GraphQLClientProvider>(GraphQLClientProvider());
     Get.put<AppNavigator>(AppNavigatorImpl());
   }
 }

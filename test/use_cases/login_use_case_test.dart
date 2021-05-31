@@ -16,12 +16,12 @@ void main() {
   group('Validate login use case', () {
     final mockRepository = MockOAuthRepository();
     final mockStorage = FakeSharedPreferencesStorage();
-
-    when(mockRepository.login('positive', 'test')).thenAnswer((_) async =>
-        AuthToken(
-            accessToken: 'token',
-            tokenType: 'bearer',
-            refreshToken: 'refresh token'));
+    final mockGraphQLClientProvider =
+        when(mockRepository.login('positive', 'test')).thenAnswer((_) async =>
+            AuthToken(
+                accessToken: 'token',
+                tokenType: 'bearer',
+                refreshToken: 'refresh token'));
 
     when(mockRepository.login('negative', any)).thenAnswer((_) => Future.error(
         DioError(

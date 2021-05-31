@@ -17,9 +17,9 @@ class AuthTokenResponse {
       {this.accessToken, this.tokenType, this.expiresIn, this.refreshToken});
 
   factory AuthTokenResponse.fromJson(Map<String, dynamic> json) =>
-      _$AuthTokenFromJson(json);
+      _$AuthTokenResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AuthTokenToJson(this);
+  Map<String, dynamic> toJson() => _$AuthTokenResponseToJson(this);
 }
 
 @JsonSerializable()
