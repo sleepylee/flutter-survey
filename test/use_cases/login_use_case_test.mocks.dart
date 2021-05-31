@@ -1,4 +1,5 @@
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:survey/api/graphql/graphql_client_provider.dart' as _i3;
 import 'package:survey/repositories/oauth_repository.dart' as _i2;
 
 /// A class which mocks [OAuthRepository].
@@ -6,6 +7,16 @@ import 'package:survey/repositories/oauth_repository.dart' as _i2;
 /// See the documentation for Mockito's code generation for more information.
 class MockOAuthRepository extends _i1.Mock implements _i2.OAuthRepository {
   MockOAuthRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+}
+
+/// A class which mocks [GraphQLClientProvider].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGraphQLClientProvider extends _i1.Mock
+    implements _i3.GraphQLClientProvider {
+  MockGraphQLClientProvider() {
     _i1.throwOnMissingStub(this);
   }
 }
