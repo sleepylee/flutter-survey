@@ -29,6 +29,17 @@ class F {
     }
   }
 
+  static String get graphQLEndpoint {
+    switch (appFlavor) {
+      case Flavor.PRODUCTION:
+        return 'https://survey-api.nimblehq.co/graphql';
+      case Flavor.STAGING:
+        return 'https://nimble-survey-web-staging.herokuapp.com/graphql';
+      default:
+        return 'https://nimble-survey-web-staging.herokuapp.com/graphql';
+    }
+  }
+
   static String get basicAuthClientId {
     switch (appFlavor) {
       case Flavor.PRODUCTION:
