@@ -8,8 +8,8 @@ class GetLoginStateUseCase extends NoParamsUseCase<bool> {
 
   @override
   Future<Result<bool>> call() {
-    return _sharedPreferencesStorage
-        .getAccessToken()
-        .then((token) => Success(token != null && token.isNotEmpty));
+    return _sharedPreferencesStorage.getAccessToken().then((token) {
+      return Success(token != null && token.isNotEmpty);
+    });
   }
 }

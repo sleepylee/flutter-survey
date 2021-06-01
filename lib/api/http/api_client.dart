@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
-import 'package:survey/api/request/oauth_token_request.dart';
-import 'package:survey/models/auth_token.dart';
-import 'package:survey/models/user.dart';
+import 'package:survey/api/http/request/oauth_token_request.dart';
+import 'package:survey/api/http/response/auth_token_response.dart';
+import 'package:survey/api/http/response/user.dart';
 
 part 'api_client.g.dart';
 
