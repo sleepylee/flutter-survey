@@ -1,6 +1,7 @@
 {
   "titleGeneralEmail": "Email",
   "titleGeneralPassword": "Mật khẩu",
+  "titleToday": "Hôm Nay",
   "titleGeneralError": "Lỗi",
   "buttonLogin": "Đăng nhập",
   "errorValidationEmailEmpty": "Vui lòng nhập email",

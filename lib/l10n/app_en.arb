@@ -7,6 +7,10 @@
   "@titleGeneralPassword": {
     "description": "Label of the Password text form field"
   },
+  "titleToday": "Today",
+  "@titleToday": {
+    "description": "Label Today on the Home screen"
+  },
   "titleGeneralError": "Error",
   "@titleGeneralError": {
     "description": "A generic Error label"

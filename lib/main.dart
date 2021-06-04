@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -29,26 +30,34 @@ class SurveyApp extends StatefulWidget {
 class _AppState extends State<SurveyApp> {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: F.title,
-      theme: appTheme,
-      getPages: [
-        GetPage(name: "/", page: () => SplashPage(), binding: SplashBinding()),
-        GetPage(
-            name: "/login", page: () => LoginPage(), binding: LoginBinding()),
-        GetPage(name: "/home", page: () => HomePage(), binding: HomeBinding()),
-      ],
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: [
-        const Locale('en', ''),
-        const Locale('vi', ''),
-        const Locale('th', ''),
-      ],
+    return AnnotatedRegion(
+      child: GetMaterialApp(
+        title: F.title,
+        theme: appTheme,
+        getPages: [
+          GetPage(
+              name: "/", page: () => SplashPage(), binding: SplashBinding()),
+          GetPage(
+              name: "/login", page: () => LoginPage(), binding: LoginBinding()),
+          GetPage(
+              name: "/home", page: () => HomePage(), binding: HomeBinding()),
+        ],
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('en', ''),
+          const Locale('vi', ''),
+          const Locale('th', ''),
+        ],
+      ),
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ),
     );
   }
 
