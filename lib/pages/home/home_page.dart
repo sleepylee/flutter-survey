@@ -18,37 +18,38 @@ class HomePage extends StatelessWidget {
           ),
           child: SafeArea(
             child: Padding(
-                padding: const EdgeInsets.only(left: 24, right: 24),
-                child: Wrap(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // TODO: Bind real data (date & user profile) later in [Integrate].
-                        new Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              new DateFormat('EEEE, MMMM dd')
-                                  .format(DateTime.now())
-                                  .toUpperCase(),
-                              style: Theme.of(context).textTheme.subtitle1,
-                            ),
-                            const SizedBox(height: 5),
-                            Text(AppLocalizations.of(context).titleToday,
-                                style: Theme.of(context).textTheme.headline4),
-                          ],
-                        ),
-                        CircleAvatar(
-                          radius: 22,
-                          backgroundImage:
-                              NetworkImage('https://picsum.photos/250?image=9'),
-                        ),
-                      ],
-                    ),
-                  ],
-                )),
+              padding: const EdgeInsets.only(left: 24, right: 24),
+              child: Wrap(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // TODO: Bind real data (date & user profile) later in [Integrate].
+                      new Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            new DateFormat('EEEE, MMMM dd')
+                                .format(DateTime.now())
+                                .toUpperCase(),
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                          const SizedBox(height: 5),
+                          Text(AppLocalizations.of(context).titleToday,
+                              style: Theme.of(context).textTheme.headline4),
+                        ],
+                      ),
+                      CircleAvatar(
+                        radius: 22,
+                        backgroundImage:
+                            NetworkImage('https://picsum.photos/250?image=9'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),
