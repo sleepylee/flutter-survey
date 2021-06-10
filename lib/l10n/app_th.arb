@@ -1,6 +1,7 @@
 {
   "titleGeneralEmail": "Email",
   "titleGeneralPassword": "รหัสผ่าน",
+  "titleToday": "วันนี้",
   "titleGeneralError": "ข้อผิดพลาด",
   "buttonLogin": "เข้าสู่ระบบ",
   "errorValidationEmailEmpty": "กรุณากรอกอีเมลของคุณ",
