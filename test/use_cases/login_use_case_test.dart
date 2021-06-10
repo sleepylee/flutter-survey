@@ -8,6 +8,7 @@ import 'package:survey/repositories/oauth_repository.dart';
 import 'package:survey/use_cases/base_use_case.dart';
 import 'package:survey/use_cases/login_use_case.dart';
 
+import '../fakers/fake_graphql_client_provider.dart';
 import '../fakers/fake_shared_preferences_storage.dart';
 import 'login_use_case_test.mocks.dart';
 
@@ -16,6 +17,7 @@ void main() {
   group('Validate login use case', () {
     final mockRepository = MockOAuthRepository();
     final mockStorage = FakeSharedPreferencesStorage();
+    final mockGraphQLClientProvider = FakeGraphQLClientProvider();
 
     when(mockRepository.login('positive', 'test')).thenAnswer((_) async =>
         AuthToken(
@@ -27,7 +29,8 @@ void main() {
         DioError(
             response: Response(statusCode: 400), type: DioErrorType.RESPONSE)));
 
-    final loginUseCase = LoginUseCase(mockRepository, mockStorage);
+    final loginUseCase =
+        LoginUseCase(mockRepository, mockStorage, mockGraphQLClientProvider);
 
     test('When login with valid credential, it returns Success', () async {
       final result = await loginUseCase

@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_token.dart';
+part of 'auth_token_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-AuthToken _$AuthTokenFromJson(Map<String, dynamic> json) {
-  return AuthToken(
+AuthTokenResponse _$AuthTokenResponseFromJson(Map<String, dynamic> json) {
+  return AuthTokenResponse(
     accessToken: json['access_token'] as String,
     tokenType: json['token_type'] as String,
     expiresIn: (json['expires_in'] as num)?.toDouble(),
@@ -15,7 +15,8 @@ AuthToken _$AuthTokenFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$AuthTokenToJson(AuthToken instance) => <String, dynamic>{
+Map<String, dynamic> _$AuthTokenResponseToJson(AuthTokenResponse instance) =>
+    <String, dynamic>{
       'access_token': instance.accessToken,
       'token_type': instance.tokenType,
       'expires_in': instance.expiresIn,
@@ -28,7 +29,8 @@ InnerResponseData _$InnerResponseDataFromJson(Map<String, dynamic> json) {
     type: json['type'] as String,
     authToken: json['attributes'] == null
         ? null
-        : AuthToken.fromJson(json['attributes'] as Map<String, dynamic>),
+        : AuthTokenResponse.fromJson(
+            json['attributes'] as Map<String, dynamic>),
   );
 }
 

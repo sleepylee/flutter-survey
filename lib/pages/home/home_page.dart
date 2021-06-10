@@ -1,14 +1,56 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../flavors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:survey/pages/home/home_controller.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          'Home Page ${F.title}',
+      body: GetBuilder(
+        init: HomeController(),
+        builder: (controller) => Container(
+          height: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.4),
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Wrap(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // TODO: Bind real data (date & user profile) later in [Integrate].
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            DateFormat('EEEE, MMMM dd')
+                                .format(DateTime.now())
+                                .toUpperCase(),
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                          const SizedBox(height: 5),
+                          Text(AppLocalizations.of(context).titleToday,
+                              style: Theme.of(context).textTheme.headline4),
+                        ],
+                      ),
+                      CircleAvatar(
+                        radius: 22,
+                        backgroundImage:
+                            NetworkImage('https://picsum.photos/250?image=9'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
