@@ -38,6 +38,8 @@ class LoginUseCase extends UseCase<void, LoginCredential> {
     _sharedPreferencesStorage.saveTokenType(data.tokenType);
     _sharedPreferencesStorage.saveAccessToken(data.accessToken);
     _sharedPreferencesStorage.saveRefreshToken(data.refreshToken);
+    _sharedPreferencesStorage.saveTokenExpiration(
+        data.expiresIn + DateTime.now().millisecondsSinceEpoch);
     // TODO: create an Authenticator instead of accessing directly like this
     _graphQLClientProvider
         .setAuthToken("${data.tokenType} ${data.accessToken}");
