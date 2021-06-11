@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:survey/pages/home/home_controller.dart';
 
@@ -40,10 +39,12 @@ class HomePage extends StatelessWidget {
                         ),
                         CircleAvatar(
                           radius: 22,
-                          child: state.currentUserAvatar.value.isNotEmpty
-                              ? NetworkImage(state.currentUserAvatar.value)
-                              : SvgPicture.asset(
-                                  'assets/images/avatar_placeholder.svg'),
+                          backgroundColor: Colors.black12,
+                          foregroundImage:
+                              state.currentUserAvatar.value.isNotEmpty
+                                  ? NetworkImage(state.currentUserAvatar.value)
+                                  : AssetImage(
+                                      'assets/images/avatar_placeholder.png'),
                         ),
                       ],
                     );
