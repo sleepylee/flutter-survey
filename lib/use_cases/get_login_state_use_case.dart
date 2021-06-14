@@ -18,6 +18,7 @@ class GetLoginStateUseCase extends NoParamsUseCase<bool> {
     final hasValidTokenStored = token != null &&
         token.isNotEmpty &&
         tokenExpiration > DateTime.now().millisecondsSinceEpoch;
+
     if (hasValidTokenStored) {
       // TODO: create an Authenticator instead of calling directly like this
       _graphQLClientProvider.setAuthToken("$tokenType $token");

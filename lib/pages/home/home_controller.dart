@@ -5,8 +5,13 @@ import 'package:survey/managers/user_manager.dart';
 const HOME_DISPLAY_DATE_FORMAT = 'EEEE, MMMM dd';
 
 class HomeController extends GetxController {
-  final currentDateText = "".obs;
-  final currentUserAvatar = "".obs;
+  final _currentDateText = "".obs;
+
+  String get currentDateText => _currentDateText.value;
+
+  final _currentUserAvatarUrl = "".obs;
+
+  String get currentUserAvatarUrl => _currentUserAvatarUrl.value;
 
   @override
   void onInit() {
@@ -17,7 +22,7 @@ class HomeController extends GetxController {
   }
 
   void _setDate() {
-    currentDateText.value = DateFormat(HOME_DISPLAY_DATE_FORMAT)
+    _currentDateText.value = DateFormat(HOME_DISPLAY_DATE_FORMAT)
         .format(DateTime.now())
         .toUpperCase();
   }
@@ -25,7 +30,7 @@ class HomeController extends GetxController {
   void _setUserAvatar() {
     final userManager = Get.find<UserManager>();
     userManager.getCurrentUser().listen((user) {
-      currentUserAvatar.value = user.avatarUrl;
+      _currentUserAvatarUrl.value = user.avatarUrl;
     });
   }
 }

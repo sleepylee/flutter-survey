@@ -18,7 +18,7 @@ abstract class SharedPreferencesStorage {
 
   Future<void> saveRefreshToken(String refreshToken);
 
-  Future<double> getTokenExpiration();
+  Future<int> getTokenExpiration();
 
   Future<void> saveTokenExpiration(int expiration);
 }
@@ -62,9 +62,9 @@ class LocalSharedPreferencesStorage implements SharedPreferencesStorage {
   }
 
   @override
-  Future<double> getTokenExpiration() async {
+  Future<int> getTokenExpiration() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getDouble(_PREF_KEY_TOKEN_EXPIRATION) ?? 0;
+    return prefs.getInt(_PREF_KEY_TOKEN_EXPIRATION) ?? 0;
   }
 
   @override

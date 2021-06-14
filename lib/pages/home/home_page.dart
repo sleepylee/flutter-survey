@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              state.currentDateText.value,
+                              state.currentDateText,
                               style: Theme.of(context).textTheme.subtitle1,
                             ),
                             const SizedBox(height: 5),
@@ -40,11 +40,10 @@ class HomePage extends StatelessWidget {
                         CircleAvatar(
                           radius: 22,
                           backgroundColor: Colors.black12,
-                          foregroundImage:
-                              state.currentUserAvatar.value.isNotEmpty
-                                  ? NetworkImage(state.currentUserAvatar.value)
-                                  : AssetImage(
-                                      'assets/images/avatar_placeholder.png'),
+                          foregroundImage: state.currentUserAvatarUrl.isNotEmpty
+                              ? NetworkImage(state.currentUserAvatarUrl)
+                              : AssetImage(
+                                  'assets/images/avatar_placeholder.png'),
                         ),
                       ],
                     );
