@@ -20,7 +20,7 @@ abstract class SharedPreferencesStorage {
 
   Future<double> getTokenExpiration();
 
-  Future<void> saveTokenExpiration(double expiration);
+  Future<void> saveTokenExpiration(int expiration);
 }
 
 // TODO: switch to secured_storage: https://pub.dev/packages/flutter_secure_storage
@@ -68,8 +68,8 @@ class LocalSharedPreferencesStorage implements SharedPreferencesStorage {
   }
 
   @override
-  Future<void> saveTokenExpiration(double expiration) async {
+  Future<void> saveTokenExpiration(int expiration) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return await prefs.setDouble(_PREF_KEY_TOKEN_EXPIRATION, expiration);
+    return await prefs.setInt(_PREF_KEY_TOKEN_EXPIRATION, expiration);
   }
 }

@@ -18,6 +18,11 @@ class FakeSharedPreferencesStorage extends Fake
   }
 
   @override
+  Future<void> saveTokenExpiration(int expiration) async {
+    _fakeStorage['expires-in'] = expiration;
+  }
+
+  @override
   Future<void> saveRefreshToken(String refreshToken) async {
     _fakeStorage['refresh-token'] = refreshToken;
   }

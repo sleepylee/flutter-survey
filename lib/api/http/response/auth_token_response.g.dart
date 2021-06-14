@@ -10,7 +10,7 @@ AuthTokenResponse _$AuthTokenResponseFromJson(Map<String, dynamic> json) {
   return AuthTokenResponse(
     accessToken: json['access_token'] as String,
     tokenType: json['token_type'] as String,
-    expiresIn: (json['expires_in'] as num)?.toDouble(),
+    expiresIn: json['expires_in'] as int,
     refreshToken: json['refresh_token'] as String,
   );
 }
