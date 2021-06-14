@@ -130,7 +130,7 @@ abstract class NetworkExceptions with _$NetworkExceptions {
     }, serviceUnavailable: () {
       errorMessage = "Service unavailable";
     }, methodNotAllowed: () {
-      errorMessage = "Method Allowed";
+      errorMessage = "Method not allowed";
     }, badRequest: () {
       errorMessage = "Bad request";
     }, unauthorisedRequest: () {
