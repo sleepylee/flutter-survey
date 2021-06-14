@@ -15,6 +15,10 @@ A survey conducting platform built with Flutter
 
     - `$ flutter pub run build_runner build --delete-conflicting-outputs`
 
+- Running unit testing:
+
+    - `$ flutter test test/directory/to/test` 
+
 ## License
 
 This project is Copyright (c) 2014 and onwards. It is free software,
