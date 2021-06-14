@@ -9,7 +9,7 @@ class AuthTokenResponse {
   @JsonKey(name: 'token_type')
   String tokenType;
   @JsonKey(name: 'expires_in')
-  double expiresIn;
+  int expiresIn;
   @JsonKey(name: 'refresh_token')
   String refreshToken;
 

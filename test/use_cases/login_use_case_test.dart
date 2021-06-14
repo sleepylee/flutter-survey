@@ -19,11 +19,13 @@ void main() {
     final mockStorage = FakeSharedPreferencesStorage();
     final mockGraphQLClientProvider = FakeGraphQLClientProvider();
 
-    when(mockRepository.login('positive', 'test')).thenAnswer((_) async =>
-        AuthToken(
-            accessToken: 'token',
-            tokenType: 'bearer',
-            refreshToken: 'refresh token'));
+    when(mockRepository.login('positive', 'test')).thenAnswer(
+      (_) async => AuthToken(
+          accessToken: 'token',
+          tokenType: 'bearer',
+          expiresIn: 5000,
+          refreshToken: 'refresh token'),
+    );
 
     when(mockRepository.login('negative', any)).thenAnswer((_) => Future.error(
         DioError(
