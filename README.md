@@ -21,7 +21,7 @@ A survey conducting platform built with Flutter
     
 - To generate Assets/Font/Image:
     
-    - `$ flutter packages pub run build_runner build`    
+    - `$ flutter packages pub run build_runner build --delete-conflicting-outputs`    
 
 ## License
 
