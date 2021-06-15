@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:survey/gen/fonts.gen.dart';
 
 final ThemeData appTheme = ThemeData(
   primaryColor: Colors.white,
   accentColor: Colors.white24,
-  fontFamily: 'Neuzeit',
+  fontFamily: FontFamily.neuzeit,
   textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.white),
   textTheme: TextTheme(
-    headline4: TextStyle(
-        color: Colors.white,
-        fontFamily: 'Neuzeit-Heavy',
-        fontWeight: FontWeight.w800),
-    subtitle1: TextStyle(
-        color: Colors.white,
-        fontFamily: 'Neuzeit-Heavy',
-        fontWeight: FontWeight.w800),
+    headline4: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
+    subtitle1: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
@@ -27,7 +22,6 @@ final ThemeData appTheme = ThemeData(
         TextStyle(
           fontSize: 17,
           fontWeight: FontWeight.w900,
-          fontFamily: 'Neuzeit',
         ),
       ),
     ),

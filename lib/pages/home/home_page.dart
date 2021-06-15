@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:survey/gen/assets.gen.dart';
 import 'package:survey/pages/home/home_controller.dart';
 
 class HomePage extends StatelessWidget {
@@ -42,8 +43,7 @@ class HomePage extends StatelessWidget {
                           backgroundColor: Colors.black12,
                           foregroundImage: state.currentUserAvatarUrl.isNotEmpty
                               ? NetworkImage(state.currentUserAvatarUrl)
-                              : AssetImage(
-                                  'assets/images/avatar_placeholder.png'),
+                              : Assets.images.avatarPlaceholder,
                         ),
                       ],
                     );

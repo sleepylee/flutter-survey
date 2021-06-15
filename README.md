@@ -18,6 +18,10 @@ A survey conducting platform built with Flutter
 - Running unit testing:
 
     - `$ flutter test test/directory/to/test` 
+    
+- To generate Assets/Font/Image:
+    
+    - `$ flutter packages pub run build_runner build`    
 
 ## License
 
