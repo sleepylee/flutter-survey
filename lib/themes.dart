@@ -10,12 +10,10 @@ final ThemeData appTheme = ThemeData(
     headline4: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
     headline5: TextStyle(
         color: Colors.white,
-        fontFamily: 'Neuzeit-Heavy',
         fontWeight: FontWeight.w800),
     subtitle1: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
     bodyText1: TextStyle(
         color: Colors.white,
-        fontFamily: 'Neuzeit',
         fontWeight: FontWeight.w400),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(

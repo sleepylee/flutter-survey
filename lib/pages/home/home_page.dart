@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
               id: "111",
               title: "Mock Title: Scarlett Bangkok ",
               description:
-                  "Mock Title: We'd love ot hear from you! Or a very long paragraph here to test the UI display",
+                  "Mock Description: We'd love ot hear from you! Or a very long paragraph here to test the UI display",
               imageUrl:
                   "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_l",
             ),
