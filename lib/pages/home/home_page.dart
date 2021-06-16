@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
             itemCount: cards.length,
             controller: PageController(initialPage: 0, viewportFraction: 1),
             onPageChanged: (index) {
-              // TODO: update state
+              // TODO: update state of the scroll indicator
             },
           ),
           SafeArea(
