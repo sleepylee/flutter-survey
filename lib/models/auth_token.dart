@@ -1,8 +1,8 @@
 class AuthToken {
-  var accessToken;
-  var refreshToken;
-  var tokenType;
-  var expiresIn;
+  String accessToken;
+  String refreshToken;
+  int expiresIn;
+  String tokenType;
 
   AuthToken(
       {this.accessToken, this.tokenType, this.expiresIn, this.refreshToken});

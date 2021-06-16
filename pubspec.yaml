@@ -62,6 +62,7 @@ dev_dependencies:
   json_serializable: ^3.5.1
   build_runner: ^1.0.0
   built_value: any
+  flutter_gen_runner:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -81,9 +82,8 @@ flutter:
     - family: Neuzeit
       fonts:
         - asset: assets/fonts/neuzeit.otf
-    - family: Neuzeit-Heavy
-      fonts:
         - asset: assets/fonts/neuzeit-heavy.otf
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

@@ -30,8 +30,8 @@ jobs:
       - name: Get flutter dependencies.
         run: flutter pub get
 
-      # Check for any formatting issues in the code.
-      - run: flutter format --set-exit-if-changed .
+      - name: Check for any formatting issues in the code.
+        run: flutter format --set-exit-if-changed .
 
       - name: Statically analyze the Dart code for any errors.
         run: flutter analyze .
