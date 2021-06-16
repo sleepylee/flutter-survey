@@ -90,7 +90,7 @@ class SurveyCarouselCard extends StatelessWidget {
       result.add(Container(
         width: 7.0,
         height: 7.0,
-        margin: EdgeInsets.symmetric(horizontal: 7),
+        margin: EdgeInsets.symmetric(horizontal: 5),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: (currentPage % 3 == i) ? Colors.white : Colors.white24,
