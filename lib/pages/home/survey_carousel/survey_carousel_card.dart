@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:survey/pages/home/survey_carousel/survey_ui_model.dart';
+import 'package:survey/pages/ui/indicators_widget.dart';
 
 // ignore: must_be_immutable
 class SurveyCarouselCard extends StatelessWidget {
@@ -28,7 +29,7 @@ class SurveyCarouselCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
               child: Wrap(
                 children: [
-                  _updateIndicators(0),
+                  const Indicators(currentPage: 0),
                   const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,28 +76,5 @@ class SurveyCarouselCard extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Widget _updateIndicators(int currentPage) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: _getIndicators(currentPage),
-    );
-  }
-
-  List<Widget> _getIndicators(int currentPage) {
-    final result = <Widget>[];
-    for (int i = 0; i < 3; i++) {
-      result.add(Container(
-        width: 7.0,
-        height: 7.0,
-        margin: EdgeInsets.symmetric(horizontal: 5),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: (currentPage % 3 == i) ? Colors.white : Colors.white24,
-        ),
-      ));
-    }
-    return result;
   }
 }

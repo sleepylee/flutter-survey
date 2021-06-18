@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
               );
             },
             itemCount: cards.length,
-            controller: PageController(initialPage: 0, viewportFraction: 1),
+            controller: PageController(),
             onPageChanged: (index) {
               // TODO: update state of the scroll indicator
             },

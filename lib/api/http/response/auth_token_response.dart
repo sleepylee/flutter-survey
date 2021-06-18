@@ -24,12 +24,11 @@ class AuthTokenResponse {
 
 @JsonSerializable()
 class InnerResponseData {
-  int id;
   String type;
   @JsonKey(name: 'attributes')
   AuthTokenResponse authToken;
 
-  InnerResponseData({this.id, this.type, this.authToken});
+  InnerResponseData({this.type, this.authToken});
 
   factory InnerResponseData.fromJson(Map<String, dynamic> json) =>
       _$InnerResponseDataFromJson(json);
