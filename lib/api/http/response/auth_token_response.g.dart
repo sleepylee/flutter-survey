@@ -25,7 +25,6 @@ Map<String, dynamic> _$AuthTokenResponseToJson(AuthTokenResponse instance) =>
 
 InnerResponseData _$InnerResponseDataFromJson(Map<String, dynamic> json) {
   return InnerResponseData(
-    id: json['id'] as int,
     type: json['type'] as String,
     authToken: json['attributes'] == null
         ? null
@@ -36,7 +35,6 @@ InnerResponseData _$InnerResponseDataFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$InnerResponseDataToJson(InnerResponseData instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'type': instance.type,
       'attributes': instance.authToken,
     };
