@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 const String _PREF_KEY_TYPE = 'PREF_KEY_TYPE';
 const String _PREF_KEY_ACCESS_TOKEN = 'PREF_KEY_TOKEN';
 const String _PREF_KEY_REFRESH_TOKEN = 'PREF_KEY_REFRESH_TOKEN';
+const String _PREF_KEY_TOKEN_EXPIRATION = 'PREF_KEY_TOKEN_EXPIRATION';
 
 abstract class SharedPreferencesStorage {
   Future<String> getTokenType();
@@ -16,8 +17,13 @@ abstract class SharedPreferencesStorage {
   Future<String> getRefreshToken();
 
   Future<void> saveRefreshToken(String refreshToken);
+
+  Future<int> getTokenExpiration();
+
+  Future<void> saveTokenExpiration(int expiration);
 }
 
+// TODO: switch to secured_storage: https://pub.dev/packages/flutter_secure_storage
 class LocalSharedPreferencesStorage implements SharedPreferencesStorage {
   @override
   Future<void> saveTokenType(String tokenType) async {
@@ -53,5 +59,17 @@ class LocalSharedPreferencesStorage implements SharedPreferencesStorage {
   Future<void> saveRefreshToken(String refreshToken) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.setString(_PREF_KEY_REFRESH_TOKEN, refreshToken);
+  }
+
+  @override
+  Future<int> getTokenExpiration() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(_PREF_KEY_TOKEN_EXPIRATION) ?? 0;
+  }
+
+  @override
+  Future<void> saveTokenExpiration(int expiration) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return await prefs.setInt(_PREF_KEY_TOKEN_EXPIRATION, expiration);
   }
 }

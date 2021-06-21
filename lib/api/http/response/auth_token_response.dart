@@ -9,7 +9,7 @@ class AuthTokenResponse {
   @JsonKey(name: 'token_type')
   String tokenType;
   @JsonKey(name: 'expires_in')
-  double expiresIn;
+  int expiresIn;
   @JsonKey(name: 'refresh_token')
   String refreshToken;
 
@@ -24,12 +24,11 @@ class AuthTokenResponse {
 
 @JsonSerializable()
 class InnerResponseData {
-  int id;
   String type;
   @JsonKey(name: 'attributes')
   AuthTokenResponse authToken;
 
-  InnerResponseData({this.id, this.type, this.authToken});
+  InnerResponseData({this.type, this.authToken});
 
   factory InnerResponseData.fromJson(Map<String, dynamic> json) =>
       _$InnerResponseDataFromJson(json);

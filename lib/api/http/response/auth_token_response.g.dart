@@ -10,7 +10,7 @@ AuthTokenResponse _$AuthTokenResponseFromJson(Map<String, dynamic> json) {
   return AuthTokenResponse(
     accessToken: json['access_token'] as String,
     tokenType: json['token_type'] as String,
-    expiresIn: (json['expires_in'] as num)?.toDouble(),
+    expiresIn: json['expires_in'] as int,
     refreshToken: json['refresh_token'] as String,
   );
 }
@@ -25,7 +25,6 @@ Map<String, dynamic> _$AuthTokenResponseToJson(AuthTokenResponse instance) =>
 
 InnerResponseData _$InnerResponseDataFromJson(Map<String, dynamic> json) {
   return InnerResponseData(
-    id: json['id'] as int,
     type: json['type'] as String,
     authToken: json['attributes'] == null
         ? null
@@ -36,7 +35,6 @@ InnerResponseData _$InnerResponseDataFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$InnerResponseDataToJson(InnerResponseData instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'type': instance.type,
       'attributes': instance.authToken,
     };

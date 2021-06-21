@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:survey/gen/assets.gen.dart';
 import 'package:survey/navigator/navigator.dart';
 import 'package:survey/pages/login/login_controller.dart';
 
@@ -23,7 +24,7 @@ class LoginPage extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/images/sign_in_background.png'),
+                  image: Assets.images.signInBackground,
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.4), BlendMode.overlay),
                 ),
@@ -50,7 +51,8 @@ class LoginPage extends StatelessWidget {
                           decoration: _formInputDecoration(
                               label: AppLocalizations.of(context)
                                   .titleGeneralEmail),
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w600),
                           validator: _emailValidator,
                         ),
                         const SizedBox(height: 20),
