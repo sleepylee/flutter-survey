@@ -71,6 +71,7 @@ class HomeController extends GetxController {
         });
       }
     } else {
+      // ignore: invalid_use_of_protected_member
       final lastCursor = _surveys.value.last.cursor;
       final surveys = await getSurveysUseCase.call(lastCursor);
       if (surveys is Success<List<Survey>>) {
