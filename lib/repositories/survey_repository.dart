@@ -16,7 +16,7 @@ class SurveyRepositoryImpl implements SurveyRepository {
   @override
   Future<List<Survey>> getSurveys(String cursor) {
     final queryOptions = QueryOptions(
-        fetchPolicy: FetchPolicy.cacheAndNetwork,
+        fetchPolicy: FetchPolicy.networkOnly,
         document: gql(GET_SURVEYS_QUERY),
         variables: {'endCursor': cursor});
     return _graphQlClient.query(queryOptions).then((value) {

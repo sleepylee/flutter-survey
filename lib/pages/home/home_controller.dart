@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:survey/managers/user_manager.dart';
 import 'package:survey/models/survey.dart';
+import 'package:survey/pages/home/survey_carousel/survey_ui_model.dart';
 import 'package:survey/use_cases/base_use_case.dart';
 import 'package:survey/use_cases/get_surveys_use_case.dart';
 
@@ -15,6 +16,22 @@ class HomeController extends GetxController {
   final _currentUserAvatarUrl = "".obs;
 
   String get currentUserAvatarUrl => _currentUserAvatarUrl.value;
+
+  final RxList<Survey> _surveys = RxList.empty(growable: true);
+
+  List<SurveyUiModel> get surveyUiModels => _surveys.isEmpty
+      ? List.empty()
+      // ignore: invalid_use_of_protected_member
+      : _surveys.value
+          .map((e) => SurveyUiModel(
+                id: e.id,
+                title: e.title,
+                description: e.description,
+                imageUrl: e.hdCoverImageUrl,
+              ))
+          .toList(growable: true);
+
+  bool _paginationFinished = false;
 
   @override
   void onInit() {
@@ -39,14 +56,40 @@ class HomeController extends GetxController {
     });
   }
 
-  // TODO: update this to get surveys with pagination in [Integrate]
   void _getSurveys() async {
+    if (_paginationFinished) {
+      return;
+    }
+
     final getSurveysUseCase = Get.find<GetSurveysUseCase>();
-    final surveys = await getSurveysUseCase.call("MQ");
-    if (surveys is Success<List<Survey>>) {
-      surveys.value.forEach((element) {
-        print("Items: ${element.title} - ${element.description}");
-      });
+    // ignore: invalid_use_of_protected_member
+    if (_surveys.value.isEmpty) {
+      final surveys = await getSurveysUseCase.call("");
+      if (surveys is Success<List<Survey>>) {
+        surveys.value.forEach((element) {
+          _surveys.add(element);
+        });
+      }
+    } else {
+      final lastCursor = _surveys.value.last.cursor;
+      final surveys = await getSurveysUseCase.call(lastCursor);
+      if (surveys is Success<List<Survey>>) {
+        if (surveys.value.isEmpty) {
+          _paginationFinished = true;
+          return;
+        }
+
+        surveys.value.forEach((element) {
+          _surveys.add(element);
+        });
+      }
+    }
+  }
+
+  void onIndexChanged(int index) {
+    // ignore: invalid_use_of_protected_member
+    if (index == _surveys.value.length - 2) {
+      _getSurveys(); // load more
     }
   }
 }
