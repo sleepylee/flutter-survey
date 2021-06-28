@@ -18,7 +18,7 @@ class SurveyRepositoryImpl implements SurveyRepository {
     final queryOptions = QueryOptions(
         fetchPolicy: FetchPolicy.cacheAndNetwork,
         document: gql(GET_SURVEYS_QUERY),
-        variables: {'after': cursor});
+        variables: {'endCursor': cursor});
     return _graphQlClient.query(queryOptions).then((value) {
       if (value.data != null) {
         final surveysResponse = SurveysResponse.fromJson(value.data['surveys']);
