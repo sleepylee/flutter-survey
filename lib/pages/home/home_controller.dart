@@ -23,11 +23,14 @@ class HomeController extends GetxController {
       ? List.empty()
       // ignore: invalid_use_of_protected_member
       : _surveys.value
-          .map((e) => SurveyUiModel(
-                id: e.id,
-                title: e.title,
-                description: e.description,
-                imageUrl: e.hdCoverImageUrl,
+          .asMap()
+          .entries
+          .map((entry) => SurveyUiModel(
+                id: entry.value.id,
+                title: entry.value.title,
+                description: entry.value.description,
+                imageUrl: entry.value.hdCoverImageUrl,
+                index: entry.key,
               ))
           .toList(growable: true);
 
