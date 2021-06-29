@@ -69,9 +69,7 @@ class HomeController extends GetxController {
     if (_surveys.value.isEmpty) {
       final surveys = await getSurveysUseCase.call("");
       if (surveys is Success<List<Survey>>) {
-        surveys.value.forEach((element) {
-          _surveys.add(element);
-        });
+        _surveys.addAll(surveys.value);
       }
     } else {
       // ignore: invalid_use_of_protected_member
@@ -83,9 +81,7 @@ class HomeController extends GetxController {
           return;
         }
 
-        surveys.value.forEach((element) {
-          _surveys.add(element);
-        });
+        _surveys.addAll(surveys.value);
       }
     }
   }
