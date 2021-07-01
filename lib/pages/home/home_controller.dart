@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:survey/managers/user_manager.dart';
+import 'package:survey/models/survey.dart';
+import 'package:survey/use_cases/base_use_case.dart';
+import 'package:survey/use_cases/get_surveys_use_case.dart';
 
 const HOME_DISPLAY_DATE_FORMAT = 'EEEE, MMMM dd';
 
@@ -19,6 +22,8 @@ class HomeController extends GetxController {
 
     _setDate();
     _setUserAvatar();
+
+    _getSurveys();
   }
 
   void _setDate() {
@@ -32,5 +37,16 @@ class HomeController extends GetxController {
     userManager.getCurrentUser().listen((user) {
       _currentUserAvatarUrl.value = user.avatarUrl;
     });
+  }
+
+  // TODO: update this to get surveys with pagination in [Integrate]
+  void _getSurveys() async {
+    final getSurveysUseCase = Get.find<GetSurveysUseCase>();
+    final surveys = await getSurveysUseCase.call("MQ");
+    if (surveys is Success<List<Survey>>) {
+      surveys.value.forEach((element) {
+        print("Items: ${element.title} - ${element.description}");
+      });
+    }
   }
 }
