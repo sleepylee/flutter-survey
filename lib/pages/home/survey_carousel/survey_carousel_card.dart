@@ -29,7 +29,7 @@ class SurveyCarouselCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
               child: Wrap(
                 children: [
-                  const Indicators(currentPage: 0),
+                  Indicators(currentPage: surveyUiModel.index),
                   const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

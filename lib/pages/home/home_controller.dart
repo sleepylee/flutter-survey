@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:survey/managers/user_manager.dart';
 import 'package:survey/models/survey.dart';
+import 'package:survey/pages/home/survey_carousel/survey_ui_model.dart';
 import 'package:survey/use_cases/base_use_case.dart';
 import 'package:survey/use_cases/get_surveys_use_case.dart';
 
@@ -15,6 +16,25 @@ class HomeController extends GetxController {
   final _currentUserAvatarUrl = "".obs;
 
   String get currentUserAvatarUrl => _currentUserAvatarUrl.value;
+
+  final RxList<Survey> _surveys = RxList.empty(growable: true);
+
+  List<SurveyUiModel> get surveyUiModels => _surveys.isEmpty
+      ? List.empty()
+      // ignore: invalid_use_of_protected_member
+      : _surveys.value
+          .asMap()
+          .entries
+          .map((entry) => SurveyUiModel(
+                id: entry.value.id,
+                title: entry.value.title,
+                description: entry.value.description,
+                imageUrl: entry.value.hdCoverImageUrl,
+                index: entry.key,
+              ))
+          .toList(growable: true);
+
+  bool _paginationFinished = false;
 
   @override
   void onInit() {
@@ -39,14 +59,37 @@ class HomeController extends GetxController {
     });
   }
 
-  // TODO: update this to get surveys with pagination in [Integrate]
   void _getSurveys() async {
+    if (_paginationFinished) {
+      return;
+    }
+
     final getSurveysUseCase = Get.find<GetSurveysUseCase>();
-    final surveys = await getSurveysUseCase.call("MQ");
-    if (surveys is Success<List<Survey>>) {
-      surveys.value.forEach((element) {
-        print("Items: ${element.title} - ${element.description}");
-      });
+    // ignore: invalid_use_of_protected_member
+    if (_surveys.value.isEmpty) {
+      final surveys = await getSurveysUseCase.call("");
+      if (surveys is Success<List<Survey>>) {
+        _surveys.addAll(surveys.value);
+      }
+    } else {
+      // ignore: invalid_use_of_protected_member
+      final lastCursor = _surveys.value.last.cursor;
+      final surveys = await getSurveysUseCase.call(lastCursor);
+      if (surveys is Success<List<Survey>>) {
+        if (surveys.value.isEmpty) {
+          _paginationFinished = true;
+          return;
+        }
+
+        _surveys.addAll(surveys.value);
+      }
+    }
+  }
+
+  void onIndexChanged(int index) {
+    // ignore: invalid_use_of_protected_member
+    if (index == _surveys.value.length - 2) {
+      _getSurveys(); // load more
     }
   }
 }
