@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:survey/navigator/navigator.dart';
 import 'package:survey/pages/home/survey_carousel/survey_ui_model.dart';
 import 'package:survey/pages/ui/indicators_widget.dart';
 
@@ -62,7 +64,7 @@ class SurveyCarouselCard extends StatelessWidget {
                           ),
                           backgroundColor: Colors.white,
                           onPressed: () {
-                            // TODO: Add click action
+                            _navigateToSurveyDetail(surveyUiModel.id);
                           },
                         ),
                         flex: 1,
@@ -76,5 +78,10 @@ class SurveyCarouselCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _navigateToSurveyDetail(String id) {
+    final navigator = Get.find<AppNavigator>();
+    navigator.navigateToSurvey(id);
   }
 }
