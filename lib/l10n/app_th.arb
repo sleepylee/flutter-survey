@@ -4,6 +4,7 @@
   "titleToday": "วันนี้",
   "titleGeneralError": "ข้อผิดพลาด",
   "buttonLogin": "เข้าสู่ระบบ",
+  "buttonStartSurvey": "เริ่มการสำรวจ",
   "errorValidationEmailEmpty": "กรุณากรอกอีเมลของคุณ",
   "errorValidationEmailInvalid": "กรุณาใส่อีเมลที่ถูกต้อง",
   "errorLoginFailed": "เข้าสู่ระบบล้มเหลว! โปรดตรวจสอบอีเมลหรือรหัสผ่านของคุณอีกครั้ง"

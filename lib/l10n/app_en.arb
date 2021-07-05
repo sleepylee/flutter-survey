@@ -19,6 +19,10 @@
   "@buttonLogin": {
     "description": "Label of the Login button"
   },
+  "buttonStartSurvey": "Start Survey",
+  "@buttonStartSurvey": {
+    "description": "Label of the Start Survey button"
+  },
   "errorValidationEmailEmpty": "Please enter your email",
   "@errorValidationEmailEmpty": {
     "description": "Error message when Email is empty"
