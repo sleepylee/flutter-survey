@@ -21,9 +21,9 @@ class SurveyController extends GetxController {
     final getSurveyUseCase = Get.find<GetSurveyDetailUseCase>();
     getSurveyUseCase.call(surveyId).then((result) => {
           if (result is Success<Survey>)
-            {_survey.value = Optional.of(result.value)}
+            _survey.value = Optional.of(result.value)
           else
-            {print("Error when fetching survey, handle Error later.")}
+            print("Error when fetching survey, handle Error later.")
         });
   }
 }

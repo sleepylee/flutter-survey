@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:survey/models/survey.dart';
 import 'package:survey/pages/survey/survey_controller.dart';
 
 class SurveyPage extends StatelessWidget {
@@ -15,7 +16,7 @@ class SurveyPage extends StatelessWidget {
         builder: (controller) => GetX<SurveyController>(
           builder: (state) {
             return state.optionalSurvey.isPresent
-                ? SurveyDetail(state: state)
+                ? SurveyDetail(survey: state.optionalSurvey.value)
                 // TODO: change this to the loading shimmer layout later
                 : ColoredBox(color: Colors.white12);
           },
@@ -26,9 +27,9 @@ class SurveyPage extends StatelessWidget {
 }
 
 class SurveyDetail extends StatelessWidget {
-  SurveyDetail({this.state});
+  SurveyDetail({this.survey});
 
-  final SurveyController state;
+  final Survey survey;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class SurveyDetail extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(state.optionalSurvey.value.hdCoverImageUrl),
+              image: NetworkImage(survey.hdCoverImageUrl),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.5), BlendMode.overlay),
@@ -66,13 +67,13 @@ class SurveyDetail extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          state.optionalSurvey.value.title,
+                          survey.title,
                           style: Theme.of(context).textTheme.headline4,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          state.optionalSurvey.value.description,
+                          survey.description,
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1
@@ -96,8 +97,7 @@ class SurveyDetail extends StatelessWidget {
               child: Text(AppLocalizations.of(context).buttonStartSurvey),
             ),
             onPressed: () {
-              Get.snackbar(
-                  "TODO", "Go to Survey: ${state.optionalSurvey.value.id}",
+              Get.snackbar("TODO", "Go to Survey: ${survey.id}",
                   backgroundColor: Colors.white70);
             },
           ),
