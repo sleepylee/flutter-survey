@@ -13,13 +13,17 @@ class SurveyController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    _getSurvey();
+  }
 
+  void _getSurvey() {
     final surveyId = Get.arguments[DATA_SURVEY_ID];
-    // TODO: remove this when integrate
     final getSurveyUseCase = Get.find<GetSurveyDetailUseCase>();
     getSurveyUseCase.call(surveyId).then((result) => {
           if (result is Success<Survey>)
             {_survey.value = Optional.of(result.value)}
+          else
+            {print("Error when fetching survey, handle Error later.")}
         });
   }
 }
