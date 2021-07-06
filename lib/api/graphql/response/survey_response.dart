@@ -4,7 +4,7 @@ part 'survey_response.g.dart';
 
 @JsonSerializable()
 class SurveysResponse {
-  List<SurveyResponse> edges;
+  List<SurveyNodeResponse> edges;
 
   SurveysResponse({this.edges});
 
@@ -15,29 +15,29 @@ class SurveysResponse {
 }
 
 @JsonSerializable()
-class SurveyResponse {
+class SurveyNodeResponse {
   String cursor;
-  NodeResponse node;
+  SurveyResponse node;
 
-  SurveyResponse({this.cursor, this.node});
+  SurveyNodeResponse({this.cursor, this.node});
 
-  factory SurveyResponse.fromJson(Map<String, dynamic> json) =>
-      _$SurveyResponseFromJson(json);
+  factory SurveyNodeResponse.fromJson(Map<String, dynamic> json) =>
+      _$SurveyNodeResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$SurveyResponseToJson(this);
+  Map<String, dynamic> toJson() => _$SurveyNodeResponseToJson(this);
 }
 
 @JsonSerializable()
-class NodeResponse {
+class SurveyResponse {
   String id;
   String title;
   String coverImageUrl;
   String description;
 
-  NodeResponse({this.id, this.title, this.coverImageUrl, this.description});
+  SurveyResponse({this.id, this.title, this.coverImageUrl, this.description});
 
-  factory NodeResponse.fromJson(Map<String, dynamic> json) =>
-      _$NodeResponseFromJson(json);
+  factory SurveyResponse.fromJson(Map<String, dynamic> json) =>
+      _$SurveyResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NodeResponseToJson(this);
+  Map<String, dynamic> toJson() => _$SurveyResponseToJson(this);
 }

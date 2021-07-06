@@ -6,6 +6,8 @@ import 'package:survey/models/survey.dart';
 
 abstract class SurveyRepository {
   Future<List<Survey>> getSurveys(String cursor);
+
+  Future<Survey> getSurveyById(String id);
 }
 
 class SurveyRepositoryImpl implements SurveyRepository {
@@ -37,6 +39,26 @@ class SurveyRepositoryImpl implements SurveyRepository {
         });
 
         return surveysList;
+      } else {
+        throw NetworkExceptions.notFound("Something is wrong");
+      }
+    });
+  }
+
+  @override
+  Future<Survey> getSurveyById(String id) {
+    final queryOptions = QueryOptions(
+        fetchPolicy: FetchPolicy.cacheAndNetwork,
+        document: gql(GET_SURVEY_BY_ID),
+        variables: {'surveyId': id});
+    return _graphQlClient.query(queryOptions).then((value) {
+      if (value.data != null) {
+        final surveyResponse = SurveyResponse.fromJson(value.data['survey']);
+        return Survey(
+            id: surveyResponse.id,
+            title: surveyResponse.title,
+            description: surveyResponse.description,
+            coverImageUrl: surveyResponse.coverImageUrl);
       } else {
         throw NetworkExceptions.notFound("Something is wrong");
       }

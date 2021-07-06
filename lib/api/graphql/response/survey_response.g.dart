@@ -11,7 +11,7 @@ SurveysResponse _$SurveysResponseFromJson(Map<String, dynamic> json) {
     edges: (json['edges'] as List)
         ?.map((e) => e == null
             ? null
-            : SurveyResponse.fromJson(e as Map<String, dynamic>))
+            : SurveyNodeResponse.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }
@@ -21,23 +21,23 @@ Map<String, dynamic> _$SurveysResponseToJson(SurveysResponse instance) =>
       'edges': instance.edges,
     };
 
-SurveyResponse _$SurveyResponseFromJson(Map<String, dynamic> json) {
-  return SurveyResponse(
+SurveyNodeResponse _$SurveyNodeResponseFromJson(Map<String, dynamic> json) {
+  return SurveyNodeResponse(
     cursor: json['cursor'] as String,
     node: json['node'] == null
         ? null
-        : NodeResponse.fromJson(json['node'] as Map<String, dynamic>),
+        : SurveyResponse.fromJson(json['node'] as Map<String, dynamic>),
   );
 }
 
-Map<String, dynamic> _$SurveyResponseToJson(SurveyResponse instance) =>
+Map<String, dynamic> _$SurveyNodeResponseToJson(SurveyNodeResponse instance) =>
     <String, dynamic>{
       'cursor': instance.cursor,
       'node': instance.node,
     };
 
-NodeResponse _$NodeResponseFromJson(Map<String, dynamic> json) {
-  return NodeResponse(
+SurveyResponse _$SurveyResponseFromJson(Map<String, dynamic> json) {
+  return SurveyResponse(
     id: json['id'] as String,
     title: json['title'] as String,
     coverImageUrl: json['coverImageUrl'] as String,
@@ -45,7 +45,7 @@ NodeResponse _$NodeResponseFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$NodeResponseToJson(NodeResponse instance) =>
+Map<String, dynamic> _$SurveyResponseToJson(SurveyResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
