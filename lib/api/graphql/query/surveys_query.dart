@@ -20,6 +20,7 @@ const String GET_SURVEYS_QUERY = r"""
 const String GET_SURVEY_BY_ID = r"""
   query($surveyId: ID!){
     survey(id: $surveyId){
+      id
       title
       coverImageUrl
       description
