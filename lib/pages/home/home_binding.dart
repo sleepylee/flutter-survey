@@ -15,6 +15,8 @@ class HomeBinding implements Bindings {
     final surveyRepository = SurveyRepositoryImpl(graphQLClientProvider.client);
     Get.put(GetProfileUseCase(userRepository));
     Get.put(GetSurveysUseCase(surveyRepository));
+
+    Get.put<SurveyRepository>(surveyRepository);
     Get.put<UserManager>(UserManagerImpl());
   }
 }
