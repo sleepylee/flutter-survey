@@ -39,7 +39,8 @@ class SurveyDetail extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: CachedNetworkImageProvider(survey.hdCoverImageUrl),
+              image: CachedNetworkImageProvider(survey.hdCoverImageUrl,
+                  cacheKey: survey.id),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.5), BlendMode.overlay),
