@@ -4,6 +4,7 @@
   "titleToday": "Hôm Nay",
   "titleGeneralError": "Lỗi",
   "buttonLogin": "Đăng nhập",
+  "buttonStartSurvey": "Bắt đầu khảo sát",
   "errorValidationEmailEmpty": "Vui lòng nhập email",
   "errorValidationEmailInvalid": "Vui lòng nhập đúng email",
   "errorLoginFailed": "Lỗi đăng nhập! Vui lòng kiểm tra lại email và mật khẩu"

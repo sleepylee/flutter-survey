@@ -12,6 +12,8 @@ import 'package:survey/pages/login/login_binding.dart';
 import 'package:survey/pages/login/login_page.dart';
 import 'package:survey/pages/splash/splash_binding.dart';
 import 'package:survey/pages/splash/splash_page.dart';
+import 'package:survey/pages/survey/survey_binding.dart';
+import 'package:survey/pages/survey/survey_page.dart';
 import 'package:survey/preferences/shared_preferences.dart';
 import 'package:survey/themes.dart';
 
@@ -41,6 +43,10 @@ class _AppState extends State<SurveyApp> {
               name: "/login", page: () => LoginPage(), binding: LoginBinding()),
           GetPage(
               name: "/home", page: () => HomePage(), binding: HomeBinding()),
+          GetPage(
+              name: "/survey",
+              page: () => SurveyPage(),
+              binding: SurveyBinding()),
         ],
         localizationsDelegates: [
           AppLocalizations.delegate,

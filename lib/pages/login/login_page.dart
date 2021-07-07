@@ -131,6 +131,7 @@ class LoginPage extends StatelessWidget {
         Get.snackbar(
           AppLocalizations.of(Get.context).titleGeneralError,
           AppLocalizations.of(Get.context).errorLoginFailed,
+          backgroundColor: Colors.white70,
         );
       },
     );
