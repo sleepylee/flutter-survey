@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,8 @@ class SurveyCarouselCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-        image: NetworkImage(surveyUiModel.imageUrl),
+        image: CachedNetworkImageProvider(surveyUiModel.imageUrl,
+            cacheKey: surveyUiModel.id),
         fit: BoxFit.cover,
         colorFilter:
             ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.overlay),
