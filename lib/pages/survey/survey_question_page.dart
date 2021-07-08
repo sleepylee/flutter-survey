@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:survey/pages/survey/survey_answer.dart';
 import 'package:survey/pages/survey/survey_controller.dart';
 
 class SurveyQuestionPage extends StatelessWidget {
@@ -68,13 +69,26 @@ class SurveyQuestionPage extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ).marginOnly(top: 8),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),
                 ],
               ),
             ),
+            // TODO: remove these:
+            Align(
+              alignment: Alignment.center,
+              child: SurveyAnswer(type: AnswerType.like),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: SurveyAnswer(type: AnswerType.heart),
+            ).marginOnly(top: 85),
+            Align(
+              alignment: Alignment.center,
+              child: SurveyAnswer(type: AnswerType.star),
+            ).marginOnly(top: 155),
             Align(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
