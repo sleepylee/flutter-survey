@@ -79,16 +79,20 @@ class SurveyQuestionPage extends StatelessWidget {
             // TODO: remove these:
             Align(
               alignment: Alignment.center,
-              child: SurveyAnswer(type: AnswerType.like),
+              child: SurveyAnswer(type: "heart"),
             ),
             Align(
               alignment: Alignment.center,
-              child: SurveyAnswer(type: AnswerType.heart),
+              child: SurveyAnswer(type: "star"),
             ).marginOnly(top: 85),
             Align(
               alignment: Alignment.center,
-              child: SurveyAnswer(type: AnswerType.star),
-            ).marginOnly(top: 155),
+              child: SurveyAnswer(type: "money"),
+            ).marginOnly(top: 165),
+            Align(
+              alignment: Alignment.center,
+              child: SurveyAnswer(type: "slider"),
+            ).marginOnly(top: 235),
             Align(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
