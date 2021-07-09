@@ -77,10 +77,14 @@ class SurveyQuestionPage extends StatelessWidget {
               ),
             ),
             // TODO: remove these:
-            SurveyAnswer(
-              type: "choice", // TODO: Come from API
-              optionsText: ["Yes", "No", "Ok"],
-            ).marginOnly(top: 85),
+            Align(
+              alignment: Alignment.center,
+              child: SurveyAnswer(
+                counter: 10,
+                type: "nps", // TODO: Come from API
+                optionsText: ["Not satisfied at all", "Ok", "Satisfied yeah"],
+              ),
+            ),
             Align(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(

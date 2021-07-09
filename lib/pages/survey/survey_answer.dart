@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:survey/pages/ui/nps_rating_bar.dart';
 import 'package:survey/pages/ui/picker_selector.dart';
 import 'package:survey/pages/ui/slide_rating_bar.dart';
 
@@ -28,6 +29,11 @@ Widget _processAnswerUi(String type, List<String> optionsText, int counter) {
     case RATING_TYPE_CHOICE:
     case RATING_TYPE_DROPDOWN:
       return PickerSelector(optionsText: optionsText);
+    case RATING_TYPE_NPS:
+      return NpsRatingBar(
+          counter: counter,
+          minTitle: optionsText.first,
+          maxTitle: optionsText.last);
     default:
       return SizedBox.shrink();
   }
