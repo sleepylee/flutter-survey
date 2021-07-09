@@ -2,6 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const String RATING_TYPE_SMILEY = "smiley";
+const smileys = {
+  "worst": "😡",
+  "worse": "😕",
+  "neutral": "😐",
+  "better": "🙂",
+  "best": "😄",
+};
 
 class SmileyRatingBar extends StatefulWidget {
   final int counter;
@@ -9,14 +16,10 @@ class SmileyRatingBar extends StatefulWidget {
   SmileyRatingBar(this.counter);
 
   @override
-  _SmileyRatingBarState createState() => _SmileyRatingBarState(counter);
+  _SmileyRatingBarState createState() => _SmileyRatingBarState();
 }
 
 class _SmileyRatingBarState extends State<SmileyRatingBar> {
-  final int counter;
-
-  _SmileyRatingBarState(this.counter);
-
   int _selectedRate = 2;
 
   void _onRateSelected(int rate) {
@@ -35,7 +38,7 @@ class _SmileyRatingBarState extends State<SmileyRatingBar> {
         child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemCount: counter,
+            itemCount: widget.counter,
             itemBuilder: (context, index) {
               return GestureDetector(
                   onTap: () {
@@ -58,16 +61,17 @@ class _SmileyRatingBarState extends State<SmileyRatingBar> {
     final correctStyle = index == selectedIndex ? enabledStyle : disabledStyle;
     switch (index) {
       case 0:
-        return Text("😡", style: correctStyle);
+        return Text(smileys["worst"], style: correctStyle);
       case 1:
-        return Text("😕", style: correctStyle);
+        return Text(smileys["worse"], style: correctStyle);
       case 2:
-        return Text("😐", style: correctStyle);
+        return Text(smileys["neutral"], style: correctStyle);
       case 3:
-        return Text("🙂", style: correctStyle);
+        return Text(smileys["better"], style: correctStyle);
       case 4:
+        return Text(smileys["best"], style: correctStyle);
       default:
-        return Text("😄", style: correctStyle);
+        return Text(smileys["neutral"], style: correctStyle);
     }
   }
 }
