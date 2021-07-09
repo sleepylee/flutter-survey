@@ -12,17 +12,10 @@ class NpsRatingBar extends StatefulWidget {
       : super(key: key);
 
   @override
-  _NpsRatingBarState createState() => _NpsRatingBarState(
-      counter: this.counter, minTitle: this.minTitle, maxTitle: this.maxTitle);
+  _NpsRatingBarState createState() => _NpsRatingBarState();
 }
 
 class _NpsRatingBarState extends State<NpsRatingBar> {
-  final int counter;
-  final String minTitle;
-  final String maxTitle;
-
-  _NpsRatingBarState({this.counter, this.minTitle, this.maxTitle});
-
   int _selectedRate = 4;
 
   void _onRateSelected(int rate) {
@@ -46,7 +39,7 @@ class _NpsRatingBarState extends State<NpsRatingBar> {
             child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: counter,
+              itemCount: widget.counter,
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
@@ -62,7 +55,7 @@ class _NpsRatingBarState extends State<NpsRatingBar> {
                             : Colors.white30,
                         width: 1,
                       ),
-                      borderRadius: _roundedBorder(index, counter),
+                      borderRadius: _roundedBorder(index, widget.counter),
                     ),
                     child: Text(
                       (index + 1).toString(),
@@ -84,18 +77,18 @@ class _NpsRatingBarState extends State<NpsRatingBar> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  minTitle,
+                  widget.minTitle,
                   style: style.copyWith(
-                    color:
-                        (_selectedRate != null && _selectedRate >= counter / 2)
-                            ? Colors.white30
-                            : Colors.white,
+                    color: (_selectedRate != null &&
+                            _selectedRate >= widget.counter / 2)
+                        ? Colors.white30
+                        : Colors.white,
                   ),
                 ),
-                Text(maxTitle,
+                Text(widget.maxTitle,
                     style: style.copyWith(
                       color: (_selectedRate != null &&
-                              _selectedRate >= counter / 2)
+                              _selectedRate >= widget.counter / 2)
                           ? Colors.white
                           : Colors.white30,
                     )),
@@ -111,11 +104,11 @@ class _NpsRatingBarState extends State<NpsRatingBar> {
     if (index == 0) {
       return BorderRadius.only(
           topLeft: Radius.circular(10), bottomLeft: Radius.circular(10));
-    } else if (index == total - 1) {
+    }
+    if (index == total - 1) {
       return BorderRadius.only(
           topRight: Radius.circular(10), bottomRight: Radius.circular(10));
-    } else {
-      return null;
     }
+    return null;
   }
 }
