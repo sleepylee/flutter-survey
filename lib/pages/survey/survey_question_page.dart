@@ -80,9 +80,8 @@ class SurveyQuestionPage extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: SurveyAnswer(
-                counter: 10,
-                type: "nps", // TODO: Come from API
-                optionsText: ["Not satisfied at all", "Ok", "Satisfied yeah"],
+                counter: 5,
+                type: "smiley", // TODO: Come from API
               ),
             ),
             Align(
