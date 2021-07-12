@@ -39,7 +39,7 @@ Widget _processAnswerUi(String type, List<String> optionsText, int counter) {
     case RATING_TYPE_SMILEY:
       return SmileyRatingBar(counter);
     case RATING_TYPE_TEXT_AREA:
-      return TextAreaRating(null);
+      return TextAreaRating(optionsText.first);
     default:
       return SizedBox.shrink();
   }
