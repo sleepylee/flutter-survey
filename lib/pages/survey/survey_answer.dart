@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:survey/pages/ui/nps_rating_bar.dart';
 import 'package:survey/pages/ui/picker_selector.dart';
 import 'package:survey/pages/ui/slide_rating_bar.dart';
+import 'package:survey/pages/ui/smiley_rating_bar.dart';
 
 class SurveyAnswer extends StatelessWidget {
   final String type;
@@ -34,6 +35,8 @@ Widget _processAnswerUi(String type, List<String> optionsText, int counter) {
           counter: counter,
           minTitle: optionsText.first,
           maxTitle: optionsText.last);
+    case RATING_TYPE_SMILEY:
+      return SmileyRatingBar(counter);
     default:
       return SizedBox.shrink();
   }
