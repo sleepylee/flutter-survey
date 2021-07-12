@@ -61,7 +61,7 @@ class SurveyQuestionPage extends StatelessWidget {
                                   .textTheme
                                   .bodyText1
                                   .copyWith(
-                                  color: Colors.white70, fontSize: 15),
+                                      color: Colors.white70, fontSize: 15),
                             ),
                             Text(
                               "TODO: How satisfied you are?",
