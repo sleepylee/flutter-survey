@@ -81,8 +81,12 @@ class SurveyQuestionPage extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: SurveyAnswer(
-                type: "textarea", // TODO: Come from API
-                optionsText: [null], // TODO: Come from API
+                type: "textfield", // TODO: Come from API
+                optionsText: [
+                  "First Name",
+                  "Last Name",
+                  "Age"
+                ], // TODO: Come from API
               ),
             ),
             Align(
