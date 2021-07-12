@@ -4,6 +4,7 @@ import 'package:survey/pages/ui/nps_rating_bar.dart';
 import 'package:survey/pages/ui/picker_selector.dart';
 import 'package:survey/pages/ui/slide_rating_bar.dart';
 import 'package:survey/pages/ui/smiley_rating_bar.dart';
+import 'package:survey/pages/ui/text_area_rating.dart';
 
 class SurveyAnswer extends StatelessWidget {
   final String type;
@@ -24,12 +25,12 @@ Widget _processAnswerUi(String type, List<String> optionsText, int counter) {
   switch (type) {
     case RATING_TYPE_STAR:
     case RATING_TYPE_HEART:
-    case RATING_TYPE_SLIDER:
     case RATING_TYPE_MONEY:
       return SlideRatingBar.from(type, counter);
     case RATING_TYPE_CHOICE:
     case RATING_TYPE_DROPDOWN:
       return PickerSelector(optionsText: optionsText);
+    case RATING_TYPE_SLIDER:
     case RATING_TYPE_NPS:
       return NpsRatingBar(
           counter: counter,
@@ -37,6 +38,8 @@ Widget _processAnswerUi(String type, List<String> optionsText, int counter) {
           maxTitle: optionsText.last);
     case RATING_TYPE_SMILEY:
       return SmileyRatingBar(counter);
+    case RATING_TYPE_TEXT_AREA:
+      return TextAreaRating(null);
     default:
       return SizedBox.shrink();
   }
