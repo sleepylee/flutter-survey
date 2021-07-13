@@ -5,6 +5,7 @@ import 'package:survey/pages/ui/picker_selector.dart';
 import 'package:survey/pages/ui/slide_rating_bar.dart';
 import 'package:survey/pages/ui/smiley_rating_bar.dart';
 import 'package:survey/pages/ui/text_area_rating.dart';
+import 'package:survey/pages/ui/text_field_rating.dart';
 
 class SurveyAnswer extends StatelessWidget {
   final String type;
@@ -40,6 +41,8 @@ Widget _processAnswerUi(String type, List<String> optionsText, int counter) {
       return SmileyRatingBar(counter);
     case RATING_TYPE_TEXT_AREA:
       return TextAreaRating(optionsText.first);
+    case RATING_TYPE_TEXT_FIELD:
+      return TextFieldRating(hints: optionsText);
     default:
       return SizedBox.shrink();
   }
