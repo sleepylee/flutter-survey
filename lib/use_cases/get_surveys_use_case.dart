@@ -1,3 +1,4 @@
+import 'package:survey/exception/network_exceptions.dart';
 import 'package:survey/models/survey.dart';
 import 'package:survey/repositories/survey_repository.dart';
 import 'package:survey/use_cases/base_use_case.dart';
@@ -12,7 +13,7 @@ class GetSurveysUseCase extends UseCase<List<Survey>, String> {
     try {
       final result = await _surveyRepository.getSurveys(cursor);
       return Success(result);
-    } catch (exception) {
+    } on NetworkExceptions catch (exception) {
       return Failed(UseCaseException(exception, null));
     }
   }

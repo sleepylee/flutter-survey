@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
                                 style: Theme.of(context).textTheme.subtitle1,
                               ),
                               const SizedBox(height: 5),
-                              Text(AppLocalizations.of(context).titleToday,
+                              Text(AppLocalizations.of(context)!.titleToday,
                                   style: Theme.of(context).textTheme.headline4),
                             ],
                           ),

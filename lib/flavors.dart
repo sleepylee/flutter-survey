@@ -5,7 +5,7 @@ enum Flavor {
 
 // TODO: rework on this, keeping all detail in the binary isn't nice
 class F {
-  static Flavor appFlavor;
+  static Flavor? appFlavor;
 
   static String get title {
     switch (appFlavor) {

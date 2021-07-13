@@ -8,22 +8,26 @@ class FakeSharedPreferencesStorage extends Fake
   Map<String, dynamic> _fakeStorage = HashMap();
 
   @override
-  Future<void> saveTokenType(String tokenType) async {
+  Future<bool> saveTokenType(String tokenType) async {
     _fakeStorage['token-type'] = tokenType;
+    return true;
   }
 
   @override
-  Future<void> saveAccessToken(String token) async {
+  Future<bool> saveAccessToken(String token) async {
     _fakeStorage['access-token'] = token;
+    return true;
   }
 
   @override
-  Future<void> saveTokenExpiration(int expiration) async {
+  Future<bool> saveTokenExpiration(int expiration) async {
     _fakeStorage['expires-in'] = expiration;
+    return true;
   }
 
   @override
-  Future<void> saveRefreshToken(String refreshToken) async {
+  Future<bool> saveRefreshToken(String refreshToken) async {
     _fakeStorage['refresh-token'] = refreshToken;
+    return true;
   }
 }

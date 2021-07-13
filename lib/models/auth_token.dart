@@ -5,5 +5,8 @@ class AuthToken {
   String tokenType;
 
   AuthToken(
-      {this.accessToken, this.tokenType, this.expiresIn, this.refreshToken});
+      {required this.accessToken,
+      required this.tokenType,
+      required this.expiresIn,
+      required this.refreshToken});
 }

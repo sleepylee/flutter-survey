@@ -6,7 +6,11 @@ class Survey {
   String coverImageUrl;
 
   Survey(
-      {this.cursor, this.id, this.title, this.description, this.coverImageUrl});
+      {required this.cursor,
+      required this.id,
+      required this.title,
+      required this.description,
+      required this.coverImageUrl});
 
   String get hdCoverImageUrl => coverImageUrl + "l";
 }

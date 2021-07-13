@@ -3,5 +3,5 @@ class User {
   String email;
   String avatarUrl;
 
-  User({this.id, this.email, this.avatarUrl});
+  User({required this.id, required this.email, required this.avatarUrl});
 }

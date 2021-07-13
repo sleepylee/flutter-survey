@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         body: GetBuilder(
           init: LoginController(),
-          builder: (controller) => Center(
+          builder: (LoginController controller) => Center(
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -49,18 +49,18 @@ class LoginPage extends StatelessWidget {
                           keyboardType: TextInputType.emailAddress,
                           controller: controller.emailController,
                           decoration: _formInputDecoration(
-                              label: AppLocalizations.of(context)
+                              label: AppLocalizations.of(context)!
                                   .titleGeneralEmail),
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.w600),
-                          validator: _emailValidator,
+                          validator: (value) => _emailValidator(context, value),
                         ),
                         const SizedBox(height: 20),
                         TextFormField(
                           keyboardType: TextInputType.text,
                           controller: controller.passwordController,
                           decoration: _formInputDecoration(
-                              label: AppLocalizations.of(context)
+                              label: AppLocalizations.of(context)!
                                   .titleGeneralPassword),
                           obscureText: true,
                           style: TextStyle(color: Colors.white),
@@ -80,7 +80,8 @@ class LoginPage extends StatelessWidget {
         ));
   }
 
-  ElevatedButton _loginButton({BuildContext context, bool enable = true}) {
+  ElevatedButton _loginButton(
+      {required BuildContext context, bool enable = true}) {
     return ElevatedButton(
       style: enable
           ? ButtonStyle()
@@ -88,11 +89,11 @@ class LoginPage extends StatelessWidget {
               backgroundColor: MaterialStateProperty.all<Color>(Colors.white24),
               foregroundColor: MaterialStateProperty.all<Color>(Colors.white70),
             ),
-      child: Text(AppLocalizations.of(context).buttonLogin),
+      child: Text(AppLocalizations.of(context)!.buttonLogin),
       onPressed: () {
-        if (enable && _formKey.currentState.validate()) {
-          Get.focusScope.unfocus();
-          return _attemptLogin();
+        if (enable && (_formKey.currentState?.validate() ?? false)) {
+          Get.focusScope?.unfocus();
+          return _attemptLogin(context);
         } else {
           return null;
         }
@@ -100,7 +101,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  InputDecoration _formInputDecoration({String label}) => InputDecoration(
+  InputDecoration _formInputDecoration({String? label}) => InputDecoration(
         labelStyle: TextStyle(color: Colors.white30),
         floatingLabelBehavior: FloatingLabelBehavior.never,
         border: OutlineInputBorder(
@@ -111,17 +112,17 @@ class LoginPage extends StatelessWidget {
         labelText: label,
       );
 
-  String _emailValidator(String value) {
-    if (value == null || value.isEmpty) {
-      return AppLocalizations.of(Get.context).errorValidationEmailEmpty;
+  String? _emailValidator(BuildContext context, String? value) {
+    if (value == null) return null;
+    if (value.isEmpty) {
+      return AppLocalizations.of(context)!.errorValidationEmailEmpty;
     }
     if (!GetUtils.isEmail(value)) {
-      return AppLocalizations.of(Get.context).errorValidationEmailInvalid;
+      return AppLocalizations.of(context)!.errorValidationEmailInvalid;
     }
-    return null;
   }
 
-  void _attemptLogin() {
+  void _attemptLogin(BuildContext context) {
     Get.find<LoginController>().attemptLogin(
       onSuccess: () {
         final navigator = Get.find<AppNavigator>();
@@ -129,8 +130,8 @@ class LoginPage extends StatelessWidget {
       },
       onFailed: () {
         Get.snackbar(
-          AppLocalizations.of(Get.context).titleGeneralError,
-          AppLocalizations.of(Get.context).errorLoginFailed,
+          AppLocalizations.of(context)!.titleGeneralError,
+          AppLocalizations.of(context)!.errorLoginFailed,
           backgroundColor: Colors.white70,
         );
       },

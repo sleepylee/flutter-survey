@@ -25,7 +25,9 @@ void main() {
     test('When login with a valid credential, it calls onSuccess', () async {
       var onSuccessCalled = false;
 
-      when(mockLoginUseCase.call(any)).thenAnswer((_) async => Success(null));
+      when(mockLoginUseCase
+              .call(LoginCredential(email: 'hello', password: 'pwd')))
+          .thenAnswer((_) async => Success(null));
 
       await loginController.attemptLogin(onSuccess: () {
         onSuccessCalled = true;
@@ -38,7 +40,9 @@ void main() {
     test('When login with an invalid credential, it calls onFailed', () async {
       var onFailedCalled = false;
 
-      when(mockLoginUseCase.call(any)).thenAnswer((_) async => Failed(null));
+      when(mockLoginUseCase
+              .call(LoginCredential(email: 'any', password: 'any')))
+          .thenAnswer((_) async => Failed(null));
 
       await loginController.attemptLogin(onFailed: () {
         onFailedCalled = true;

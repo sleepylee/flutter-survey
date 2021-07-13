@@ -8,25 +8,25 @@ const String _PREF_KEY_TOKEN_EXPIRATION = 'PREF_KEY_TOKEN_EXPIRATION';
 abstract class SharedPreferencesStorage {
   Future<String> getTokenType();
 
-  Future<void> saveTokenType(String tokenType);
+  Future<bool> saveTokenType(String tokenType);
 
   Future<String> getAccessToken();
 
-  Future<void> saveAccessToken(String token);
+  Future<bool> saveAccessToken(String token);
 
   Future<String> getRefreshToken();
 
-  Future<void> saveRefreshToken(String refreshToken);
+  Future<bool> saveRefreshToken(String refreshToken);
 
   Future<int> getTokenExpiration();
 
-  Future<void> saveTokenExpiration(int expiration);
+  Future<bool> saveTokenExpiration(int expiration);
 }
 
 // TODO: switch to secured_storage: https://pub.dev/packages/flutter_secure_storage
 class LocalSharedPreferencesStorage implements SharedPreferencesStorage {
   @override
-  Future<void> saveTokenType(String tokenType) async {
+  Future<bool> saveTokenType(String tokenType) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.setString(_PREF_KEY_TYPE, tokenType);
   }
@@ -44,7 +44,7 @@ class LocalSharedPreferencesStorage implements SharedPreferencesStorage {
   }
 
   @override
-  Future<void> saveAccessToken(String token) async {
+  Future<bool> saveAccessToken(String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.setString(_PREF_KEY_ACCESS_TOKEN, token);
   }
@@ -56,7 +56,7 @@ class LocalSharedPreferencesStorage implements SharedPreferencesStorage {
   }
 
   @override
-  Future<void> saveRefreshToken(String refreshToken) async {
+  Future<bool> saveRefreshToken(String refreshToken) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.setString(_PREF_KEY_REFRESH_TOKEN, refreshToken);
   }
@@ -68,7 +68,7 @@ class LocalSharedPreferencesStorage implements SharedPreferencesStorage {
   }
 
   @override
-  Future<void> saveTokenExpiration(int expiration) async {
+  Future<bool> saveTokenExpiration(int expiration) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.setInt(_PREF_KEY_TOKEN_EXPIRATION, expiration);
   }

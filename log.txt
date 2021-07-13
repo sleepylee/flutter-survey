@@ -1,0 +1,46 @@
+*** Request ***
+uri: https://nimble-survey-web-staging.herokuapp.com/api/v1/oauth/token
+method: POST
+responseType: ResponseType.json
+followRedirects: true
+connectTimeout: 0
+receiveTimeout: 0
+extra: {}
+headers:
+ content-type: application/json; charset=utf-8
+data:
+{grant_type: password, email: flutter@nimblehq.co, password: 123456, client_id: z9iUamZLvRgtVVtRJ8UqItg2vmncGyEi30p1eWEddnA, client_secret: 1vqRNMxq-Yx83A61GNjLb17qxCGKxHDb8EmB3MKdxqA}
+flutter:
+*** DioError ***:
+uri: https://nimble-survey-web-staging.herokuapp.com/api/v1/oauth/token
+DioError [DioErrorType.RESPONSE]: Http status error [400]
+uri: https://nimble-survey-web-staging.herokuapp.com/api/v1/oauth/token
+statusCode: 400
+headers:
+ connection: keep-alive
+ cache-control: private, no-store
+ transfer-encoding: chunked
+ date: Fri, 26 Mar 2021 10:15:01 GMT
+ content-encoding: gzip
+ vary: Accept-Encoding, Origin
+ strict-transport-security: max-age=31536000; includeSubDomains
+ referrer-policy: strict-origin-when-cross-origin
+ x-permitted-cross-domain-policies: none
+ pragma: no-cache
+ content-type: application/json; charset=utf-8
+ x-xss-protection: 1; mode=block
+ www-authenticate: Bearer realm="Doorkeeper", error="invalid_grant", error_description="The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."
+ server: Cowboy
+ x-request-id: e4c8d14f-772b-466e-8c28-94f6b44a74ca
+ x-download-options: noopen
+ x-runtime: 0.363702
+ via: 1.1 vegur
+ x-frame-options: SAMEORIGIN
+ x-content-type-options: nosniff
+Response Text:
+{"errors":[{"source":"Doorkeeper::OAuth::Error","detail":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.","code":"invalid_grant"}]}
+flutter:
+flutter:
+Error is: NetworkExceptions.unauthorisedRequest()
+[VERBOSE-2:shell.cc(242)] Dart Unhandled Exception: type '_$UnauthorisedRequest' is not a subtype of type 'Null', stack trace: #0      LoginUseCase.call (package:survey/usecases/login_use_case.dart:29:39)
+<asynchronous suspension>

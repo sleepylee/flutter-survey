@@ -9,12 +9,10 @@ import 'package:survey/repositories/oauth_repository.dart';
 import 'package:survey/use_cases/base_use_case.dart';
 
 class LoginCredential {
-  @required
   final String email;
-  @required
   final String password;
 
-  LoginCredential({this.email, this.password});
+  LoginCredential({required this.email, required this.password});
 }
 
 class LoginUseCase extends UseCase<void, LoginCredential> {
@@ -31,7 +29,7 @@ class LoginUseCase extends UseCase<void, LoginCredential> {
         .login((credential.email), credential.password)
         .then((value) => _persistTokenData(value))
         .onError((err, stackTrace) => Failed(
-            UseCaseException(NetworkExceptions.fromDioException(err), err)));
+            UseCaseException(NetworkExceptions.fromDioException(err), (err as Exception))));
   }
 
   Result<dynamic> _persistTokenData(AuthToken data) {

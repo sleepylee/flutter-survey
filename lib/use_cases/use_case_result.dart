@@ -5,20 +5,20 @@ abstract class Result<T> {
 }
 
 class Success<T> extends Result<T> {
-  final T value;
+  final T? value;
 
   Success(this.value) : super._();
 }
 
 class UseCaseException implements Exception {
   final NetworkExceptions networkExceptions;
-  final Exception actualException;
+  final Exception? actualException;
 
   UseCaseException(this.networkExceptions, this.actualException);
 }
 
 class Failed<T> extends Result<T> {
-  final UseCaseException exception;
+  final UseCaseException? exception;
 
   Failed(this.exception) : super._();
 }

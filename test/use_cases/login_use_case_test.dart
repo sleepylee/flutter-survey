@@ -27,7 +27,7 @@ void main() {
           refreshToken: 'refresh token'),
     );
 
-    when(mockRepository.login('negative', any)).thenAnswer((_) => Future.error(
+    when(mockRepository.login('negative', '123')).thenAnswer((_) => Future.error(
         DioError(
             response: Response(statusCode: 400), type: DioErrorType.RESPONSE)));
 
@@ -46,7 +46,7 @@ void main() {
           .call(LoginCredential(email: 'negative', password: 'meh'));
 
       expect(result, isA<Failed>());
-      expect((result as Failed).exception.networkExceptions,
+      expect((result as Failed).exception?.networkExceptions,
           NetworkExceptions.unauthorisedRequest());
     });
   });

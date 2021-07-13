@@ -44,7 +44,7 @@ abstract class NetworkExceptions with _$NetworkExceptions {
   static NetworkExceptions fromDioException(error) {
     if (error is Exception) {
       try {
-        NetworkExceptions networkExceptions;
+        NetworkExceptions? networkExceptions;
         if (error is DioError) {
           switch (error.type) {
             case DioErrorType.CANCEL:
@@ -101,7 +101,7 @@ abstract class NetworkExceptions with _$NetworkExceptions {
         } else {
           networkExceptions = NetworkExceptions.unexpectedError();
         }
-        return networkExceptions;
+        return networkExceptions!;
       } on FormatException catch (_) {
         // Helper.printError(e.toString());
         return NetworkExceptions.formatException();
@@ -119,41 +119,66 @@ abstract class NetworkExceptions with _$NetworkExceptions {
 
   static String getErrorMessage(NetworkExceptions networkExceptions) {
     var errorMessage = "";
-    networkExceptions.when(notImplemented: () {
-      errorMessage = "Not Implemented";
-    }, requestCancelled: () {
-      errorMessage = "Request Cancelled";
-    }, internalServerError: () {
-      errorMessage = "Internal Server Error";
-    }, notFound: (String reason) {
-      errorMessage = reason;
-    }, serviceUnavailable: () {
-      errorMessage = "Service unavailable";
-    }, methodNotAllowed: () {
-      errorMessage = "Method not allowed";
-    }, badRequest: () {
-      errorMessage = "Bad request";
-    }, unauthorisedRequest: () {
-      errorMessage = "Unauthorised request";
-    }, unexpectedError: () {
-      errorMessage = "Unexpected error occurred";
-    }, requestTimeout: () {
-      errorMessage = "Connection request timeout";
-    }, noInternetConnection: () {
-      errorMessage = "No internet connection";
-    }, conflict: () {
-      errorMessage = "Error due to a conflict";
-    }, sendTimeout: () {
-      errorMessage = "Send timeout in connection with API server";
-    }, unableToProcess: () {
-      errorMessage = "Unable to process the data";
-    }, defaultError: (String error) {
-      errorMessage = error;
-    }, formatException: () {
-      errorMessage = "Unexpected error occurred";
-    }, notAcceptable: () {
-      errorMessage = "Not acceptable";
-    });
+    networkExceptions.when(
+      notImplemented: () {
+        return errorMessage = "Not Implemented";
+      },
+      requestCancelled: () {
+        return errorMessage = "Request Cancelled";
+      },
+      internalServerError: () {
+        return  errorMessage = "Internal Server Error";
+      },
+      notFound: (String reason) {
+        return errorMessage = reason;
+      },
+      serviceUnavailable: () {
+        return errorMessage = "Service unavailable";
+      },
+      methodNotAllowed: () {
+        return errorMessage = "Method not allowed";
+      },
+      badRequest: () {
+        return errorMessage = "Bad request";
+      },
+      unauthorisedRequest: () {
+        return errorMessage = "Unauthorised request";
+      },
+      unexpectedError: () {
+        return errorMessage = "Unexpected error occurred";
+      },
+      requestTimeout: () {
+        return errorMessage = "Connection request timeout";
+      },
+      noInternetConnection: () {
+        return errorMessage = "No internet connection";
+
+      },
+      conflict: () {
+        errorMessage = "Error due to a conflict";
+        return "";
+      },
+      sendTimeout: () {
+        errorMessage = "Send timeout in connection with API server";
+        return "";
+      },
+      unableToProcess: () {
+        errorMessage = "Unable to process the data";
+        return "";
+      },
+      defaultError: (String error) {
+        errorMessage = error;
+        return "";
+      },
+      formatException: () {
+        errorMessage = "Unexpected error occurred";
+        return "";
+      },
+      notAcceptable: () {
+        errorMessage = "Not acceptable";
+        return "";
+      },
+    );
     return errorMessage;
   }
 }

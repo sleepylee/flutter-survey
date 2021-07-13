@@ -11,7 +11,7 @@ class LoginController extends GetxController {
   final passwordController = TextEditingController();
 
   Future<void> attemptLogin(
-      {VoidCallback onSuccess, VoidCallback onFailed}) async {
+      {VoidCallback? onSuccess, VoidCallback? onFailed}) async {
     isLoading.value = true;
 
     final loginUseCase = Get.find<LoginUseCase>();

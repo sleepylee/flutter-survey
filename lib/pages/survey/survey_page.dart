@@ -29,7 +29,7 @@ class SurveyPage extends StatelessWidget {
 }
 
 class SurveyDetail extends StatelessWidget {
-  SurveyDetail({this.survey});
+  SurveyDetail({required this.survey});
 
   final Survey survey;
 
@@ -79,7 +79,7 @@ class SurveyDetail extends StatelessWidget {
                           survey.description,
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText1
+                              .bodyText1!
                               .copyWith(color: Colors.white70, fontSize: 17),
                           maxLines: 5,
                           overflow: TextOverflow.ellipsis,
@@ -97,7 +97,7 @@ class SurveyDetail extends StatelessWidget {
           child: ElevatedButton(
             child: Padding(
               padding: EdgeInsets.only(left: 20, right: 20, bottom: 5),
-              child: Text(AppLocalizations.of(context).buttonStartSurvey),
+              child: Text(AppLocalizations.of(context)!.buttonStartSurvey),
             ),
             onPressed: () {
               _navigateToSurveyQuestion();

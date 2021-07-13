@@ -6,5 +6,9 @@ class SurveyUiModel {
   int index;
 
   SurveyUiModel(
-      {this.id, this.title, this.description, this.imageUrl, this.index});
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.imageUrl,
+      required this.index});
 }

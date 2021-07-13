@@ -3,6 +3,7 @@
 /// *****************************************************
 ///  FlutterGen
 /// *****************************************************
+
 import 'package:flutter/widgets.dart';
 
 class $AssetsImagesGen {

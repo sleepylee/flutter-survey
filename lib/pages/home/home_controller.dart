@@ -68,20 +68,20 @@ class HomeController extends GetxController {
     // ignore: invalid_use_of_protected_member
     if (_surveys.value.isEmpty) {
       final surveys = await getSurveysUseCase.call("");
-      if (surveys is Success<List<Survey>>) {
-        _surveys.addAll(surveys.value);
+      if (surveys is Success<List<Survey>> && surveys.value != null) {
+        _surveys.addAll(surveys.value!);
       }
     } else {
       // ignore: invalid_use_of_protected_member
       final lastCursor = _surveys.value.last.cursor;
       final surveys = await getSurveysUseCase.call(lastCursor);
-      if (surveys is Success<List<Survey>>) {
-        if (surveys.value.isEmpty) {
+      if (surveys is Success<List<Survey>> && surveys.value != null) {
+        if (surveys.value!.isEmpty) {
           _paginationFinished = true;
           return;
         }
 
-        _surveys.addAll(surveys.value);
+        _surveys.addAll(surveys.value!);
       }
     }
   }

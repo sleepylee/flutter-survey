@@ -6,7 +6,7 @@ part 'survey_response.g.dart';
 class SurveysResponse {
   List<SurveyNodeResponse> edges;
 
-  SurveysResponse({this.edges});
+  SurveysResponse({required this.edges});
 
   factory SurveysResponse.fromJson(Map<String, dynamic> json) =>
       _$SurveysResponseFromJson(json);
@@ -19,7 +19,7 @@ class SurveyNodeResponse {
   String cursor;
   SurveyResponse node;
 
-  SurveyNodeResponse({this.cursor, this.node});
+  SurveyNodeResponse({required this.cursor, required this.node});
 
   factory SurveyNodeResponse.fromJson(Map<String, dynamic> json) =>
       _$SurveyNodeResponseFromJson(json);
@@ -34,7 +34,11 @@ class SurveyResponse {
   String coverImageUrl;
   String description;
 
-  SurveyResponse({this.id, this.title, this.coverImageUrl, this.description});
+  SurveyResponse(
+      {required this.id,
+      required this.title,
+      required this.coverImageUrl,
+      required this.description});
 
   factory SurveyResponse.fromJson(Map<String, dynamic> json) =>
       _$SurveyResponseFromJson(json);

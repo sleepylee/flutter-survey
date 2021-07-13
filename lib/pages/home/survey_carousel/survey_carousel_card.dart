@@ -8,7 +8,7 @@ import 'package:survey/pages/ui/indicators_widget.dart';
 
 // ignore: must_be_immutable
 class SurveyCarouselCard extends StatelessWidget {
-  SurveyCarouselCard({this.surveyUiModel});
+  SurveyCarouselCard({required this.surveyUiModel});
 
   final SurveyUiModel surveyUiModel;
 

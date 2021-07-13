@@ -14,7 +14,7 @@ abstract class UserManager {
 class UserManagerImpl implements UserManager {
   final GetProfileUseCase _getProfileUseCase = Get.find<GetProfileUseCase>();
 
-  Rx<User> _currentUser = User(id: "-1").obs;
+  Rx<User> _currentUser = User(id: "-1", email: "", avatarUrl: "").obs;
 
   /// Providing the current user state, when init, it call refresh() once to fetch,
   /// In case of error, it returns a User with id: "error".
@@ -29,7 +29,7 @@ class UserManagerImpl implements UserManager {
     _getProfileUseCase.call().then((result) {
       if (result is Success) _currentUser.value = (result as Success).value;
       if (result is Failed) {
-        _currentUser.update((currentUser) => currentUser.id = ERROR);
+        _currentUser.update((currentUser) => currentUser?.id = ERROR);
       }
     });
   }
