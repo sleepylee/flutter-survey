@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const String RATING_TYPE_SMILEY = "smiley";
-const smileys = {
+const _smileys = {
   "worst": "😡",
   "worse": "😕",
   "neutral": "😐",
@@ -61,17 +61,17 @@ class _SmileyRatingBarState extends State<SmileyRatingBar> {
     final correctStyle = index == selectedIndex ? enabledStyle : disabledStyle;
     switch (index) {
       case 0:
-        return Text(smileys["worst"], style: correctStyle);
+        return Text(_smileys["worst"], style: correctStyle);
       case 1:
-        return Text(smileys["worse"], style: correctStyle);
+        return Text(_smileys["worse"], style: correctStyle);
       case 2:
-        return Text(smileys["neutral"], style: correctStyle);
+        return Text(_smileys["neutral"], style: correctStyle);
       case 3:
-        return Text(smileys["better"], style: correctStyle);
+        return Text(_smileys["better"], style: correctStyle);
       case 4:
-        return Text(smileys["best"], style: correctStyle);
+        return Text(_smileys["best"], style: correctStyle);
       default:
-        return Text(smileys["neutral"], style: correctStyle);
+        return Text(_smileys["neutral"], style: correctStyle);
     }
   }
 }

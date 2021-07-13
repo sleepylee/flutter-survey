@@ -9,6 +9,7 @@ class SurveyQuestionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: GetBuilder<SurveyController>(builder: (controller) {
         // TODO: use Question instead when doing the Integration
         final survey = controller.optionalSurvey.value;
@@ -22,7 +23,7 @@ class SurveyQuestionPage extends StatelessWidget {
                       cacheKey: survey.id),
                   fit: BoxFit.cover,
                   colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.5), BlendMode.overlay),
+                      Colors.black.withOpacity(0.7), BlendMode.overlay),
                 ),
               ),
             ),
@@ -80,8 +81,8 @@ class SurveyQuestionPage extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: SurveyAnswer(
-                counter: 5,
-                type: "smiley", // TODO: Come from API
+                type: "textarea", // TODO: Come from API
+                optionsText: [null], // TODO: Come from API
               ),
             ),
             Align(
