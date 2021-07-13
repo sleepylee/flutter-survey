@@ -103,7 +103,7 @@ class LoginPage extends StatelessWidget {
         labelStyle: Theme.of(context)
             .textTheme
             .subtitle1
-            .copyWith(fontWeight: FontWeight.w500),
+            .copyWith(fontWeight: FontWeight.w400),
         floatingLabelBehavior: FloatingLabelBehavior.never,
         border: OutlineInputBorder(
             borderSide: BorderSide.none,
