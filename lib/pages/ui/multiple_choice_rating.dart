@@ -42,6 +42,7 @@ class _MultipleChoiceRatingState extends State<MultipleChoiceRating> {
             onTap: () {
               _onItemSelected(index);
             },
+            behavior: HitTestBehavior.translucent,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 75),
               child: Column(
