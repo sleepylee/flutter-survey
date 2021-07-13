@@ -48,22 +48,20 @@ class LoginPage extends StatelessWidget {
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           controller: controller.emailController,
-                          decoration: _formInputDecoration(
-                              label: AppLocalizations.of(context)
-                                  .titleGeneralEmail),
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.w600),
+                          decoration: _formInputDecoration(context,
+                              AppLocalizations.of(context).titleGeneralEmail),
                           validator: _emailValidator,
+                          textInputAction: TextInputAction.next,
                         ),
                         const SizedBox(height: 20),
                         TextFormField(
                           keyboardType: TextInputType.text,
                           controller: controller.passwordController,
                           decoration: _formInputDecoration(
-                              label: AppLocalizations.of(context)
+                              context,
+                              AppLocalizations.of(context)
                                   .titleGeneralPassword),
                           obscureText: true,
-                          style: TextStyle(color: Colors.white),
                         ),
                         const SizedBox(height: 50),
                         GetX<LoginController>(builder: (state) {
@@ -100,8 +98,12 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  InputDecoration _formInputDecoration({String label}) => InputDecoration(
-        labelStyle: TextStyle(color: Colors.white30),
+  InputDecoration _formInputDecoration(BuildContext context, String label) =>
+      InputDecoration(
+        labelStyle: Theme.of(context)
+            .textTheme
+            .subtitle1
+            .copyWith(fontWeight: FontWeight.w500),
         floatingLabelBehavior: FloatingLabelBehavior.never,
         border: OutlineInputBorder(
             borderSide: BorderSide.none,
