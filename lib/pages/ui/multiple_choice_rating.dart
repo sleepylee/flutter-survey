@@ -52,7 +52,7 @@ class _MultipleChoiceRatingState extends State<MultipleChoiceRating> {
                       Text(
                         widget.choices[index],
                         style: Theme.of(context).textTheme.bodyText1.copyWith(
-                            fontSize: 25,
+                            fontSize: 20,
                             fontWeight: _isSelected(index)
                                 ? FontWeight.w800
                                 : FontWeight.w400,
