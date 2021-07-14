@@ -11,12 +11,17 @@ class TextFieldRating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 300,
+      alignment: Alignment.topCenter,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: _makeTextFields(context, hints),
+        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+        child: MediaQuery.removePadding(
+          context: context,
+          removeTop: true,
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            children: _makeTextFields(context, hints),
+          ),
         ),
       ),
     );
