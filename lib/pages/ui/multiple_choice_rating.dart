@@ -11,17 +11,17 @@ class MultipleChoiceRating extends StatefulWidget {
 }
 
 class _MultipleChoiceRatingState extends State<MultipleChoiceRating> {
-  final _selectedIndex = <int>[];
+  final _selectedIndexes = <int>[];
 
   bool _isSelected(int index) {
-    return _selectedIndex.contains(index);
+    return _selectedIndexes.contains(index);
   }
 
   void _onItemSelected(int index) {
     setState(() {
       _isSelected(index)
-          ? _selectedIndex.remove(index)
-          : _selectedIndex.add(index);
+          ? _selectedIndexes.remove(index)
+          : _selectedIndexes.add(index);
     });
   }
 
@@ -68,13 +68,12 @@ class _MultipleChoiceRatingState extends State<MultipleChoiceRating> {
                               : Colors.white12),
                     ],
                   ),
-                  _shouldDrawDivider(index)
-                      ? const Divider(
-                          color: Colors.white,
-                          height: 30,
-                          thickness: 1,
-                        )
-                      : SizedBox.shrink()
+                  if (_shouldDrawDivider(index))
+                    const Divider(
+                      color: Colors.white,
+                      height: 30,
+                      thickness: 1,
+                    ),
                 ],
               ),
             ),
