@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:survey/pages/ui/multiple_choice_rating.dart';
 import 'package:survey/pages/ui/nps_rating_bar.dart';
 import 'package:survey/pages/ui/picker_selector.dart';
 import 'package:survey/pages/ui/slide_rating_bar.dart';
@@ -29,6 +30,7 @@ Widget _processAnswerUi(String type, List<String> optionsText, int counter) {
     case RATING_TYPE_MONEY:
       return SlideRatingBar.from(type, counter);
     case RATING_TYPE_CHOICE:
+      return MultipleChoiceRating(choices: optionsText);
     case RATING_TYPE_DROPDOWN:
       return PickerSelector(optionsText: optionsText);
     case RATING_TYPE_SLIDER:
