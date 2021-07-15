@@ -42,6 +42,11 @@ SurveyResponse _$SurveyResponseFromJson(Map<String, dynamic> json) {
     title: json['title'] as String,
     coverImageUrl: json['coverImageUrl'] as String,
     description: json['description'] as String,
+    surveyQuestionResponses: (json['questions'] as List)
+        ?.map((e) => e == null
+            ? null
+            : SurveyQuestionResponse.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
@@ -51,4 +56,48 @@ Map<String, dynamic> _$SurveyResponseToJson(SurveyResponse instance) =>
       'title': instance.title,
       'coverImageUrl': instance.coverImageUrl,
       'description': instance.description,
+      'questions': instance.surveyQuestionResponses,
+    };
+
+SurveyQuestionResponse _$SurveyQuestionResponseFromJson(
+    Map<String, dynamic> json) {
+  return SurveyQuestionResponse(
+    id: json['id'] as String,
+    text: json['text'] as String,
+    imageUrl: json['imageUrl'] as String,
+    displayType: json['displayType'] as String,
+    isMandatory: json['isMandatory'] as bool,
+    surveyAnswerResponses: (json['answers'] as List)
+        ?.map((e) => e == null
+            ? null
+            : SurveyAnswerResponse.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$SurveyQuestionResponseToJson(
+        SurveyQuestionResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'text': instance.text,
+      'imageUrl': instance.imageUrl,
+      'displayType': instance.displayType,
+      'isMandatory': instance.isMandatory,
+      'answers': instance.surveyAnswerResponses,
+    };
+
+SurveyAnswerResponse _$SurveyAnswerResponseFromJson(Map<String, dynamic> json) {
+  return SurveyAnswerResponse(
+    id: json['id'] as String,
+    text: json['text'] as String,
+    score: json['score'] as int,
+  );
+}
+
+Map<String, dynamic> _$SurveyAnswerResponseToJson(
+        SurveyAnswerResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'text': instance.text,
+      'score': instance.score,
     };

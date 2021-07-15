@@ -2,6 +2,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:survey/api/graphql/query/surveys_query.dart';
 import 'package:survey/api/graphql/response/survey_response.dart';
 import 'package:survey/exception/network_exceptions.dart';
+import 'package:survey/mappers/survey_mapper.dart';
 import 'package:survey/models/survey.dart';
 
 abstract class SurveyRepository {
@@ -28,13 +29,7 @@ class SurveyRepositoryImpl implements SurveyRepository {
         final surveysList = <Survey>[];
 
         surveysResponse.edges.forEach((item) {
-          final surveyItem = Survey(
-            cursor: item.cursor,
-            id: item.node.id,
-            title: item.node.title,
-            description: item.node.description,
-            coverImageUrl: item.node.coverImageUrl,
-          );
+          final surveyItem = item.toSurvey();
           surveysList.add(surveyItem);
         });
 
@@ -48,17 +43,13 @@ class SurveyRepositoryImpl implements SurveyRepository {
   @override
   Future<Survey> getSurveyById(String id) {
     final queryOptions = QueryOptions(
-        fetchPolicy: FetchPolicy.cacheAndNetwork,
+        fetchPolicy: FetchPolicy.networkOnly,
         document: gql(GET_SURVEY_BY_ID),
         variables: {'surveyId': id});
     return _graphQlClient.query(queryOptions).then((value) {
       if (value.data != null) {
         final surveyResponse = SurveyResponse.fromJson(value.data['survey']);
-        return Survey(
-            id: surveyResponse.id,
-            title: surveyResponse.title,
-            description: surveyResponse.description,
-            coverImageUrl: surveyResponse.coverImageUrl);
+        return surveyResponse.toSurvey();
       } else {
         throw NetworkExceptions.notFound("Something is wrong");
       }
