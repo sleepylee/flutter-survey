@@ -47,11 +47,13 @@ class _AppState extends State<SurveyApp> {
           GetPage(
               name: "/survey",
               page: () => SurveyPage(),
-              binding: SurveyBinding()),
+              binding: SurveyBinding(),
+              transition: Transition.fadeIn),
           GetPage(
               name: "/survey-question",
               page: () => SurveyQuestionPage(),
-              binding: SurveyBinding()),
+              binding: SurveyBinding(),
+              transition: Transition.rightToLeftWithFade),
         ],
         localizationsDelegates: [
           AppLocalizations.delegate,

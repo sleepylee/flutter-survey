@@ -50,22 +50,30 @@ class _MultipleChoiceRatingState extends State<MultipleChoiceRating> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        widget.choices[index],
-                        style: Theme.of(context).textTheme.bodyText1.copyWith(
-                            fontSize: 20,
-                            fontWeight: _isSelected(index)
-                                ? FontWeight.w800
-                                : FontWeight.w400,
+                      Expanded(
+                        child: Text(
+                          widget.choices[index],
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                              fontSize: 20,
+                              fontWeight: _isSelected(index)
+                                  ? FontWeight.w800
+                                  : FontWeight.w400,
+                              color: _isSelected(index)
+                                  ? Colors.white
+                                  : Colors.white54),
+                        ),
+                        flex: 4,
+                      ),
+                      Expanded(
+                        child: Icon(Icons.check_circle,
+                            size: 25,
                             color: _isSelected(index)
                                 ? Colors.white
-                                : Colors.white54),
-                      ),
-                      Icon(Icons.check_circle,
-                          size: 25,
-                          color: _isSelected(index)
-                              ? Colors.white
-                              : Colors.white12),
+                                : Colors.white12),
+                        flex: 1,
+                      )
                     ],
                   ),
                   if (_shouldDrawDivider(index))
