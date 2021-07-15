@@ -43,7 +43,7 @@ class SurveyRepositoryImpl implements SurveyRepository {
   @override
   Future<Survey> getSurveyById(String id) {
     final queryOptions = QueryOptions(
-        fetchPolicy: FetchPolicy.networkOnly,
+        fetchPolicy: FetchPolicy.cacheAndNetwork,
         document: gql(GET_SURVEY_BY_ID),
         variables: {'surveyId': id});
     return _graphQlClient.query(queryOptions).then((value) {
