@@ -17,11 +17,10 @@ class SurveyQuestionPage extends StatelessWidget {
           init: SurveyController(),
           builder: (_) {
             return GetX<SurveyController>(builder: (controller) {
-              //return Text(controller.indexString);
               return Stack(
                 children: [
                   _buildBackground(controller.currentQuestion),
-                  _buildTitle(context, controller.indexString,
+                  _buildTitle(context, controller.indexTitleText,
                       controller.currentQuestion.text),
                   _buildAnswerBody(controller.optionalSurvey.value.questions),
                   _buildSubmitButton(),
@@ -71,7 +70,8 @@ class SurveyQuestionPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTitle(BuildContext context, String indexString, String text) {
+  Widget _buildTitle(
+      BuildContext context, String indexTitle, String questionTitle) {
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,14 +85,14 @@ class SurveyQuestionPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      indexString,
+                      indexTitle,
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
                           .copyWith(color: Colors.white70, fontSize: 15),
                     ),
                     Text(
-                      text,
+                      questionTitle,
                       style: Theme.of(context).textTheme.headline4,
                       maxLines: 8,
                       overflow: TextOverflow.ellipsis,

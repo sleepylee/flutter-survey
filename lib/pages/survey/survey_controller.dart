@@ -19,7 +19,7 @@ class SurveyController extends GetxController {
   SurveyQuestion get currentQuestion =>
       optionalSurvey.value.questions[currentQuestionIndex];
 
-  String get indexString => _getIndexString();
+  String get indexTitleText => _getIndexText();
 
   @override
   void onInit() {
@@ -39,7 +39,7 @@ class SurveyController extends GetxController {
     });
   }
 
-  String _getIndexString() {
+  String _getIndexText() {
     if (_survey.value.isEmpty) return "";
     return "${currentQuestionIndex + 1}/$questionAmount";
   }
