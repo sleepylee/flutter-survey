@@ -20,8 +20,12 @@ class SurveyQuestionPage extends StatelessWidget {
               return Stack(
                 children: [
                   _buildBackground(controller.currentQuestion),
-                  _buildTitle(context, controller.indexTitleText,
-                      controller.currentQuestion.text),
+                  _buildTitle(
+                      context: context,
+                      indexTitle: controller.indexTitleText,
+                      questionTitle: controller.currentQuestion.text,
+                      isEmptyAnswer:
+                          controller.currentQuestion.doesNotRequireAnswer),
                   _buildAnswerBody(controller.optionalSurvey.value.questions),
                   _buildSubmitButton(),
                 ],
@@ -71,7 +75,10 @@ class SurveyQuestionPage extends StatelessWidget {
   }
 
   Widget _buildTitle(
-      BuildContext context, String indexTitle, String questionTitle) {
+      {BuildContext context,
+      String indexTitle,
+      String questionTitle,
+      bool isEmptyAnswer = false}) {
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +101,7 @@ class SurveyQuestionPage extends StatelessWidget {
                     Text(
                       questionTitle,
                       style: Theme.of(context).textTheme.headline4,
-                      maxLines: 8,
+                      maxLines: isEmptyAnswer ? 10 : 3,
                       overflow: TextOverflow.ellipsis,
                     ).marginOnly(top: 8),
                   ],
