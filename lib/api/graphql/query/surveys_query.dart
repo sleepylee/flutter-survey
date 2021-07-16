@@ -11,7 +11,7 @@ const String GET_SURVEYS_QUERY = r"""
           questions {
             id,
             text,
-            imageUrl,
+            coverImageUrl,
             displayType,
             isMandatory
             answers {
@@ -39,7 +39,7 @@ const String GET_SURVEY_BY_ID = r"""
       questions {
         id,
         text,
-        imageUrl,
+        coverImageUrl,
         displayType,
         isMandatory
         answers {

@@ -20,7 +20,7 @@ class Survey {
 class SurveyQuestion {
   String id;
   String text;
-  String imageUrl;
+  String coverImageUrl;
   String displayType;
   bool isMandatory;
   List<SurveyAnswer> answers;
@@ -28,10 +28,12 @@ class SurveyQuestion {
   SurveyQuestion(
       {this.id,
       this.text,
-      this.imageUrl,
+      this.coverImageUrl,
       this.displayType,
       this.isMandatory,
       this.answers});
+
+  String get hdCoverImageUrl => coverImageUrl + "l";
 }
 
 class SurveyAnswer {

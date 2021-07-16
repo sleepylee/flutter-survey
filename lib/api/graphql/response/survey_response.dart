@@ -54,7 +54,7 @@ class SurveyResponse {
 class SurveyQuestionResponse {
   String id;
   String text;
-  String imageUrl;
+  String coverImageUrl;
   String displayType;
   bool isMandatory;
   @JsonKey(name: "answers")
@@ -63,7 +63,7 @@ class SurveyQuestionResponse {
   SurveyQuestionResponse({
     this.id,
     this.text,
-    this.imageUrl,
+    this.coverImageUrl,
     this.displayType,
     this.isMandatory,
     this.surveyAnswerResponses,

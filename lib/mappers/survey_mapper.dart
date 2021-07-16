@@ -28,7 +28,7 @@ extension QuestionResponseMapper on List<SurveyQuestionResponse> {
   List<SurveyQuestion> toSurveyQuestions() {
     return map((question) => SurveyQuestion(
           id: question.id,
-          imageUrl: question.imageUrl,
+          coverImageUrl: question.coverImageUrl,
           displayType: question.displayType,
           text: question.text,
           isMandatory: question.isMandatory,
