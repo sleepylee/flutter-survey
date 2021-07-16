@@ -37,18 +37,6 @@ class SurveyRepositoryImpl implements SurveyRepository {
 
   @override
   Future<Survey> getSurveyById(String id) {
-    /*final input = CreateResponseMutationInput(
-      SurveySubmission(
-        "d5de6a8f8f5f1cfe51bc",
-        [
-          SurveyQuestionSubmission("940d229e4cd87cd1e202", [
-            SurveyAnswerSubmission("037574cb93d16800eecd", "50"),
-            SurveyAnswerSubmission("037574cb93d16800eecd", "100"),
-          ])
-        ]
-      )
-    );
-    createResponse(input);*/
     final queryOptions = QueryOptions(
         fetchPolicy: FetchPolicy.cacheAndNetwork,
         document: gql(GET_SURVEY_BY_ID),
