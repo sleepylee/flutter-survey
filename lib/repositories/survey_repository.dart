@@ -25,15 +25,7 @@ class SurveyRepositoryImpl implements SurveyRepository {
     return _graphQlClient.query(queryOptions).then((value) {
       if (value.data != null) {
         final surveysResponse = SurveysResponse.fromJson(value.data['surveys']);
-
-        final surveysList = <Survey>[];
-
-        surveysResponse.edges.forEach((item) {
-          final surveyItem = item.toSurvey();
-          surveysList.add(surveyItem);
-        });
-
-        return surveysList;
+        return surveysResponse.edges.map((item) => item.toSurvey()).toList();
       } else {
         throw NetworkExceptions.notFound("Something is wrong");
       }
