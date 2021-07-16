@@ -64,7 +64,7 @@ SurveyQuestionResponse _$SurveyQuestionResponseFromJson(
   return SurveyQuestionResponse(
     id: json['id'] as String,
     text: json['text'] as String,
-    imageUrl: json['imageUrl'] as String,
+    coverImageUrl: json['coverImageUrl'] as String,
     displayType: json['displayType'] as String,
     isMandatory: json['isMandatory'] as bool,
     surveyAnswerResponses: (json['answers'] as List)
@@ -80,7 +80,7 @@ Map<String, dynamic> _$SurveyQuestionResponseToJson(
     <String, dynamic>{
       'id': instance.id,
       'text': instance.text,
-      'imageUrl': instance.imageUrl,
+      'coverImageUrl': instance.coverImageUrl,
       'displayType': instance.displayType,
       'isMandatory': instance.isMandatory,
       'answers': instance.surveyAnswerResponses,
