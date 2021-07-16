@@ -8,12 +8,13 @@ class Survey {
   String coverImageUrl;
   List<SurveyQuestion> questions;
 
-  Survey({this.cursor,
-    this.id,
-    this.title,
-    this.description,
-    this.coverImageUrl,
-    this.questions});
+  Survey(
+      {this.cursor,
+      this.id,
+      this.title,
+      this.description,
+      this.coverImageUrl,
+      this.questions});
 
   String get hdCoverImageUrl => coverImageUrl + "l";
 }
