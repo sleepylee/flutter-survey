@@ -10,6 +10,17 @@ class SurveyController extends GetxController {
 
   Optional<Survey> get optionalSurvey => _survey.value;
 
+  int get questionAmount => optionalSurvey.value.questions.length;
+
+  final _currentQuestion = 0.obs;
+
+  int get currentQuestionIndex => _currentQuestion.value;
+
+  SurveyQuestion get currentQuestion =>
+      optionalSurvey.value.questions[currentQuestionIndex];
+
+  String get indexTitleText => _getIndexText();
+
   @override
   void onInit() {
     super.onInit();
@@ -19,11 +30,25 @@ class SurveyController extends GetxController {
   void _getSurvey() {
     final surveyId = Get.arguments[DATA_SURVEY_ID];
     final getSurveyUseCase = Get.find<GetSurveyDetailUseCase>();
-    getSurveyUseCase.call(surveyId).then((result) => {
-          if (result is Success<Survey>)
-            _survey.value = Optional.of(result.value)
-          else
-            print("Error when fetching survey, handle Error later.")
-        });
+    getSurveyUseCase.call(surveyId).then((result) {
+      if (result is Success<Survey>) {
+        _survey.value = Optional.of(result.value);
+      } else {
+        print("Error when fetching survey, handle Error later.");
+      }
+    });
+  }
+
+  String _getIndexText() {
+    if (_survey.value.isEmpty) return "";
+    return "${currentQuestionIndex + 1}/$questionAmount";
+  }
+
+  void onNextQuestion() {
+    if (currentQuestionIndex == questionAmount - 1) {
+      // TODO: do submission
+      return;
+    }
+    _currentQuestion.value = currentQuestionIndex + 1;
   }
 }

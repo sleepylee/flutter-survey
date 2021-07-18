@@ -2,111 +2,154 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:survey/pages/survey/survey_answer.dart';
+import 'package:survey/models/survey.dart';
+import 'package:survey/pages/survey/survey_answer_selection.dart';
 import 'package:survey/pages/survey/survey_controller.dart';
 
 class SurveyQuestionPage extends StatelessWidget {
+  final PageController _answersController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: GetBuilder<SurveyController>(builder: (controller) {
-        // TODO: use Question instead when doing the Integration
-        final survey = controller.optionalSurvey.value;
-        return Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  // TODO: update this with the Survey Question's coverImageUrl
-                  image: CachedNetworkImageProvider(survey.hdCoverImageUrl,
-                      cacheKey: survey.id),
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.7), BlendMode.overlay),
-                ),
-              ),
-            ),
-            SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      body: GetBuilder(
+          init: SurveyController(),
+          builder: (_) {
+            return GetX<SurveyController>(builder: (controller) {
+              return Stack(
                 children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: MaterialButton(
-                      color: Colors.white.withOpacity(0.2),
-                      height: 28,
-                      child: Icon(
-                        Icons.close,
-                        size: 18,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        // TODO: update this behavior: show confirmation dialog
-                        Get.back();
-                      },
-                      shape: CircleBorder(),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Wrap(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "TODO: 1/5",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1
-                                  .copyWith(
-                                      color: Colors.white70, fontSize: 15),
-                            ),
-                            Text(
-                              "TODO: How satisfied you are?",
-                              style: Theme.of(context).textTheme.headline4,
-                              maxLines: 4,
-                              overflow: TextOverflow.ellipsis,
-                            ).marginOnly(top: 8),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  _buildBackground(controller.currentQuestion),
+                  _buildTitle(
+                      context: context,
+                      indexTitle: controller.indexTitleText,
+                      questionTitle: controller.currentQuestion.text,
+                      isEmptyAnswer:
+                          controller.currentQuestion.doesNotRequireAnswer),
+                  _buildAnswerBody(controller.optionalSurvey.value.questions),
+                  _buildSubmitButton(),
                 ],
-              ),
-            ),
-            // TODO: remove these:
-            Align(
-              alignment: Alignment.center,
-              child: SurveyAnswer(
-                type: "choice", // TODO: Come from API
-                optionsText: [
-                  "Your mum",
-                  "Your dad",
-                  "Magic Mike",
-                  "More",
-                ], // TODO: Come from API
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: FloatingActionButton(
-                child: const Icon(
-                  Icons.chevron_right,
-                  size: 50,
-                ),
-                backgroundColor: Colors.white,
-                onPressed: () {
-                  Get.snackbar("TODO", "Move to the next question",
-                      backgroundColor: Colors.white);
-                },
-              ),
-            ).marginOnly(bottom: 50, right: 24),
-          ],
-        );
-      }),
+              );
+            });
+          }),
     );
+  }
+
+  Widget _buildBackground(SurveyQuestion question) {
+    return Stack(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: CachedNetworkImageProvider(question.hdCoverImageUrl,
+                  cacheKey: question.id),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Container(
+          color: Colors.black54,
+        )
+      ],
+    );
+  }
+
+  Widget _buildExitQuestionButton() {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: MaterialButton(
+        color: Colors.white.withOpacity(0.2),
+        height: 28,
+        child: Icon(
+          Icons.close,
+          size: 18,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          // TODO: update this behavior: show confirmation dialog
+          Get.back();
+        },
+        shape: CircleBorder(),
+      ),
+    );
+  }
+
+  Widget _buildTitle(
+      {BuildContext context,
+      String indexTitle,
+      String questionTitle,
+      bool isEmptyAnswer = false}) {
+    return SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildExitQuestionButton(),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Wrap(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      indexTitle,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .copyWith(color: Colors.white70, fontSize: 15),
+                    ),
+                    Text(
+                      questionTitle,
+                      style: Theme.of(context).textTheme.headline4,
+                      maxLines: isEmptyAnswer ? 10 : 3,
+                      overflow: TextOverflow.ellipsis,
+                    ).marginOnly(top: 8),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAnswerBody(List<SurveyQuestion> questions) {
+    return SafeArea(
+      child: PageView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) => Center(
+          child: SurveyAnswerSelection(
+            type: questions[index].displayType,
+            optionsText:
+                questions[index].answers.map((e) => e.text ?? "").toList(),
+            counter: questions[index].answers.length ?? 0,
+          ),
+        ),
+        itemCount: questions.length,
+        controller: _answersController,
+        onPageChanged: (index) {},
+      ),
+    );
+  }
+
+  Widget _buildSubmitButton() {
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: FloatingActionButton(
+        child: const Icon(
+          Icons.chevron_right,
+          size: 50,
+        ),
+        backgroundColor: Colors.white,
+        onPressed: () {
+          _answersController.nextPage(
+              duration: Duration(milliseconds: 500), curve: Curves.ease);
+
+          final surveyController = Get.find<SurveyController>();
+          surveyController.onNextQuestion();
+        },
+      ),
+    ).marginOnly(bottom: 50, right: 24);
   }
 }

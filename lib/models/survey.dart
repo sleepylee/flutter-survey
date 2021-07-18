@@ -1,3 +1,5 @@
+import 'package:get/get_utils/get_utils.dart';
+
 class Survey {
   String cursor;
   String id;
@@ -34,6 +36,8 @@ class SurveyQuestion {
       this.answers});
 
   String get hdCoverImageUrl => coverImageUrl + "l";
+
+  bool get doesNotRequireAnswer => GetUtils.isNullOrBlank(answers);
 }
 
 class SurveyAnswer {

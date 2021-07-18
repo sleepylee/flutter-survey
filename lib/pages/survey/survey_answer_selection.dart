@@ -8,14 +8,12 @@ import 'package:survey/pages/ui/smiley_rating_bar.dart';
 import 'package:survey/pages/ui/text_area_rating.dart';
 import 'package:survey/pages/ui/text_field_rating.dart';
 
-class SurveyAnswer extends StatelessWidget {
+class SurveyAnswerSelection extends StatelessWidget {
   final String type;
   final List<String> optionsText;
-  final int questionIndex;
   final int counter;
 
-  SurveyAnswer(
-      {this.type, this.optionsText, this.questionIndex = 0, this.counter = -1});
+  SurveyAnswerSelection({this.type, this.optionsText, this.counter = -1});
 
   @override
   Widget build(BuildContext context) {
