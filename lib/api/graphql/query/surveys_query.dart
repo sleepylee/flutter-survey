@@ -8,6 +8,18 @@ const String GET_SURVEYS_QUERY = r"""
           title
           coverImageUrl
           description
+          questions {
+            id,
+            text,
+            coverImageUrl,
+            displayType,
+            isMandatory
+            answers {
+              id
+              text
+              score
+            }
+          }
         }
       }
       pageInfo {
@@ -27,10 +39,11 @@ const String GET_SURVEY_BY_ID = r"""
       questions {
         id,
         text,
-        displayType,
-        displayOrder,
         coverImageUrl,
+        displayType,
+        isMandatory
         answers {
+          id
           text
           score
         }
