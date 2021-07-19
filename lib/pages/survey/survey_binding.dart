@@ -8,6 +8,6 @@ class SurveyBinding implements Bindings {
   void dependencies() {
     final surveyRepository = Get.find<SurveyRepository>();
     Get.lazyPut(() => GetSurveyDetailUseCase(surveyRepository));
-    Get.lazyPut(() => CreateResponseUseCase(surveyRepository));
+    Get.lazyPut(() => CreateSurveyResponseUseCase(surveyRepository));
   }
 }

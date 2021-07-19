@@ -3,10 +3,10 @@ import 'package:survey/repositories/survey_repository.dart';
 
 import 'base_use_case.dart';
 
-class CreateResponseUseCase extends UseCase<bool, ResponseInput> {
+class CreateSurveyResponseUseCase extends UseCase<bool, ResponseInput> {
   final SurveyRepository _surveyRepository;
 
-  CreateResponseUseCase(this._surveyRepository);
+  CreateSurveyResponseUseCase(this._surveyRepository);
 
   @override
   Future<Result<bool>> call(ResponseInput params) async {
