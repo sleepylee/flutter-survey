@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:survey/pages/survey/survey_controller.dart';
 
 const String RATING_TYPE_SMILEY = "smiley";
+const int DEFAULT_SELECTED_RATE = 2;
 const _smileys = {
   "worst": "😡",
   "worse": "😕",
@@ -11,21 +14,29 @@ const _smileys = {
 };
 
 class SmileyRatingBar extends StatefulWidget {
-  final int counter;
+  final List<String> ids;
 
-  SmileyRatingBar(this.counter);
+  SmileyRatingBar(this.ids);
 
   @override
   _SmileyRatingBarState createState() => _SmileyRatingBarState();
 }
 
 class _SmileyRatingBarState extends State<SmileyRatingBar> {
-  int _selectedRate = 2;
+  int _selectedRate = DEFAULT_SELECTED_RATE;
+  final _surveyController = Get.find<SurveyController>();
 
   void _onRateSelected(int rate) {
     setState(() {
       _selectedRate = rate;
+      _surveyController.onAnswerSelected({widget.ids[rate]: ""});
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    _surveyController.onAnswerSelected({widget.ids[DEFAULT_SELECTED_RATE]: ""});
+    super.didChangeDependencies();
   }
 
   @override
@@ -38,7 +49,7 @@ class _SmileyRatingBarState extends State<SmileyRatingBar> {
         child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemCount: widget.counter,
+            itemCount: widget.ids.length,
             itemBuilder: (context, index) {
               return GestureDetector(
                   onTap: () {

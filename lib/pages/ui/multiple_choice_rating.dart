@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:survey/pages/survey/survey_controller.dart';
 
 class MultipleChoiceRating extends StatefulWidget {
-  final List<String> choices;
+  final Map<String, String> idAndChoice;
 
-  const MultipleChoiceRating({Key key, this.choices}) : super(key: key);
+  const MultipleChoiceRating({Key key, this.idAndChoice}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _MultipleChoiceRatingState();
@@ -12,6 +14,7 @@ class MultipleChoiceRating extends StatefulWidget {
 
 class _MultipleChoiceRatingState extends State<MultipleChoiceRating> {
   final _selectedIndexes = <int>[];
+  final _surveyController = Get.find<SurveyController>();
 
   bool _isSelected(int index) {
     return _selectedIndexes.contains(index);
@@ -22,11 +25,14 @@ class _MultipleChoiceRatingState extends State<MultipleChoiceRating> {
       _isSelected(index)
           ? _selectedIndexes.remove(index)
           : _selectedIndexes.add(index);
+      final answers = Map.fromIterable(_selectedIndexes,
+          key: (e) => widget.idAndChoice.keys.toList()[e], value: (_) => "");
+      _surveyController.onAnswerSelected(answers);
     });
   }
 
   bool _shouldDrawDivider(int index) {
-    return index == widget.choices.length - 1 ? false : true;
+    return index == widget.idAndChoice.values.length - 1 ? false : true;
   }
 
   @override
@@ -36,7 +42,7 @@ class _MultipleChoiceRatingState extends State<MultipleChoiceRating> {
       alignment: Alignment.center,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: widget.choices.length,
+        itemCount: widget.idAndChoice.values.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
@@ -52,7 +58,7 @@ class _MultipleChoiceRatingState extends State<MultipleChoiceRating> {
                     children: [
                       Expanded(
                         child: Text(
-                          widget.choices[index],
+                          widget.idAndChoice.values.toList()[index],
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.bodyText1.copyWith(

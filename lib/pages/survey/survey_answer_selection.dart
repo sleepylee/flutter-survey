@@ -10,39 +10,40 @@ import 'package:survey/pages/ui/text_field_rating.dart';
 
 class SurveyAnswerSelection extends StatelessWidget {
   final String type;
-  final List<String> optionsText;
+  final Map<String, String> optionIdAndText;
   final int counter;
 
-  SurveyAnswerSelection({this.type, this.optionsText, this.counter = -1});
+  SurveyAnswerSelection({this.type, this.optionIdAndText, this.counter = -1});
 
   @override
   Widget build(BuildContext context) {
-    return _processAnswerUi(type, optionsText, counter);
+    return _processAnswerUi(type, optionIdAndText, counter);
   }
 }
 
-Widget _processAnswerUi(String type, List<String> optionsText, int counter) {
+Widget _processAnswerUi(
+    String type, Map<String, String> optionIdAndText, int counter) {
   switch (type) {
     case RATING_TYPE_STAR:
     case RATING_TYPE_HEART:
     case RATING_TYPE_MONEY:
-      return SlideRatingBar.from(type, counter);
+      return SlideRatingBar.from(type, optionIdAndText.keys.toList());
     case RATING_TYPE_CHOICE:
-      return MultipleChoiceRating(choices: optionsText);
+      return MultipleChoiceRating(idAndChoice: optionIdAndText);
     case RATING_TYPE_DROPDOWN:
-      return PickerSelector(optionsText: optionsText);
+      return PickerSelector(idAndChoice: optionIdAndText);
     case RATING_TYPE_SLIDER:
     case RATING_TYPE_NPS:
       return NpsRatingBar(
-          counter: counter,
-          minTitle: optionsText.first,
-          maxTitle: optionsText.last);
+          ids: optionIdAndText.keys.toList(),
+          minTitle: optionIdAndText.values.toList().first,
+          maxTitle: optionIdAndText.values.toList().last);
     case RATING_TYPE_SMILEY:
-      return SmileyRatingBar(counter);
+      return SmileyRatingBar(optionIdAndText.keys.toList());
     case RATING_TYPE_TEXT_AREA:
-      return TextAreaRating(optionsText.first);
+      return TextAreaRating(optionIdAndText.values.toList().first);
     case RATING_TYPE_TEXT_FIELD:
-      return TextFieldRating(hints: optionsText);
+      return TextFieldRating(hints: optionIdAndText.values.toList());
     default:
       return SizedBox.shrink();
   }

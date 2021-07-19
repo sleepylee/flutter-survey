@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:survey/pages/survey/survey_controller.dart';
 
 const double ITEM_SIZE = 50.0;
 
@@ -8,22 +10,24 @@ const String RATING_TYPE_CHOICE = "choice";
 const String RATING_TYPE_DROPDOWN = "dropdown";
 
 class PickerSelector extends StatelessWidget {
-  final List<String> optionsText;
+  final Map<String, String> idAndChoice;
 
-  PickerSelector({@required this.optionsText});
+  PickerSelector({@required this.idAndChoice});
 
   @override
   Widget build(BuildContext context) {
+    final surveyController = Get.find<SurveyController>();
+    surveyController.onAnswerSelected({idAndChoice.keys.first: ""});
     return Center(
       child: SizedBox(
         height: 150,
         child: CupertinoPicker(
           itemExtent: ITEM_SIZE,
           selectionOverlay: CustomPaint(painter: TwoHorizontalLinesPainter()),
-          children: _getOptionWidgets(context, optionsText),
+          children: _getOptionWidgets(context, idAndChoice.values.toList()),
           onSelectedItemChanged: (index) {
-            // TODO: update this behavior to ViewModel
-            print("Selected: $index");
+            surveyController
+                .onAnswerSelected({idAndChoice.keys.toList()[index]: ""});
           },
         ),
       ),
