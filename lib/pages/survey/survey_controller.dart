@@ -19,6 +19,14 @@ class SurveyController extends GetxController {
   SurveyQuestion get currentQuestion =>
       optionalSurvey.value.questions[currentQuestionIndex];
 
+  String get nextQuestionImage {
+    if (currentQuestionIndex != optionalSurvey.value.questions.length - 1) {
+      return optionalSurvey
+          .value.questions[currentQuestionIndex + 1].hdCoverImageUrl;
+    }
+    return null;
+  }
+
   String get indexTitleText => _getIndexText();
 
   @override

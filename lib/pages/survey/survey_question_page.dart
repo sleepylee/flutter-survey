@@ -17,6 +17,11 @@ class SurveyQuestionPage extends StatelessWidget {
           init: SurveyController(),
           builder: (_) {
             return GetX<SurveyController>(builder: (controller) {
+              if (controller.nextQuestionImage != null) {
+                precacheImage(
+                    CachedNetworkImageProvider(controller.nextQuestionImage),
+                    context);
+              }
               return Stack(
                 children: [
                   _buildBackground(controller.currentQuestion),
