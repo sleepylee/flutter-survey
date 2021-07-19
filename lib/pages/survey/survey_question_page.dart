@@ -123,7 +123,6 @@ class SurveyQuestionPage extends StatelessWidget {
     return SafeArea(
       child: PageView.builder(
         physics: NeverScrollableScrollPhysics(),
-        allowImplicitScrolling: false,
         itemBuilder: (context, index) => Center(
           child: SurveyAnswerSelection(
             type: questions[index].displayType,

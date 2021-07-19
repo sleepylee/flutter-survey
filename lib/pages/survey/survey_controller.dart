@@ -67,6 +67,8 @@ class SurveyController extends GetxController {
           List.from(_currentAnswer);
       _currentAnswer.clear();
     }
+
+    // TODO: remove this debug log later
     print("ResponseInput: $_responseInput");
 
     _currentQuestion.value = currentQuestionIndex + 1;
@@ -76,6 +78,8 @@ class SurveyController extends GetxController {
     _currentAnswer = idAndAnswer.entries
         .map((entry) => AnswerDetail(entry.key, entry.value))
         .toList();
+
+    // TODO: remove this debug log later
     print("Rated on: Question: ${currentQuestion.id} Answers: $_currentAnswer");
   }
 }
