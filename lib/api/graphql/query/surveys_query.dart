@@ -51,3 +51,11 @@ const String GET_SURVEY_BY_ID = r"""
     }
   }
 """;
+
+const String CREATE_RESPONSE = r"""
+  mutation($input: CreateResponseMutationInput!) {
+    createResponse(input: $input){
+      clientMutationId
+	  }
+  }
+""";
