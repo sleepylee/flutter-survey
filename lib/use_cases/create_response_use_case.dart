@@ -30,7 +30,7 @@ class CreateSurveyResponseUseCase extends UseCase<bool, ResponseInput> {
       await _surveyRepository.createResponse(input);
       return Success(true);
     } catch (exception) {
-      return Success(false);
+      return Failed(exception);
     }
   }
 }
