@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
-import 'package:survey/pages/survey/survey_controller.dart';
 
 const double ITEM_SIZE = 50.0;
 
@@ -11,13 +9,13 @@ const String RATING_TYPE_DROPDOWN = "dropdown";
 
 class PickerSelector extends StatelessWidget {
   final Map<String, String> idAndChoice;
+  final void Function(Map<String, String>) onRatingListener;
 
-  PickerSelector({@required this.idAndChoice});
+  PickerSelector({@required this.idAndChoice, @required this.onRatingListener});
 
   @override
   Widget build(BuildContext context) {
-    final surveyController = Get.find<SurveyController>();
-    surveyController.onAnswerSelected({idAndChoice.keys.first: ""});
+    onRatingListener.call({idAndChoice.keys.first: ""});
     return Center(
       child: SizedBox(
         height: 150,
@@ -26,8 +24,7 @@ class PickerSelector extends StatelessWidget {
           selectionOverlay: CustomPaint(painter: TwoHorizontalLinesPainter()),
           children: _getOptionWidgets(context, idAndChoice.values.toList()),
           onSelectedItemChanged: (index) {
-            surveyController
-                .onAnswerSelected({idAndChoice.keys.toList()[index]: ""});
+            onRatingListener.call({idAndChoice.keys.toList()[index]: ""});
           },
         ),
       ),

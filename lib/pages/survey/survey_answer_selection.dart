@@ -12,34 +12,43 @@ class SurveyAnswerSelection extends StatelessWidget {
   final String type;
   final Map<String, String> optionIdAndText;
   final int counter;
+  final Function(Map<String, String>) onRatingListener;
 
-  SurveyAnswerSelection({this.type, this.optionIdAndText, this.counter = -1});
+  SurveyAnswerSelection(
+      {this.type,
+      this.optionIdAndText,
+      this.counter = -1,
+      @required this.onRatingListener});
 
   @override
   Widget build(BuildContext context) {
-    return _processAnswerUi(type, optionIdAndText, counter);
+    return _processAnswerUi(type, optionIdAndText, counter, onRatingListener);
   }
 }
 
-Widget _processAnswerUi(
-    String type, Map<String, String> optionIdAndText, int counter) {
+Widget _processAnswerUi(String type, Map<String, String> optionIdAndText,
+    int counter, Function(Map<String, String>) onRatingListener) {
   switch (type) {
     case RATING_TYPE_STAR:
     case RATING_TYPE_HEART:
     case RATING_TYPE_MONEY:
-      return SlideRatingBar.from(type, optionIdAndText.keys.toList());
+      return SlideRatingBar.from(
+          type, optionIdAndText.keys.toList(), onRatingListener);
     case RATING_TYPE_CHOICE:
-      return MultipleChoiceRating(idAndChoice: optionIdAndText);
+      return MultipleChoiceRating(
+          idAndChoice: optionIdAndText, onRatingListener: onRatingListener);
     case RATING_TYPE_DROPDOWN:
-      return PickerSelector(idAndChoice: optionIdAndText);
+      return PickerSelector(
+          idAndChoice: optionIdAndText, onRatingListener: onRatingListener);
     case RATING_TYPE_SLIDER:
     case RATING_TYPE_NPS:
       return NpsRatingBar(
           ids: optionIdAndText.keys.toList(),
           minTitle: optionIdAndText.values.toList().first,
-          maxTitle: optionIdAndText.values.toList().last);
+          maxTitle: optionIdAndText.values.toList().last,
+          onRatingListener: onRatingListener);
     case RATING_TYPE_SMILEY:
-      return SmileyRatingBar(optionIdAndText.keys.toList());
+      return SmileyRatingBar(optionIdAndText.keys.toList(), onRatingListener);
     case RATING_TYPE_TEXT_AREA:
       return TextAreaRating(optionIdAndText.values.toList().first);
     case RATING_TYPE_TEXT_FIELD:

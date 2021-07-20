@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:survey/pages/survey/survey_controller.dart';
 
 const String RATING_TYPE_SMILEY = "smiley";
 const int DEFAULT_SELECTED_RATE = 2;
@@ -15,8 +13,9 @@ const _smileys = {
 
 class SmileyRatingBar extends StatefulWidget {
   final List<String> ids;
+  final Function(Map<String, String>) onRatingListener;
 
-  SmileyRatingBar(this.ids);
+  SmileyRatingBar(this.ids, this.onRatingListener);
 
   @override
   _SmileyRatingBarState createState() => _SmileyRatingBarState();
@@ -24,18 +23,17 @@ class SmileyRatingBar extends StatefulWidget {
 
 class _SmileyRatingBarState extends State<SmileyRatingBar> {
   int _selectedRate = DEFAULT_SELECTED_RATE;
-  final _surveyController = Get.find<SurveyController>();
 
   void _onRateSelected(int rate) {
     setState(() {
       _selectedRate = rate;
-      _surveyController.onAnswerSelected({widget.ids[rate]: ""});
+      widget.onRatingListener.call({widget.ids[rate]: ""});
     });
   }
 
   @override
   void didChangeDependencies() {
-    _surveyController.onAnswerSelected({widget.ids[DEFAULT_SELECTED_RATE]: ""});
+    widget.onRatingListener.call({widget.ids[DEFAULT_SELECTED_RATE]: ""});
     super.didChangeDependencies();
   }
 

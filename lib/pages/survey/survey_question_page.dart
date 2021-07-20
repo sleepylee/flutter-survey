@@ -129,6 +129,10 @@ class SurveyQuestionPage extends StatelessWidget {
             optionIdAndText: Map.fromIterable(questions[index].answers,
                 key: (e) => e.id, value: (e) => e.text),
             counter: questions[index].answers.length ?? 0,
+            onRatingListener: (idAndText) {
+              final surveyController = Get.find<SurveyController>();
+              surveyController.onAnswerSelected(idAndText);
+            },
           ),
         ),
         itemCount: questions.length,

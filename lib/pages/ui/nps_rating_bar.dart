@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:survey/pages/survey/survey_controller.dart';
 
 const String RATING_TYPE_NPS = "nps";
 const int DEFAULT_SELECTED_RATE = 4;
@@ -10,8 +8,14 @@ class NpsRatingBar extends StatefulWidget {
   final List<String> ids;
   final String minTitle;
   final String maxTitle;
+  final Function(Map<String, String>) onRatingListener;
 
-  NpsRatingBar({Key key, this.ids, this.minTitle, this.maxTitle})
+  NpsRatingBar(
+      {Key key,
+      this.ids,
+      this.minTitle,
+      this.maxTitle,
+      @required this.onRatingListener})
       : super(key: key);
 
   @override
@@ -20,18 +24,17 @@ class NpsRatingBar extends StatefulWidget {
 
 class _NpsRatingBarState extends State<NpsRatingBar> {
   int _selectedRate = DEFAULT_SELECTED_RATE;
-  final _surveyController = Get.find<SurveyController>();
 
   void _onRateSelected(int rate) {
     setState(() {
       _selectedRate = rate;
-      _surveyController.onAnswerSelected({widget.ids[rate]: ""});
+      widget.onRatingListener.call({widget.ids[rate]: ""});
     });
   }
 
   @override
   void didChangeDependencies() {
-    _surveyController.onAnswerSelected({widget.ids[DEFAULT_SELECTED_RATE]: ""});
+    widget.onRatingListener.call({widget.ids[DEFAULT_SELECTED_RATE]: ""});
     super.didChangeDependencies();
   }
 

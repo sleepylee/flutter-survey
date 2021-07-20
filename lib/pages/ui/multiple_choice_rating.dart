@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:survey/pages/survey/survey_controller.dart';
 
 class MultipleChoiceRating extends StatefulWidget {
   final Map<String, String> idAndChoice;
+  final void Function(Map<String, String>) onRatingListener;
 
-  const MultipleChoiceRating({Key key, this.idAndChoice}) : super(key: key);
+  const MultipleChoiceRating(
+      {Key key, this.idAndChoice, @required this.onRatingListener})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _MultipleChoiceRatingState();
@@ -14,7 +15,6 @@ class MultipleChoiceRating extends StatefulWidget {
 
 class _MultipleChoiceRatingState extends State<MultipleChoiceRating> {
   final _selectedIndexes = <int>[];
-  final _surveyController = Get.find<SurveyController>();
 
   bool _isSelected(int index) {
     return _selectedIndexes.contains(index);
@@ -27,7 +27,7 @@ class _MultipleChoiceRatingState extends State<MultipleChoiceRating> {
           : _selectedIndexes.add(index);
       final answers = Map.fromIterable(_selectedIndexes,
           key: (e) => widget.idAndChoice.keys.toList()[e], value: (_) => "");
-      _surveyController.onAnswerSelected(answers);
+      widget.onRatingListener.call(answers);
     });
   }
 

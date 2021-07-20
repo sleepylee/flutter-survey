@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:get/get.dart';
-import 'package:survey/pages/survey/survey_controller.dart';
 
 const int DEFAULT_RATE_COUNT = 5;
 const int DEFAULT_SELECTED_RATE_INDEX = 2;
@@ -13,26 +11,43 @@ const String RATING_TYPE_STAR = "star";
 
 class SlideRatingBar extends StatefulWidget {
   final RatingType type;
-  final List<String> values;
+  final List<String> ids;
+  final void Function(Map<String, String>) onRatingListener;
 
-  SlideRatingBar({this.type, this.values});
+  SlideRatingBar(
+      {@required this.type,
+      @required this.ids,
+      @required this.onRatingListener});
 
-  factory SlideRatingBar.from(String type, List<String> ids) {
+  factory SlideRatingBar.from(String type, List<String> ids,
+      Function(Map<String, String>) onRatingListener) {
     final actualCounter = ids.length == -1 ? DEFAULT_RATE_COUNT : ids.length;
     switch (type) {
       case RATING_TYPE_HEART:
         return SlideRatingBar(
-            type: HeartRatingType(counter: actualCounter), values: ids);
+          type: HeartRatingType(counter: actualCounter),
+          ids: ids,
+          onRatingListener: onRatingListener,
+        );
       case RATING_TYPE_SLIDER:
         return SlideRatingBar(
-            type: SliderRatingType(counter: actualCounter), values: ids);
+          type: SliderRatingType(counter: actualCounter),
+          ids: ids,
+          onRatingListener: onRatingListener,
+        );
       case RATING_TYPE_MONEY:
         return SlideRatingBar(
-            type: MoneyRatingType(counter: actualCounter), values: ids);
+          type: MoneyRatingType(counter: actualCounter),
+          ids: ids,
+          onRatingListener: onRatingListener,
+        );
       case RATING_TYPE_STAR:
       default:
         return SlideRatingBar(
-            type: StarRatingType(counter: actualCounter), values: ids);
+          type: StarRatingType(counter: actualCounter),
+          ids: ids,
+          onRatingListener: onRatingListener,
+        );
     }
   }
 
@@ -41,12 +56,9 @@ class SlideRatingBar extends StatefulWidget {
 }
 
 class _SlideRatingBarState extends State<SlideRatingBar> {
-  final _surveyController = Get.find<SurveyController>();
-
   @override
   void didChangeDependencies() {
-    final defaultSelection = {widget.values[DEFAULT_SELECTED_RATE_INDEX]: ""};
-    _surveyController.onAnswerSelected(defaultSelection);
+    widget.onRatingListener.call({widget.ids[DEFAULT_SELECTED_RATE_INDEX]: ""});
     super.didChangeDependencies();
   }
 
@@ -61,8 +73,7 @@ class _SlideRatingBarState extends State<SlideRatingBar> {
       itemPadding: EdgeInsets.symmetric(horizontal: 5.0),
       itemBuilder: (context, _) => widget.type.icon,
       onRatingUpdate: (rating) {
-        _surveyController
-            .onAnswerSelected({widget.values[rating.toInt() - 1]: ""});
+        widget.onRatingListener.call({widget.ids[rating.toInt() - 1]: ""});
       },
     );
   }
