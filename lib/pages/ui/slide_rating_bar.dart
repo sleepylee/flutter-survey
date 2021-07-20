@@ -57,9 +57,9 @@ class SlideRatingBar extends StatefulWidget {
 
 class _SlideRatingBarState extends State<SlideRatingBar> {
   @override
-  void didChangeDependencies() {
+  void initState() {
     widget.onRatingListener.call({widget.ids[DEFAULT_SELECTED_RATE_INDEX]: ""});
-    super.didChangeDependencies();
+    super.initState();
   }
 
   @override

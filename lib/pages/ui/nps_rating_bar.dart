@@ -26,16 +26,16 @@ class _NpsRatingBarState extends State<NpsRatingBar> {
   int _selectedRate = DEFAULT_SELECTED_RATE;
 
   void _onRateSelected(int rate) {
+    widget.onRatingListener.call({widget.ids[rate]: ""});
     setState(() {
       _selectedRate = rate;
-      widget.onRatingListener.call({widget.ids[rate]: ""});
     });
   }
 
   @override
-  void didChangeDependencies() {
+  void initState() {
     widget.onRatingListener.call({widget.ids[DEFAULT_SELECTED_RATE]: ""});
-    super.didChangeDependencies();
+    super.initState();
   }
 
   @override

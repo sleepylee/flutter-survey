@@ -25,10 +25,11 @@ class _MultipleChoiceRatingState extends State<MultipleChoiceRating> {
       _isSelected(index)
           ? _selectedIndexes.remove(index)
           : _selectedIndexes.add(index);
-      final answers = Map.fromIterable(_selectedIndexes,
-          key: (e) => widget.idAndChoice.keys.toList()[e], value: (_) => "");
-      widget.onRatingListener.call(answers);
     });
+
+    final answers = Map.fromIterable(_selectedIndexes,
+        key: (e) => widget.idAndChoice.keys.toList()[e], value: (_) => "");
+    widget.onRatingListener.call(answers);
   }
 
   bool _shouldDrawDivider(int index) {
