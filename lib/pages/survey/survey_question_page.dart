@@ -33,7 +33,7 @@ class SurveyQuestionPage extends StatelessWidget {
                       isEmptyAnswer:
                           controller.currentQuestion.doesNotRequireAnswer),
                   _buildAnswerBody(controller.optionalSurvey.value.questions),
-                  _buildSubmitButton(context, controller.isLastQuestion),
+                  _buildSubmitButton(context),
                 ],
               );
             });
@@ -143,11 +143,11 @@ class SurveyQuestionPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSubmitButton(BuildContext context, bool isLastQuestion) {
+  Widget _buildSubmitButton(BuildContext context) {
     final surveyController = Get.find<SurveyController>();
     return Align(
       alignment: Alignment.bottomRight,
-      child: isLastQuestion
+      child: surveyController.isLastQuestion
           ? ElevatedButton(
               child: Padding(
                 padding: EdgeInsets.only(left: 20, right: 20, bottom: 5),
