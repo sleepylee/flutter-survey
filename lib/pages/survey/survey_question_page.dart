@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:survey/models/survey.dart';
 import 'package:survey/pages/survey/survey_answer_selection.dart';
@@ -32,7 +33,7 @@ class SurveyQuestionPage extends StatelessWidget {
                       isEmptyAnswer:
                           controller.currentQuestion.doesNotRequireAnswer),
                   _buildAnswerBody(controller.optionalSurvey.value.questions),
-                  _buildSubmitButton(),
+                  _buildSubmitButton(context, controller.isLastQuestion),
                 ],
               );
             });
@@ -142,22 +143,50 @@ class SurveyQuestionPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSubmitButton() {
+  Widget _buildSubmitButton(BuildContext context, bool isLastQuestion) {
+    final surveyController = Get.find<SurveyController>();
     return Align(
       alignment: Alignment.bottomRight,
-      child: FloatingActionButton(
-        child: const Icon(
-          Icons.chevron_right,
-          size: 50,
-        ),
-        backgroundColor: Colors.white,
-        onPressed: () {
-          _answersController.nextPage(
-              duration: Duration(milliseconds: 500), curve: Curves.ease);
-          final surveyController = Get.find<SurveyController>();
-          surveyController.onNextQuestion();
-        },
-      ),
+      child: isLastQuestion
+          ? ElevatedButton(
+              child: Padding(
+                padding: EdgeInsets.only(left: 20, right: 20, bottom: 5),
+                child: surveyController.isSubmitting
+                    ? SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          backgroundColor: Colors.black54,
+                        ),
+                      )
+                    : Text(AppLocalizations.of(context).buttonSubmit),
+              ),
+              onPressed: () async {
+                if (surveyController.isSubmitting) return;
+                final result = await surveyController.submitAllAnswers();
+                if (result) {
+                  // TODO: navigate to Complete screen
+                  Get.snackbar("Success", "Next: move to Complete screen",
+                      backgroundColor: Colors.white);
+                } else {
+                  Get.snackbar(AppLocalizations.of(context).errorGeneralTitle,
+                      AppLocalizations.of(context).errorGeneralMessage,
+                      backgroundColor: Colors.white);
+                }
+              },
+            )
+          : FloatingActionButton(
+              child: const Icon(
+                Icons.chevron_right,
+                size: 50,
+              ),
+              backgroundColor: Colors.white,
+              onPressed: () {
+                _answersController.nextPage(
+                    duration: Duration(milliseconds: 500), curve: Curves.ease);
+                surveyController.onNextQuestion();
+              },
+            ),
     ).marginOnly(bottom: 50, right: 24);
   }
 }
