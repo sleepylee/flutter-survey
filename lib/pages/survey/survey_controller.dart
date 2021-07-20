@@ -58,6 +58,7 @@ class SurveyController extends GetxController {
   }
 
   void onNextQuestion() {
+    //print("On Next");
     if (currentQuestionIndex == questionAmount - 1) {
       // TODO: do submission
       return;
