@@ -40,6 +40,11 @@ class ResponseInput {
   Map<String, List<AnswerDetail>> questionsAndAnswers = {};
 
   ResponseInput(this.surveyId);
+
+  @override
+  String toString() {
+    return "ResponseInput: SurveyId: $surveyId - $questionsAndAnswers";
+  }
 }
 
 class AnswerDetail {
@@ -47,4 +52,9 @@ class AnswerDetail {
   String answer;
 
   AnswerDetail(this.id, this.answer);
+
+  @override
+  String toString() {
+    return "AnswerDetail: {$id:$answer}";
+  }
 }

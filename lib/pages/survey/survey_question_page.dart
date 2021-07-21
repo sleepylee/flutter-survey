@@ -126,9 +126,13 @@ class SurveyQuestionPage extends StatelessWidget {
         itemBuilder: (context, index) => Center(
           child: SurveyAnswerSelection(
             type: questions[index].displayType,
-            optionsText:
-                questions[index].answers.map((e) => e.text ?? "").toList(),
+            optionIdAndText: Map.fromIterable(questions[index].answers,
+                key: (e) => e.id, value: (e) => e.text),
             counter: questions[index].answers.length ?? 0,
+            onRatingListener: (idAndText) {
+              final surveyController = Get.find<SurveyController>();
+              surveyController.onAnswerSelected(idAndText);
+            },
           ),
         ),
         itemCount: questions.length,
@@ -150,7 +154,6 @@ class SurveyQuestionPage extends StatelessWidget {
         onPressed: () {
           _answersController.nextPage(
               duration: Duration(milliseconds: 500), curve: Curves.ease);
-
           final surveyController = Get.find<SurveyController>();
           surveyController.onNextQuestion();
         },

@@ -8,22 +8,23 @@ const String RATING_TYPE_CHOICE = "choice";
 const String RATING_TYPE_DROPDOWN = "dropdown";
 
 class PickerSelector extends StatelessWidget {
-  final List<String> optionsText;
+  final Map<String, String> idAndChoice;
+  final void Function(Map<String, String>) onRatingListener;
 
-  PickerSelector({@required this.optionsText});
+  PickerSelector({@required this.idAndChoice, @required this.onRatingListener});
 
   @override
   Widget build(BuildContext context) {
+    onRatingListener.call({idAndChoice.keys.first: ""});
     return Center(
       child: SizedBox(
         height: 150,
         child: CupertinoPicker(
           itemExtent: ITEM_SIZE,
           selectionOverlay: CustomPaint(painter: TwoHorizontalLinesPainter()),
-          children: _getOptionWidgets(context, optionsText),
+          children: _getOptionWidgets(context, idAndChoice.values.toList()),
           onSelectedItemChanged: (index) {
-            // TODO: update this behavior to ViewModel
-            print("Selected: $index");
+            onRatingListener.call({idAndChoice.keys.toList()[index]: ""});
           },
         ),
       ),

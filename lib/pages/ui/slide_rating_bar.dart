@@ -3,44 +3,77 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 const int DEFAULT_RATE_COUNT = 5;
+const int DEFAULT_SELECTED_RATE_INDEX = 2;
 const String RATING_TYPE_HEART = "heart";
 const String RATING_TYPE_SLIDER = "slider";
 const String RATING_TYPE_MONEY = "money";
 const String RATING_TYPE_STAR = "star";
 
-class SlideRatingBar extends StatelessWidget {
+class SlideRatingBar extends StatefulWidget {
   final RatingType type;
+  final List<String> ids;
+  final void Function(Map<String, String>) onRatingListener;
 
-  SlideRatingBar({this.type});
+  SlideRatingBar(
+      {@required this.type,
+      @required this.ids,
+      @required this.onRatingListener});
 
-  factory SlideRatingBar.from(String type, int counter) {
-    final actualCounter = counter == -1 ? DEFAULT_RATE_COUNT : counter;
+  factory SlideRatingBar.from(String type, List<String> ids,
+      Function(Map<String, String>) onRatingListener) {
+    final actualCounter = ids.length == -1 ? DEFAULT_RATE_COUNT : ids.length;
     switch (type) {
       case RATING_TYPE_HEART:
-        return SlideRatingBar(type: HeartRatingType(counter: actualCounter));
+        return SlideRatingBar(
+          type: HeartRatingType(counter: actualCounter),
+          ids: ids,
+          onRatingListener: onRatingListener,
+        );
       case RATING_TYPE_SLIDER:
-        return SlideRatingBar(type: SliderRatingType(counter: actualCounter));
+        return SlideRatingBar(
+          type: SliderRatingType(counter: actualCounter),
+          ids: ids,
+          onRatingListener: onRatingListener,
+        );
       case RATING_TYPE_MONEY:
-        return SlideRatingBar(type: MoneyRatingType(counter: actualCounter));
+        return SlideRatingBar(
+          type: MoneyRatingType(counter: actualCounter),
+          ids: ids,
+          onRatingListener: onRatingListener,
+        );
       case RATING_TYPE_STAR:
       default:
-        return SlideRatingBar(type: StarRatingType(counter: actualCounter));
+        return SlideRatingBar(
+          type: StarRatingType(counter: actualCounter),
+          ids: ids,
+          onRatingListener: onRatingListener,
+        );
     }
+  }
+
+  @override
+  State<SlideRatingBar> createState() => _SlideRatingBarState();
+}
+
+class _SlideRatingBarState extends State<SlideRatingBar> {
+  @override
+  void initState() {
+    widget.onRatingListener.call({widget.ids[DEFAULT_SELECTED_RATE_INDEX]: ""});
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return RatingBar.builder(
-      initialRating: 3,
+      initialRating: DEFAULT_SELECTED_RATE_INDEX.toDouble() + 1,
       minRating: 1,
-      unratedColor: type.unratedColor,
+      unratedColor: widget.type.unratedColor,
       direction: Axis.horizontal,
-      itemCount: type.counter,
+      itemCount: widget.type.counter,
       itemPadding: EdgeInsets.symmetric(horizontal: 5.0),
-      itemBuilder: (context, _) => type.icon,
+      itemBuilder: (context, _) => widget.type.icon,
       onRatingUpdate: (rating) {
-        // TODO: update choice to ViewModel
-        print(rating);
+        widget.onRatingListener.call({widget.ids[rating.toInt() - 1]: ""});
       },
     );
   }

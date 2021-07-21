@@ -3,6 +3,7 @@ import 'package:optional/optional.dart';
 import 'package:survey/models/survey.dart';
 import 'package:survey/navigator/const.dart';
 import 'package:survey/use_cases/base_use_case.dart';
+import 'package:survey/use_cases/create_response_use_case.dart';
 import 'package:survey/use_cases/get_survey_detail_use_case.dart';
 
 class SurveyController extends GetxController {
@@ -29,6 +30,9 @@ class SurveyController extends GetxController {
 
   String get indexTitleText => _getIndexText();
 
+  ResponseInput _responseInput;
+  List<AnswerDetail> _currentAnswer = List.empty(growable: true);
+
   @override
   void onInit() {
     super.onInit();
@@ -41,6 +45,7 @@ class SurveyController extends GetxController {
     getSurveyUseCase.call(surveyId).then((result) {
       if (result is Success<Survey>) {
         _survey.value = Optional.of(result.value);
+        _responseInput = ResponseInput(result.value.id);
       } else {
         print("Error when fetching survey, handle Error later.");
       }
@@ -57,6 +62,24 @@ class SurveyController extends GetxController {
       // TODO: do submission
       return;
     }
+    if (!currentQuestion.doesNotRequireAnswer) {
+      _responseInput.questionsAndAnswers[currentQuestion.id] =
+          List.from(_currentAnswer);
+      _currentAnswer.clear();
+    }
+
+    // TODO: remove this debug log later
+    print("ResponseInput: $_responseInput");
+
     _currentQuestion.value = currentQuestionIndex + 1;
+  }
+
+  void onAnswerSelected(Map<String, String> idAndAnswer) {
+    _currentAnswer = idAndAnswer.entries
+        .map((entry) => AnswerDetail(entry.key, entry.value))
+        .toList();
+
+    // TODO: remove this debug log later
+    print("Rated on: Question: ${currentQuestion.id} Answers: $_currentAnswer");
   }
 }
