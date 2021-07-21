@@ -3,13 +3,13 @@ import 'package:survey/repositories/survey_repository.dart';
 
 import 'base_use_case.dart';
 
-class CreateSurveyResponseUseCase extends UseCase<bool, ResponseInput> {
+class CreateSurveyResponseUseCase extends UseCase<void, ResponseInput> {
   final SurveyRepository _surveyRepository;
 
   CreateSurveyResponseUseCase(this._surveyRepository);
 
   @override
-  Future<Result<bool>> call(ResponseInput params) async {
+  Future<Result<void>> call(ResponseInput params) async {
     try {
       final input = CreateResponseMutationInput(
         SurveySubmission(
@@ -28,7 +28,7 @@ class CreateSurveyResponseUseCase extends UseCase<bool, ResponseInput> {
         ),
       );
       await _surveyRepository.createResponse(input);
-      return Success(true);
+      return Success(null);
     } catch (exception) {
       return Failed(exception);
     }

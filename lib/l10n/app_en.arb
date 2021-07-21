@@ -23,6 +23,10 @@
   "@buttonStartSurvey": {
     "description": "Label of the Start Survey button"
   },
+  "buttonSubmit": "Submit",
+  "@buttonSubmit": {
+    "description": "Label of the Submit button"
+  },
   "hintTextArea": "Your thoughts",
   "@hintTextArea": {
     "description": "The default hint text of a text area for an Answer text field"
@@ -38,5 +42,13 @@
   "errorLoginFailed": "Login failed! Please recheck your email or password",
   "@errorLoginFailed": {
     "description": "Error message when login credential is invalid"
+  },
+  "errorGeneralTitle": "Oops!",
+  "@errorGeneralTitle": {
+    "description": "General error title can be used for any case"
+  },
+  "errorGeneralMessage": "Something went wrong, please try again",
+  "@errorGeneralMessage": {
+    "description": "General error message can be used for any case"
   }
 }

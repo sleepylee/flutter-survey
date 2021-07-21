@@ -7,13 +7,9 @@ import 'package:survey/use_cases/create_response_use_case.dart';
 import 'package:survey/use_cases/get_survey_detail_use_case.dart';
 
 class SurveyController extends GetxController {
-  final Rx<Optional<Survey>> _survey = Optional<Survey>.empty().obs;
-
   Optional<Survey> get optionalSurvey => _survey.value;
 
   int get questionAmount => optionalSurvey.value.questions.length;
-
-  final _currentQuestion = 0.obs;
 
   int get currentQuestionIndex => _currentQuestion.value;
 
@@ -29,6 +25,16 @@ class SurveyController extends GetxController {
   }
 
   String get indexTitleText => _getIndexText();
+
+  bool get isLastQuestion => currentQuestionIndex == questionAmount - 1;
+
+  bool get isSubmitting => _isSubmittingAllAnswer.value;
+
+  final Rx<Optional<Survey>> _survey = Optional<Survey>.empty().obs;
+
+  final _currentQuestion = 0.obs;
+
+  final _isSubmittingAllAnswer = false.obs;
 
   ResponseInput _responseInput;
   List<AnswerDetail> _currentAnswer = List.empty(growable: true);
@@ -59,7 +65,6 @@ class SurveyController extends GetxController {
 
   void onNextQuestion() {
     if (currentQuestionIndex == questionAmount - 1) {
-      // TODO: do submission
       return;
     }
     if (!currentQuestion.doesNotRequireAnswer) {
@@ -67,19 +72,25 @@ class SurveyController extends GetxController {
           List.from(_currentAnswer);
       _currentAnswer.clear();
     }
-
-    // TODO: remove this debug log later
-    print("ResponseInput: $_responseInput");
-
     _currentQuestion.value = currentQuestionIndex + 1;
+  }
+
+  Future<bool> submitAllAnswers() async {
+    _isSubmittingAllAnswer.value = true;
+    final createSurveyResponseUseCase = Get.find<CreateSurveyResponseUseCase>();
+    return createSurveyResponseUseCase.call(_responseInput).then((value) {
+      if (value is Success<void>) {
+        return true;
+      } else {
+        _isSubmittingAllAnswer.value = false;
+        return false;
+      }
+    });
   }
 
   void onAnswerSelected(Map<String, String> idAndAnswer) {
     _currentAnswer = idAndAnswer.entries
         .map((entry) => AnswerDetail(entry.key, entry.value))
         .toList();
-
-    // TODO: remove this debug log later
-    print("Rated on: Question: ${currentQuestion.id} Answers: $_currentAnswer");
   }
 }
