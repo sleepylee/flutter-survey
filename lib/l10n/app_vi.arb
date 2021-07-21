@@ -5,7 +5,11 @@
   "titleGeneralError": "Lỗi",
   "buttonLogin": "Đăng nhập",
   "buttonStartSurvey": "Bắt đầu khảo sát",
+  "buttonSubmit": "Gửi kết quả",
+  "hintTextArea": "Suy nghĩ của bạn",
   "errorValidationEmailEmpty": "Vui lòng nhập email",
   "errorValidationEmailInvalid": "Vui lòng nhập đúng email",
-  "errorLoginFailed": "Lỗi đăng nhập! Vui lòng kiểm tra lại email và mật khẩu"
+  "errorLoginFailed": "Lỗi đăng nhập! Vui lòng kiểm tra lại email và mật khẩu",
+  "errorGeneralTitle": "Oops!",
+  "errorGeneralMessage": "Có lỗi xảy ra, vui lòng thử lại"
 }

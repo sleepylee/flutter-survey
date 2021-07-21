@@ -1,10 +1,12 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:survey/models/survey.dart';
+import 'package:survey/navigator/navigator.dart';
 import 'package:survey/pages/survey/survey_controller.dart';
 
 class SurveyPage extends StatelessWidget {
@@ -38,7 +40,8 @@ class SurveyDetail extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(survey.hdCoverImageUrl),
+              image: CachedNetworkImageProvider(survey.hdCoverImageUrl,
+                  cacheKey: survey.id),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.5), BlendMode.overlay),
@@ -97,12 +100,16 @@ class SurveyDetail extends StatelessWidget {
               child: Text(AppLocalizations.of(context).buttonStartSurvey),
             ),
             onPressed: () {
-              Get.snackbar("TODO", "Go to Survey: ${survey.id}",
-                  backgroundColor: Colors.white70);
+              _navigateToSurveyQuestion();
             },
           ),
         ).marginOnly(bottom: 50, right: 24),
       ],
     );
+  }
+
+  void _navigateToSurveyQuestion() {
+    final navigator = Get.find<AppNavigator>();
+    navigator.navigateToSurveyQuestion();
   }
 }

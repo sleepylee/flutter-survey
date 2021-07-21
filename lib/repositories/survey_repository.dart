@@ -1,13 +1,17 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:survey/api/graphql/mutation/create_response_mutation_input.dart';
 import 'package:survey/api/graphql/query/surveys_query.dart';
 import 'package:survey/api/graphql/response/survey_response.dart';
 import 'package:survey/exception/network_exceptions.dart';
+import 'package:survey/mappers/survey_mapper.dart';
 import 'package:survey/models/survey.dart';
 
 abstract class SurveyRepository {
   Future<List<Survey>> getSurveys(String cursor);
 
   Future<Survey> getSurveyById(String id);
+
+  Future<void> createResponse(CreateResponseMutationInput input);
 }
 
 class SurveyRepositoryImpl implements SurveyRepository {
@@ -24,21 +28,7 @@ class SurveyRepositoryImpl implements SurveyRepository {
     return _graphQlClient.query(queryOptions).then((value) {
       if (value.data != null) {
         final surveysResponse = SurveysResponse.fromJson(value.data['surveys']);
-
-        final surveysList = <Survey>[];
-
-        surveysResponse.edges.forEach((item) {
-          final surveyItem = Survey(
-            cursor: item.cursor,
-            id: item.node.id,
-            title: item.node.title,
-            description: item.node.description,
-            coverImageUrl: item.node.coverImageUrl,
-          );
-          surveysList.add(surveyItem);
-        });
-
-        return surveysList;
+        return surveysResponse.edges.map((item) => item.toSurvey()).toList();
       } else {
         throw NetworkExceptions.notFound("Something is wrong");
       }
@@ -54,14 +44,20 @@ class SurveyRepositoryImpl implements SurveyRepository {
     return _graphQlClient.query(queryOptions).then((value) {
       if (value.data != null) {
         final surveyResponse = SurveyResponse.fromJson(value.data['survey']);
-        return Survey(
-            id: surveyResponse.id,
-            title: surveyResponse.title,
-            description: surveyResponse.description,
-            coverImageUrl: surveyResponse.coverImageUrl);
+        return surveyResponse.toSurvey();
       } else {
         throw NetworkExceptions.notFound("Something is wrong");
       }
     });
+  }
+
+  @override
+  Future<void> createResponse(CreateResponseMutationInput input) {
+    final mutationOption = MutationOptions(
+        fetchPolicy: FetchPolicy.networkOnly,
+        document: gql(CREATE_RESPONSE),
+        variables: {'input': input});
+
+    return _graphQlClient.mutate(mutationOption);
   }
 }

@@ -8,6 +8,8 @@ abstract class AppNavigator {
   void popAndNavigateToHome();
 
   void navigateToSurvey(String id);
+
+  void navigateToSurveyQuestion();
 }
 
 class AppNavigatorImpl implements AppNavigator {
@@ -24,5 +26,10 @@ class AppNavigatorImpl implements AppNavigator {
   @override
   void navigateToSurvey(String id) {
     Get.toNamed('/survey', arguments: {DATA_SURVEY_ID: id});
+  }
+
+  @override
+  void navigateToSurveyQuestion() {
+    Get.toNamed('/survey-question');
   }
 }

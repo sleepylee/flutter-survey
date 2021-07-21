@@ -14,6 +14,7 @@ import 'package:survey/pages/splash/splash_binding.dart';
 import 'package:survey/pages/splash/splash_page.dart';
 import 'package:survey/pages/survey/survey_binding.dart';
 import 'package:survey/pages/survey/survey_page.dart';
+import 'package:survey/pages/survey/survey_question_page.dart';
 import 'package:survey/preferences/shared_preferences.dart';
 import 'package:survey/themes.dart';
 
@@ -46,7 +47,13 @@ class _AppState extends State<SurveyApp> {
           GetPage(
               name: "/survey",
               page: () => SurveyPage(),
-              binding: SurveyBinding()),
+              binding: SurveyBinding(),
+              transition: Transition.fadeIn),
+          GetPage(
+              name: "/survey-question",
+              page: () => SurveyQuestionPage(),
+              binding: SurveyBinding(),
+              transition: Transition.rightToLeftWithFade),
         ],
         localizationsDelegates: [
           AppLocalizations.delegate,
