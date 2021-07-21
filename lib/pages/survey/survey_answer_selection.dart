@@ -50,9 +50,10 @@ Widget _processAnswerUi(String type, Map<String, String> optionIdAndText,
     case RATING_TYPE_SMILEY:
       return SmileyRatingBar(optionIdAndText.keys.toList(), onRatingListener);
     case RATING_TYPE_TEXT_AREA:
-      return TextAreaRating(optionIdAndText.values.toList().first);
+      return TextAreaRating(optionIdAndText, onRatingListener);
     case RATING_TYPE_TEXT_FIELD:
-      return TextFieldRating(hints: optionIdAndText.values.toList());
+      return TextFieldRating(
+          idAndHints: optionIdAndText, onRatingListener: onRatingListener);
     default:
       return SizedBox.shrink();
   }
