@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import 'const.dart';
@@ -10,6 +11,8 @@ abstract class AppNavigator {
   void navigateToSurvey(String id);
 
   void navigateToSurveyQuestion();
+
+  void navigateBackToHomeOnCompletion();
 }
 
 class AppNavigatorImpl implements AppNavigator {
@@ -31,5 +34,10 @@ class AppNavigatorImpl implements AppNavigator {
   @override
   void navigateToSurveyQuestion() {
     Get.toNamed('/survey-question');
+  }
+
+  @override
+  void navigateBackToHomeOnCompletion() {
+    Get.until(ModalRoute.withName('/home'));
   }
 }

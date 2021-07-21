@@ -50,5 +50,9 @@
   "errorGeneralMessage": "Something went wrong, please try again",
   "@errorGeneralMessage": {
     "description": "General error message can be used for any case"
+  },
+  "messageCompleteSurvey": "Thank you for taking the survey",
+  "@messageCompleteSurvey": {
+    "description": "A thank you message when finish survey"
   }
 }

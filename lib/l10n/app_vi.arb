@@ -11,5 +11,6 @@
   "errorValidationEmailInvalid": "Vui lòng nhập đúng email",
   "errorLoginFailed": "Lỗi đăng nhập! Vui lòng kiểm tra lại email và mật khẩu",
   "errorGeneralTitle": "Oops!",
-  "errorGeneralMessage": "Có lỗi xảy ra, vui lòng thử lại"
+  "errorGeneralMessage": "Có lỗi xảy ra, vui lòng thử lại",
+  "messageCompleteSurvey": "Cảm ơn bạn đã tham gia khảo sát"
 }
