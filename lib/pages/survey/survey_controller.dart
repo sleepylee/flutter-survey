@@ -30,11 +30,15 @@ class SurveyController extends GetxController {
 
   bool get isSubmitting => _isSubmittingAllAnswer.value;
 
+  bool get isCompleteSurvey => _isCompleteSurvey.value;
+
   final Rx<Optional<Survey>> _survey = Optional<Survey>.empty().obs;
 
   final _currentQuestion = 0.obs;
 
   final _isSubmittingAllAnswer = false.obs;
+
+  final _isCompleteSurvey = false.obs;
 
   ResponseInput _responseInput;
   List<AnswerDetail> _currentAnswer = List.empty(growable: true);
@@ -80,6 +84,7 @@ class SurveyController extends GetxController {
     final createSurveyResponseUseCase = Get.find<CreateSurveyResponseUseCase>();
     return createSurveyResponseUseCase.call(_responseInput).then((value) {
       if (value is Success<void>) {
+        _isCompleteSurvey.value = true;
         return true;
       } else {
         _isSubmittingAllAnswer.value = false;

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:survey/models/survey.dart';
+import 'package:survey/navigator/navigator.dart';
 import 'package:survey/pages/survey/survey_answer_selection.dart';
+import 'package:survey/pages/survey/survey_complete.dart';
 import 'package:survey/pages/survey/survey_controller.dart';
 
 class SurveyQuestionPage extends StatelessWidget {
@@ -23,19 +25,24 @@ class SurveyQuestionPage extends StatelessWidget {
                     CachedNetworkImageProvider(controller.nextQuestionImage),
                     context);
               }
-              return Stack(
-                children: [
-                  _buildBackground(controller.currentQuestion),
-                  _buildTitle(
-                      context: context,
-                      indexTitle: controller.indexTitleText,
-                      questionTitle: controller.currentQuestion.text,
-                      isEmptyAnswer:
-                          controller.currentQuestion.doesNotRequireAnswer),
-                  _buildAnswerBody(controller.optionalSurvey.value.questions),
-                  _buildSubmitButton(context),
-                ],
-              );
+              return controller.isCompleteSurvey
+                  ? SurveyComplete(onComplete: () {
+                      _navigateBack();
+                    })
+                  : Stack(
+                      children: [
+                        _buildBackground(controller.currentQuestion),
+                        _buildTitle(
+                            context: context,
+                            indexTitle: controller.indexTitleText,
+                            questionTitle: controller.currentQuestion.text,
+                            isEmptyAnswer: controller
+                                .currentQuestion.doesNotRequireAnswer),
+                        _buildAnswerBody(
+                            controller.optionalSurvey.value.questions),
+                        _buildSubmitButton(context),
+                      ],
+                    );
             });
           }),
     );
@@ -164,11 +171,7 @@ class SurveyQuestionPage extends StatelessWidget {
               onPressed: () async {
                 if (surveyController.isSubmitting) return;
                 final result = await surveyController.submitAllAnswers();
-                if (result) {
-                  // TODO: navigate to Complete screen
-                  Get.snackbar("Success", "Next: move to Complete screen",
-                      backgroundColor: Colors.white);
-                } else {
+                if (!result) {
                   Get.snackbar(AppLocalizations.of(context).errorGeneralTitle,
                       AppLocalizations.of(context).errorGeneralMessage,
                       backgroundColor: Colors.white);
@@ -188,5 +191,10 @@ class SurveyQuestionPage extends StatelessWidget {
               },
             ),
     ).marginOnly(bottom: 50, right: 24);
+  }
+
+  void _navigateBack() {
+    final navigator = Get.find<AppNavigator>();
+    navigator.navigateBackToHomeOnCompletion();
   }
 }
