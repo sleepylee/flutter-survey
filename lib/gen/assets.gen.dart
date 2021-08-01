@@ -10,9 +10,7 @@ class $AssetsImagesGen {
 
   AssetGenImage get avatarPlaceholder =>
       const AssetGenImage('assets/images/avatar_placeholder.png');
-
   String get confetti => 'assets/images/confetti.json';
-
   String get logo => 'assets/images/logo.svg';
   AssetGenImage get signInBackground =>
       const AssetGenImage('assets/images/sign_in_background.png');
