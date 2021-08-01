@@ -362,6 +362,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.0"
+  fresh:
+    dependency: transitive
+    description:
+      name: fresh
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
+  fresh_graphql:
+    dependency: "direct main"
+    description:
+      name: fresh_graphql
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
   fuchsia_remote_debug_protocol:
     dependency: transitive
     description: flutter
