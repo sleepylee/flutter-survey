@@ -4,11 +4,8 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:survey/api/graphql/const.dart';
 import 'package:survey/api/graphql/link/custom_refresh_link.dart';
 import 'package:survey/api/http/api_client.dart';
-import 'package:survey/models/auth_token.dart';
+import 'package:survey/api/http/request/refresh_token_request.dart';
 import 'package:survey/preferences/shared_preferences.dart';
-import 'package:survey/repositories/oauth_repository.dart';
-import 'package:survey/use_cases/base_use_case.dart';
-import 'package:survey/use_cases/refresh_token_use_case.dart';
 
 import '../../flavors.dart';
 
@@ -54,16 +51,21 @@ class GraphQLClientProvider {
       tokenStorage: LocalSharedPreferencesStorage(),
       doRefreshing: (oauth2Token) async {
         final httpClient = Get.find<ApiClient>();
-        final oauthRepository = OAuthRepositoryImpl(httpClient);
-        final refreshTokenUseCase = RefreshTokenUseCase(oauthRepository);
+        final refreshResult = await httpClient.refreshToken(
+          RefreshTokenRequest(
+            refreshToken: oauth2Token.refreshToken,
+            clientId: F.basicAuthClientId,
+            clientSecret: F.basicAuthClientSecret,
+          ),
+        );
 
-        final result = await refreshTokenUseCase.call(oauth2Token.refreshToken);
-        if (result is Success<AuthToken>) {
+        if (refreshResult.data != null) {
+          final tokenResponse = refreshResult.data.authToken;
           return OAuth2Token(
-            accessToken: result.value.accessToken,
-            refreshToken: result.value.refreshToken,
-            expiresIn: result.value.expiresIn,
-            tokenType: result.value.tokenType,
+            accessToken: tokenResponse.accessToken,
+            refreshToken: tokenResponse.refreshToken,
+            expiresIn: tokenResponse.expiresIn,
+            tokenType: tokenResponse.tokenType,
           );
         } else {
           return null;
