@@ -44,7 +44,13 @@ class GraphQLClientProvider {
   void tokenIsReadyToUse() {
     _customAuthLink = CustomAuthLink.oAuth2(
       tokenStorage: LocalSharedPreferencesStorage(),
-      doRefreshing: (oauth2Token) async {
+      shouldRefresh: (response) {
+        var hasAuthError = response.errors != null &&
+            response.errors.any((element) =>
+                element.extensions['code'] == CODE_INVALID_OR_EXPIRED_TOKEN);
+        return hasAuthError;
+      },
+      doRefreshToken: (oauth2Token) async {
         final httpClient = Get.find<ApiClient>();
         final refreshResult = await httpClient.refreshToken(
           RefreshTokenRequest(
@@ -63,12 +69,6 @@ class GraphQLClientProvider {
           expiresIn: tokenResponse.expiresIn,
           tokenType: tokenResponse.tokenType,
         );
-      },
-      shouldRefresh: (response) {
-        var hasAuthError = response.errors != null &&
-            response.errors.any((element) =>
-                element.extensions['code'] == CODE_INVALID_OR_EXPIRED_TOKEN);
-        return hasAuthError;
       },
     );
   }
