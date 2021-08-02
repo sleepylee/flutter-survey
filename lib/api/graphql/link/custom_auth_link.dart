@@ -39,8 +39,7 @@ class CustomAuthLink<T> extends Link with FreshMixin<T> {
     @required ShouldRefresh shouldRefresh,
     @required RefreshToken<T> doRefreshToken,
     TokenHeaderBuilder<T> tokenHeader,
-  })
-      : assert(tokenStorage != null),
+  })  : assert(tokenStorage != null),
         assert(doRefreshToken != null),
         assert(shouldRefresh != null),
         _refreshToken = doRefreshToken,
