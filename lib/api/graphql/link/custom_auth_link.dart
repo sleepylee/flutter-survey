@@ -9,7 +9,7 @@ typedef ShouldRefresh = bool Function(Response);
 
 typedef RefreshToken<T> = Future<T> Function(T);
 
-/// {@template cutom_auth_link}
+/// {@template custom_auth_link}
 /// A GraphQL Link which handles manages an authentication token automatically.
 ///
 /// A constructor that returns a Fresh interceptor that uses the
@@ -33,7 +33,7 @@ typedef RefreshToken<T> = Future<T> Function(T);
 ///
 /// {@endtemplate}
 class CustomAuthLink<T> extends Link with FreshMixin<T> {
-  /// {@macro cutom_auth_link}
+  /// {@macro custom_auth_link}
   CustomAuthLink({
     @required TokenStorage<T> tokenStorage,
     @required ShouldRefresh shouldRefresh,
@@ -49,7 +49,7 @@ class CustomAuthLink<T> extends Link with FreshMixin<T> {
     this.tokenStorage = tokenStorage;
   }
 
-  ///{@template cutom_auth_link}
+  ///{@template custom_auth_link}
   ///A GraphQL Link which handles manages an authentication token automatically.
   ///
   /// ```dart
