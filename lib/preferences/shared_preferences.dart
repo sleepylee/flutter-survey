@@ -1,3 +1,4 @@
+import 'package:fresh_graphql/fresh_graphql.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String _PREF_KEY_TYPE = 'PREF_KEY_TYPE';
@@ -24,7 +25,8 @@ abstract class SharedPreferencesStorage {
 }
 
 // TODO: switch to secured_storage: https://pub.dev/packages/flutter_secure_storage
-class LocalSharedPreferencesStorage implements SharedPreferencesStorage {
+class LocalSharedPreferencesStorage
+    implements SharedPreferencesStorage, TokenStorage<OAuth2Token> {
   @override
   Future<void> saveTokenType(String tokenType) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -71,5 +73,29 @@ class LocalSharedPreferencesStorage implements SharedPreferencesStorage {
   Future<void> saveTokenExpiration(int expiration) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.setInt(_PREF_KEY_TOKEN_EXPIRATION, expiration);
+  }
+
+  @override
+  Future<void> delete() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+  }
+
+  @override
+  Future<OAuth2Token> read() async {
+    return OAuth2Token(
+      accessToken: await getAccessToken(),
+      refreshToken: await getRefreshToken(),
+      tokenType: await getTokenType(),
+      expiresIn: await getTokenExpiration(),
+    );
+  }
+
+  @override
+  Future<void> write(OAuth2Token token) async {
+    saveAccessToken(token.accessToken);
+    saveRefreshToken(token.refreshToken);
+    saveTokenType(token.tokenType);
+    saveTokenExpiration(token.expiresIn);
   }
 }

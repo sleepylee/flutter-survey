@@ -11,17 +11,11 @@ class GetLoginStateUseCase extends NoParamsUseCase<bool> {
 
   @override
   Future<Result<bool>> call() async {
-    final token = await _sharedPreferencesStorage.getAccessToken();
-    final tokenType = await _sharedPreferencesStorage.getTokenType();
-    final tokenExpiration =
-        await _sharedPreferencesStorage.getTokenExpiration();
-    final hasValidTokenStored = token != null &&
-        token.isNotEmpty &&
-        tokenExpiration > DateTime.now().millisecondsSinceEpoch;
+    final refreshToken = await _sharedPreferencesStorage.getRefreshToken();
+    final hasValidTokenStored = refreshToken != null && refreshToken.isNotEmpty;
 
     if (hasValidTokenStored) {
-      // TODO: create an Authenticator instead of calling directly like this
-      _graphQLClientProvider.setAuthToken("$tokenType $token");
+      _graphQLClientProvider.tokenIsReadyToUse();
     }
     return Success(hasValidTokenStored);
   }

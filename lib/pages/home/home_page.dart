@@ -59,7 +59,8 @@ class HomePage extends StatelessWidget {
                             radius: 22,
                             backgroundColor: Colors.black12,
                             foregroundImage:
-                                state.currentUserAvatarUrl.isNotEmpty
+                                state.currentUserAvatarUrl != null &&
+                                        state.currentUserAvatarUrl.isNotEmpty
                                     ? NetworkImage(state.currentUserAvatarUrl)
                                     : Assets.images.avatarPlaceholder,
                           ),

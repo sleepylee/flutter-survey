@@ -28,7 +28,7 @@ class UserRepositoryImpl implements UserRepository {
           avatarUrl: response.avatarUrl,
         );
       } else {
-        throw NetworkExceptions.notFound("Something is wrong");
+        throw NetworkExceptions.fromDioException(value);
       }
     });
   }
