@@ -124,6 +124,9 @@ class CustomAuthLink<T> extends Link with FreshMixin<T> {
         // Different error, we don't handle here so passing it through
         yield exception.parsedResponse;
       }
+    } catch (exception) {
+      // Any other exception that is not [ServerException], we pass it through
+      yield* exception;
     }
   }
 
