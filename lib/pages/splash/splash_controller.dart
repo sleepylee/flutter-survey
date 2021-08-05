@@ -1,22 +1,22 @@
 import 'package:get/get.dart';
-import 'package:optional/optional.dart';
 import 'package:survey/use_cases/base_use_case.dart';
 import 'package:survey/use_cases/get_login_state_use_case.dart';
 
 class SplashController extends GetxController {
-  final Rx<Optional<bool>> isLoggedInUser = Optional<bool>.empty().obs;
+  Future<bool> get isLoggedInUser async => await _getLoggedInState();
 
   @override
   void onInit() {
     super.onInit();
+    // Do further init here
+  }
 
+  Future<bool> _getLoggedInState() async {
     final getLoginStateUseCase = Get.find<GetLoginStateUseCase>();
-    getLoginStateUseCase.call().then((result) {
-      if (result is Success) {
-        isLoggedInUser.value = Optional.of((result as Success).value);
-      } else {
-        isLoggedInUser.value = Optional.of(false);
-      }
-    });
+    final isLoggedIn = await getLoginStateUseCase.call();
+    if (isLoggedIn is Success<bool>) {
+      return isLoggedIn.value;
+    }
+    return false;
   }
 }
