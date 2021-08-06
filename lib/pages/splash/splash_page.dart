@@ -131,4 +131,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     else
       _appNavigator.popAndNavigateToLogin();
   }
+
+  @override
+  void dispose() {
+    _logoOpacityController.dispose();
+    _backgroundOpacityController.dispose();
+    super.dispose();
+  }
 }
