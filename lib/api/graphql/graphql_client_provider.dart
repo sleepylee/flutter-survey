@@ -32,7 +32,7 @@ class GraphQLClientProvider {
         _allLink = _httpLink;
       }
       _client = GraphQLClient(
-        cache: GraphQLCache(),
+        cache: GraphQLCache(store: HiveStore()),
         link: _allLink,
       );
     }

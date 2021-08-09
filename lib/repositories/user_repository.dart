@@ -16,7 +16,7 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<User> getProfile() async {
     final queryOptions = QueryOptions(
-      fetchPolicy: FetchPolicy.cacheAndNetwork,
+      fetchPolicy: FetchPolicy.cacheFirst,
       document: gql(GET_PROFILE_QUERY),
     );
     return _graphQlClient.query(queryOptions).then((value) {
