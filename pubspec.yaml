@@ -32,6 +32,7 @@ dependencies:
 
   flutter_svg: ^0.19.3
   lottie: ^0.7.0+1
+  pull_to_refresh: ^1.6.5
 
   dio: ^3.0.10
   dio_http_cache: ^0.2.11
