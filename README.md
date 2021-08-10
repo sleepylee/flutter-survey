@@ -1,4 +1,5 @@
 # survey
+[![codecov](https://codecov.io/gh/sleepylee/flutter-survey/branch/develop/graph/badge.svg?token=S5YUK2U2IY)](https://codecov.io/gh/sleepylee/flutter-survey)
 
 A survey conducting platform built with Flutter
 
