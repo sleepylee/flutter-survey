@@ -10,23 +10,25 @@ import 'package:survey/pages/home/survey_carousel/survey_carousel_card.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    RefreshController _refreshController =
+    RefreshController pullToRefreshController =
         RefreshController(initialRefresh: false);
+
+    PageController pagingController = PageController();
     return Scaffold(
       body: GetBuilder(
           init: HomeController(),
-          builder: (controller) => SmartRefresher(
+          builder: (HomeController controller) => SmartRefresher(
                 enablePullDown: true,
-                controller: _refreshController,
+                controller: pullToRefreshController,
                 header: MaterialClassicHeader(
                   // TODO: if we support Dark mode, use Theme for this too
                   backgroundColor: Colors.black12,
                   color: Theme.of(context).accentColor,
                 ),
                 onRefresh: () async {
-                  await Future.delayed(Duration(seconds: 2), () {
-                    // TODO: handle the logic in the [Integrate] ticket
-                    _refreshController.refreshCompleted();
+                  controller.refreshData(() {
+                    pullToRefreshController.refreshCompleted();
+                    pagingController.jumpToPage(0);
                   });
                 },
                 child: Stack(children: [
@@ -41,7 +43,7 @@ class HomePage extends StatelessWidget {
                           );
                         },
                         itemCount: state.surveyUiModels.length,
-                        controller: PageController(),
+                        controller: pagingController,
                         onPageChanged: (index) {
                           final controller = Get.find<HomeController>();
                           controller.onIndexChanged(index);
