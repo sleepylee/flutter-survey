@@ -21,6 +21,9 @@ class SurveyRepositoryImpl implements SurveyRepository {
 
   @override
   Future<List<Survey>> getSurveys(String cursor, bool forceNetworkData) {
+    if (forceNetworkData) {
+      _graphQlClient.cache.store.reset();
+    }
     final queryOptions = QueryOptions(
         fetchPolicy: forceNetworkData
             ? FetchPolicy.cacheAndNetwork
