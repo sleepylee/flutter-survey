@@ -7,7 +7,7 @@ import 'package:survey/mappers/survey_mapper.dart';
 import 'package:survey/models/survey.dart';
 
 abstract class SurveyRepository {
-  Future<List<Survey>> getSurveys(String cursor);
+  Future<List<Survey>> getSurveys(String cursor, bool forceNetworkData);
 
   Future<Survey> getSurveyById(String id);
 
@@ -20,9 +20,14 @@ class SurveyRepositoryImpl implements SurveyRepository {
   SurveyRepositoryImpl(this._graphQlClient);
 
   @override
-  Future<List<Survey>> getSurveys(String cursor) {
+  Future<List<Survey>> getSurveys(String cursor, bool forceNetworkData) {
+    if (forceNetworkData) {
+      _graphQlClient.cache.store.reset();
+    }
     final queryOptions = QueryOptions(
-        fetchPolicy: FetchPolicy.cacheFirst,
+        fetchPolicy: forceNetworkData
+            ? FetchPolicy.cacheAndNetwork
+            : FetchPolicy.cacheFirst,
         document: gql(GET_SURVEYS_QUERY),
         variables: {'endCursor': cursor});
     return _graphQlClient.query(queryOptions).then((value) {
