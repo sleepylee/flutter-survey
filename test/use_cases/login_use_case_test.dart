@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:survey/exception/network_exceptions.dart';
@@ -7,6 +6,7 @@ import 'package:survey/models/auth_token.dart';
 import 'package:survey/repositories/oauth_repository.dart';
 import 'package:survey/use_cases/base_use_case.dart';
 import 'package:survey/use_cases/login_use_case.dart';
+import 'package:test/test.dart';
 
 import '../fakers/fake_graphql_client_provider.dart';
 import '../fakers/fake_shared_preferences_storage.dart';

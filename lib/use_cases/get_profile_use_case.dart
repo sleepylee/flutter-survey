@@ -1,3 +1,4 @@
+import 'package:survey/exception/network_exceptions.dart';
 import 'package:survey/models/user.dart';
 import 'package:survey/repositories/user_repository.dart';
 import 'package:survey/use_cases/base_use_case.dart';
@@ -13,7 +14,9 @@ class GetProfileUseCase extends NoParamsUseCase<User> {
       final result = await _userRepository.getProfile();
       return Success(result);
     } catch (exception) {
-      return Failed(UseCaseException(exception, null));
+      return Failed(
+        UseCaseException(NetworkExceptions.fromDioException(exception), null),
+      );
     }
   }
 }
