@@ -8,7 +8,7 @@ import 'package:test/test.dart';
 
 import '../fakers/fake_graphql_client_provider.dart';
 import '../fakers/fake_shared_preferences_storage.dart';
-import '../mocks/repository_mocks.mocks.dart';
+import '../mocks/generate_mocks.mocks.dart';
 
 void main() {
   group('Validate login use case', () {
