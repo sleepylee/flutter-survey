@@ -39,6 +39,12 @@ jobs:
       - name: Run widget tests, unit test for our flutter project.
         run: flutter test --machine --coverage
 
+      - name: Setup lcov and modify the reports
+        run: >
+        apt-get install lcov && lcov --remove coverage/lcov.info
+        'lib/*/*.freezed.dart' 'lib/*/*.g.dart' 'lib/generated/*.dart'
+        -o coverage/lcov.info
+
       - uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
