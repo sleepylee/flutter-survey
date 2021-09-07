@@ -49,7 +49,7 @@ class GraphQLClientProvider {
       shouldRefresh: (response) {
         var hasAuthError = response.errors != null &&
             response.errors.any((element) =>
-            element.extensions['code'] == CODE_INVALID_OR_EXPIRED_TOKEN);
+                element.extensions['code'] == CODE_INVALID_OR_EXPIRED_TOKEN);
         return hasAuthError;
       },
       doRefreshToken: (oauth2Token) async {
