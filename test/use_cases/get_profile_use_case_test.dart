@@ -1,15 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:survey/models/user.dart';
-import 'package:survey/repositories/user_repository.dart';
 import 'package:survey/use_cases/base_use_case.dart';
 import 'package:survey/use_cases/get_profile_use_case.dart';
 import 'package:test/test.dart';
 
-import 'get_profile_use_case_test.mocks.dart';
+import '../mocks/repository_mocks.mocks.dart';
 
-@GenerateMocks([UserRepository])
 void main() {
   group('Validate get profile success use case', () {
     final mockRepository = MockUserRepository();

@@ -1,18 +1,15 @@
 import 'package:dio/dio.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:survey/exception/network_exceptions.dart';
 import 'package:survey/models/auth_token.dart';
-import 'package:survey/repositories/oauth_repository.dart';
 import 'package:survey/use_cases/base_use_case.dart';
 import 'package:survey/use_cases/login_use_case.dart';
 import 'package:test/test.dart';
 
 import '../fakers/fake_graphql_client_provider.dart';
 import '../fakers/fake_shared_preferences_storage.dart';
-import 'login_use_case_test.mocks.dart';
+import '../mocks/repository_mocks.mocks.dart';
 
-@GenerateMocks([OAuthRepository])
 void main() {
   group('Validate login use case', () {
     final mockRepository = MockOAuthRepository();

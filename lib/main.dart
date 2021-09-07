@@ -17,6 +17,7 @@ import 'package:survey/pages/survey/survey_binding.dart';
 import 'package:survey/pages/survey/survey_page.dart';
 import 'package:survey/pages/survey/survey_question_page.dart';
 import 'package:survey/preferences/shared_preferences.dart';
+import 'package:survey/repositories/user_repository.dart';
 import 'package:survey/themes.dart';
 
 import 'api/http/api_client.dart';
@@ -87,5 +88,7 @@ class _AppState extends State<SurveyApp> {
     Get.put<ApiClient>(ApiClientProvider().httpClient());
     Get.put<GraphQLClientProvider>(GraphQLClientProvider());
     Get.put<AppNavigator>(AppNavigatorImpl());
+
+    Get.put<UserRepository>(UserRepositoryImpl(Get.find(), Get.find()));
   }
 }
