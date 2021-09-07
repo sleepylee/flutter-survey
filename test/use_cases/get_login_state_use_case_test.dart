@@ -1,13 +1,10 @@
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:survey/repositories/user_repository.dart';
 import 'package:survey/use_cases/base_use_case.dart';
 import 'package:survey/use_cases/get_login_state_use_case.dart';
 import 'package:test/test.dart';
 
-import 'get_login_state_use_case_test.mocks.dart';
+import '../mocks/repository_mocks.mocks.dart';
 
-@GenerateMocks([UserRepository])
 void main() {
   group('Validate logged-in case', () {
     final mockRepository = MockUserRepository();
