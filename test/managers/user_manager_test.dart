@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:mockito/mockito.dart';
+import 'package:survey/exception/network_exceptions.dart';
 import 'package:survey/managers/user_manager.dart';
 import 'package:survey/models/user.dart';
 import 'package:survey/use_cases/base_use_case.dart';
@@ -36,6 +37,15 @@ main() {
 
       final result = await testedUserManager.getCurrentUser().stream.first;
       expect(result.id, "1234");
+    });
+
+    test('When refresh unsuccessfully, it emits User(ERROR)', () async {
+      when(mockGetProfileUseCase.call()).thenAnswer((_) async =>
+          Failed(UseCaseException(NetworkExceptions.badRequest(), null)));
+
+      testedUserManager.refresh();
+      final result = await testedUserManager.getCurrentUser().stream.first;
+      expect(result.id, ERROR);
     });
   });
 }
