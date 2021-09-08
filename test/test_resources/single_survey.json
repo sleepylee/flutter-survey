@@ -1,0 +1,378 @@
+{
+  "data": {
+    "survey": {
+      "id": "d5de6a8f8f5f1cfe51bc",
+      "title": "Scarlett Bangkok",
+      "coverImageUrl": "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_",
+      "description": "We'd love ot hear from you!",
+      "questions": [
+        {
+          "id": "d3afbcf2b1d60af845dc",
+          "text": "\nThank you for visiting Scarlett!\n Please take a moment to share your feedback.",
+          "coverImageUrl": "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_",
+          "displayType": "intro",
+          "isMandatory": false,
+          "answers": []
+        },
+        {
+          "id": "940d229e4cd87cd1e202",
+          "text": "Food â€“ Variety, Taste and Presentation",
+          "coverImageUrl": "https://dhdbhh0jsld0o.cloudfront.net/m/b41c84934fa8e4c34269_",
+          "displayType": "star",
+          "isMandatory": false,
+          "answers": [
+            {
+              "id": "4cbc3e5a1c87d99bc7ee",
+              "text": "1",
+              "score": 0
+            },
+            {
+              "id": "6e6221ce7e0d1068874d",
+              "text": "2",
+              "score": 25
+            },
+            {
+              "id": "037574cb93d16800eecd",
+              "text": "3",
+              "score": 50
+            },
+            {
+              "id": "f09f1a680789b636459b",
+              "text": "4",
+              "score": 75
+            },
+            {
+              "id": "bafadb5f1d8defa4778a",
+              "text": "5",
+              "score": 100
+            }
+          ]
+        },
+        {
+          "id": "ea0555f328b3b0124127",
+          "text": "Beverages â€“ Variety, Taste and Presentation",
+          "coverImageUrl": "https://dhdbhh0jsld0o.cloudfront.net/m/b41c84934fa8e4c34269_",
+          "displayType": "star",
+          "isMandatory": false,
+          "answers": [
+            {
+              "id": "8e1a918e724c89397a73",
+              "text": "1",
+              "score": 0
+            },
+            {
+              "id": "b31dca3a711cdddc06da",
+              "text": "2",
+              "score": 25
+            },
+            {
+              "id": "d43e7db9dedf66326795",
+              "text": "3",
+              "score": 50
+            },
+            {
+              "id": "3f5c5676e40cb185a0e8",
+              "text": "4",
+              "score": 75
+            },
+            {
+              "id": "bd7f1fdb0cba0f7368ce",
+              "text": "5",
+              "score": 100
+            }
+          ]
+        },
+        {
+          "id": "16e68f5610ef0e0fa4db",
+          "text": "Quality of Service, Speed and Efficiency",
+          "coverImageUrl": "https://dhdbhh0jsld0o.cloudfront.net/m/b41c84934fa8e4c34269_",
+          "displayType": "star",
+          "isMandatory": false,
+          "answers": [
+            {
+              "id": "dd0a88c4c76391afb125",
+              "text": "1",
+              "score": 0
+            },
+            {
+              "id": "df3013bf2048eb8624f0",
+              "text": "2",
+              "score": 25
+            },
+            {
+              "id": "534f04bca9d051c8deb3",
+              "text": "3",
+              "score": 50
+            },
+            {
+              "id": "0d769dbd5804c8f04030",
+              "text": "4",
+              "score": 75
+            },
+            {
+              "id": "0adbe83b90f3d8342ded",
+              "text": "5",
+              "score": 100
+            }
+          ]
+        },
+        {
+          "id": "bab38ad82eaf22afcdfe",
+          "text": "Staff- Friendliness and Helpfulness",
+          "coverImageUrl": "https://dhdbhh0jsld0o.cloudfront.net/m/b41c84934fa8e4c34269_",
+          "displayType": "star",
+          "isMandatory": false,
+          "answers": [
+            {
+              "id": "e62a22a664363eee0087",
+              "text": "1",
+              "score": 0
+            },
+            {
+              "id": "b34705d5faf62a3bc800",
+              "text": "2",
+              "score": 25
+            },
+            {
+              "id": "d3b786f5c0b9eca4a863",
+              "text": "3",
+              "score": 50
+            },
+            {
+              "id": "ae5825c1b2acf846d53a",
+              "text": "4",
+              "score": 75
+            },
+            {
+              "id": "f50cba5438093e823030",
+              "text": "5",
+              "score": 100
+            }
+          ]
+        },
+        {
+          "id": "85275a0bf28a6f3b1e63",
+          "text": "Restaurant Design and Atmosphere",
+          "coverImageUrl": "https://dhdbhh0jsld0o.cloudfront.net/m/cf6002aa29fb33d9d21b_",
+          "displayType": "heart",
+          "isMandatory": false,
+          "answers": [
+            {
+              "id": "c670f00635faa85e3abf",
+              "text": "1",
+              "score": 0
+            },
+            {
+              "id": "83bf2162ccf3147b453c",
+              "text": "2",
+              "score": 25
+            },
+            {
+              "id": "f688cf66f84988a495aa",
+              "text": "3",
+              "score": 50
+            },
+            {
+              "id": "a1079c6457ff9e195314",
+              "text": "4",
+              "score": 75
+            },
+            {
+              "id": "46c607dbf315a7d1790f",
+              "text": "5",
+              "score": 100
+            }
+          ]
+        },
+        {
+          "id": "642770376f7cd0c87d3c",
+          "text": "Overall Satisfaction",
+          "coverImageUrl": "https://dhdbhh0jsld0o.cloudfront.net/m/b41c84934fa8e4c34269_",
+          "displayType": "smiley",
+          "isMandatory": false,
+          "answers": [
+            {
+              "id": "c5e8fc3bca388ec15884",
+              "text": "1",
+              "score": 0
+            },
+            {
+              "id": "db99f794d4c1c94cf16f",
+              "text": "2",
+              "score": 25
+            },
+            {
+              "id": "b9e6cf7a06deb810bbc7",
+              "text": "3",
+              "score": 50
+            },
+            {
+              "id": "a44737168ac0a731f469",
+              "text": "4",
+              "score": 75
+            },
+            {
+              "id": "8ab9b175d4e906cd9b77",
+              "text": "5",
+              "score": 100
+            }
+          ]
+        },
+        {
+          "id": "b093a6ad9a6a466fa787",
+          "text": "How did you hear about us?",
+          "coverImageUrl": "https://dhdbhh0jsld0o.cloudfront.net/m/b41c84934fa8e4c34269_",
+          "displayType": "choice",
+          "isMandatory": false,
+          "answers": [
+            {
+              "id": "002d338bc37f2142ad44",
+              "text": "TripAdvisor",
+              "score": null
+            },
+            {
+              "id": "bdf97897839888be159d",
+              "text": "Newspaper/Magazine Story",
+              "score": null
+            },
+            {
+              "id": "4ac9af2d4bc4a4dd6315",
+              "text": "Website",
+              "score": null
+            },
+            {
+              "id": "3fd673185845dce4aa7b",
+              "text": "Social Media",
+              "score": null
+            },
+            {
+              "id": "20907898b2c2d68159c8",
+              "text": "Staying at hotel",
+              "score": null
+            },
+            {
+              "id": "20c9187b64e9d3c36276",
+              "text": "Walking by",
+              "score": null
+            },
+            {
+              "id": "2051cda19e6940173c9f",
+              "text": "Other",
+              "score": null
+            }
+          ]
+        },
+        {
+          "id": "e593b2fa2f81891a2b1e",
+          "text": "How likely is that you would recommend\nScarlett to a friend or colleague?",
+          "coverImageUrl": "https://dhdbhh0jsld0o.cloudfront.net/m/b41c84934fa8e4c34269_",
+          "displayType": "nps",
+          "isMandatory": false,
+          "answers": [
+            {
+              "id": "3ffc938a273e45b27109",
+              "text": "0",
+              "score": 0
+            },
+            {
+              "id": "d244647d0d831a6d8c3a",
+              "text": "1",
+              "score": 1
+            },
+            {
+              "id": "0c5cb3cf132245ef7f21",
+              "text": "2",
+              "score": 2
+            },
+            {
+              "id": "6b52662a7315a9354a99",
+              "text": "3",
+              "score": 3
+            },
+            {
+              "id": "6697f3c5b435adecdec8",
+              "text": "4",
+              "score": 4
+            },
+            {
+              "id": "e90a40f6fcf2b9a8e593",
+              "text": "5",
+              "score": 5
+            },
+            {
+              "id": "eced71bdc77252b9fa87",
+              "text": "6",
+              "score": 6
+            },
+            {
+              "id": "1ad95bb7e499ee203ff2",
+              "text": "7",
+              "score": 7
+            },
+            {
+              "id": "54daf66f71cc24161b22",
+              "text": "8",
+              "score": 8
+            },
+            {
+              "id": "e68ac9b06cbfce652df1",
+              "text": "9",
+              "score": 9
+            },
+            {
+              "id": "3a0961f5c0ac74d62fd3",
+              "text": "10",
+              "score": 10
+            }
+          ]
+        },
+        {
+          "id": "c3a9b8ce5c2356010703",
+          "text": "Your additional comments are welcomed.",
+          "coverImageUrl": "https://dhdbhh0jsld0o.cloudfront.net/m/b41c84934fa8e4c34269_",
+          "displayType": "textarea",
+          "isMandatory": false,
+          "answers": [
+            {
+              "id": "2a49e148c5b170aca804",
+              "text": null,
+              "score": null
+            }
+          ]
+        },
+        {
+          "id": "fbf5d260de1ee6195473",
+          "text": "Don't miss out on our Exclusive Promotions!",
+          "coverImageUrl": "https://dhdbhh0jsld0o.cloudfront.net/m/b41c84934fa8e4c34269_",
+          "displayType": "textfield",
+          "isMandatory": false,
+          "answers": [
+            {
+              "id": "491d49dd6b8174456acf",
+              "text": "First Name",
+              "score": null
+            },
+            {
+              "id": "6db6dcae1a6c6644d723",
+              "text": "Mobile No.",
+              "score": null
+            },
+            {
+              "id": "575db8c074601994bde3",
+              "text": "Email ",
+              "score": null
+            }
+          ]
+        },
+        {
+          "id": "4372463ce56db58c0983",
+          "text": "Thank you for taking the time to share your feedback!",
+          "coverImageUrl": "https://dhdbhh0jsld0o.cloudfront.net/m/cf6002aa29fb33d9d21b_",
+          "displayType": "outro",
+          "isMandatory": false,
+          "answers": []
+        }
+      ]
+    }
+  }
+}
