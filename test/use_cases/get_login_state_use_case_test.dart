@@ -3,7 +3,7 @@ import 'package:survey/use_cases/base_use_case.dart';
 import 'package:survey/use_cases/get_login_state_use_case.dart';
 import 'package:test/test.dart';
 
-import '../mocks/repository_mocks.mocks.dart';
+import '../mocks/generate_mocks.mocks.dart';
 
 void main() {
   group('Validate logged-in case', () {

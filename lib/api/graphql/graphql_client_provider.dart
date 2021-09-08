@@ -1,3 +1,4 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:fresh_graphql/fresh_graphql.dart';
 import 'package:get/get.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -17,7 +18,8 @@ class GraphQLClientProvider {
   static CustomAuthLink _customAuthLink;
   static GraphQLClient _client;
 
-  factory GraphQLClientProvider() {
+  factory GraphQLClientProvider({@nullable GraphQLClient injectedClient}) {
+    _client = injectedClient;
     return GraphQLClientProvider._(
       HttpLink(F.graphQLEndpoint),
     );
