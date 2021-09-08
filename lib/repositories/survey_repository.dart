@@ -63,6 +63,10 @@ class SurveyRepositoryImpl implements SurveyRepository {
         document: gql(CREATE_RESPONSE),
         variables: {'input': input});
 
-    return _graphQlClient.mutate(mutationOption);
+    try {
+      return _graphQlClient.mutate(mutationOption);
+    } catch (exception) {
+      throw NetworkExceptions.fromDioException(exception);
+    }
   }
 }

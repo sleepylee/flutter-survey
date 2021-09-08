@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mockito/mockito.dart';
+import 'package:survey/api/graphql/mutation/create_response_mutation_input.dart';
 import 'package:survey/exception/network_exceptions.dart';
 import 'package:survey/models/survey.dart';
 import 'package:survey/repositories/survey_repository.dart';
@@ -101,6 +102,31 @@ main() async {
 
       expect(() => testedSurveyRepository.getSurveyById("any"),
           throwsA(isA<NotFound>()));
+    });
+  });
+
+  group('Validate createResponse', () {
+    final testedSurveyRepository = SurveyRepositoryImpl(mockGraphQLClient);
+    test('When createResponse successfully, it returns null', () {
+      when(mockGraphQLClient.mutate(any)).thenReturn(null);
+
+      final testInput = CreateResponseMutationInput(null);
+
+      final result = testedSurveyRepository.createResponse(testInput);
+
+      expect(result, null);
+    });
+
+    test('When createResponse unsuccessfully, it throws NetworkException',
+        () async {
+      final error = NetworkExceptions.unauthorisedRequest();
+      when(mockGraphQLClient.mutate(any))
+          .thenAnswer((_) => Future.error(error));
+
+      final testInput = CreateResponseMutationInput(null);
+
+      expect(() async => testedSurveyRepository.createResponse(testInput),
+          throwsA(isA<UnauthorisedRequest>()));
     });
   });
 }
