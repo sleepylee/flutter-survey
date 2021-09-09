@@ -84,7 +84,7 @@ main() async {
 
     test('When get Survey successfully, it has added extra data', () async {
       when(mockGraphQLClient.query(any)).thenAnswer(
-            (_) async => graphql.QueryResult.optimistic(
+        (_) async => graphql.QueryResult.optimistic(
           data: singleSurveyData,
         ),
       );
