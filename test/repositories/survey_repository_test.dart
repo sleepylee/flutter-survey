@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:graphql_flutter/graphql_flutter.dart' as graphql;
 import 'package:mockito/mockito.dart';
 import 'package:survey/api/graphql/mutation/create_response_mutation_input.dart';
 import 'package:survey/exception/network_exceptions.dart';
@@ -18,7 +19,7 @@ main() async {
 
   final injectedFakeStorage = FakeStore();
   when(mockGraphQLClient.cache)
-      .thenReturn(GraphQLCache(store: injectedFakeStorage));
+      .thenReturn(graphql.GraphQLCache(store: injectedFakeStorage));
 
   group('Validate getSurveys', () {
     final testedSurveyRepository = SurveyRepositoryImpl(mockGraphQLClient);
@@ -27,7 +28,7 @@ main() async {
     final surveysData = surveysJson['data'];
 
     when(mockGraphQLClient.query(any)).thenAnswer(
-      (_) async => QueryResult.optimistic(
+      (_) async => graphql.QueryResult.optimistic(
         data: surveysData,
       ),
     );
@@ -53,8 +54,8 @@ main() async {
 
     test('When get Surveys failed, it throws a NetworkException-NotFound',
         () async {
-      when(mockGraphQLClient.query(any))
-          .thenAnswer((_) async => QueryResult.optimistic(data: null));
+          when(mockGraphQLClient.query(any))
+          .thenAnswer((_) async => graphql.QueryResult.optimistic(data: null));
 
       expect(() => testedSurveyRepository.getSurveys("", true),
           throwsA(isA<NotFound>()));
@@ -70,7 +71,7 @@ main() async {
 
     test('When getSurveyById successfully, it returns a Survey', () async {
       when(mockGraphQLClient.query(any)).thenAnswer(
-        (_) async => QueryResult.optimistic(
+            (_) async => graphql.QueryResult.optimistic(
           data: singleSurveyData,
         ),
       );
@@ -83,7 +84,7 @@ main() async {
 
     test('When get Survey successfully, it has added extra data', () async {
       when(mockGraphQLClient.query(any)).thenAnswer(
-        (_) async => QueryResult.optimistic(
+            (_) async => graphql.QueryResult.optimistic(
           data: singleSurveyData,
         ),
       );
@@ -97,8 +98,8 @@ main() async {
 
     test('When getSurveyById failed, it throws a NetworkException-NotFound',
         () async {
-      when(mockGraphQLClient.query(any))
-          .thenAnswer((_) async => QueryResult.optimistic(data: null));
+          when(mockGraphQLClient.query(any))
+          .thenAnswer((_) async => graphql.QueryResult.optimistic(data: null));
 
       expect(() => testedSurveyRepository.getSurveyById("any"),
           throwsA(isA<NotFound>()));
@@ -119,14 +120,14 @@ main() async {
 
     test('When createResponse unsuccessfully, it throws NetworkException',
         () async {
-      final error = NetworkExceptions.unauthorisedRequest();
-      when(mockGraphQLClient.mutate(any))
-          .thenAnswer((_) => Future.error(error));
+      final error = DioError(
+          type: DioErrorType.RESPONSE, response: Response(statusCode: 404));
+      when(mockGraphQLClient.mutate(any)).thenThrow(error);
 
       final testInput = CreateResponseMutationInput(null);
 
       expect(() async => testedSurveyRepository.createResponse(testInput),
-          throwsA(isA<UnauthorisedRequest>()));
+          throwsA(isA<NotFound>()));
     });
   });
 }
