@@ -71,7 +71,7 @@ main() async {
 
     test('When getSurveyById successfully, it returns a Survey', () async {
       when(mockGraphQLClient.query(any)).thenAnswer(
-            (_) async => graphql.QueryResult.optimistic(
+        (_) async => graphql.QueryResult.optimistic(
           data: singleSurveyData,
         ),
       );
