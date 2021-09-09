@@ -62,7 +62,7 @@ abstract class NetworkExceptions with _$NetworkExceptions {
             case DioErrorType.RESPONSE:
               switch (error.response.statusCode) {
                 case 400:
-                  networkExceptions = NetworkExceptions.unauthorisedRequest();
+                  networkExceptions = NetworkExceptions.badRequest();
                   break;
                 case 401:
                   networkExceptions = NetworkExceptions.unauthorisedRequest();

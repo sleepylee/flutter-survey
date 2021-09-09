@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:mockito/mockito.dart';
 import 'package:survey/exception/network_exceptions.dart';
 import 'package:survey/models/auth_token.dart';
@@ -24,9 +23,8 @@ void main() {
           refreshToken: 'refresh token'),
     );
 
-    when(mockRepository.login('negative', any)).thenAnswer((_) => Future.error(
-        DioError(
-            response: Response(statusCode: 400), type: DioErrorType.RESPONSE)));
+    when(mockRepository.login('negative', any))
+        .thenThrow(NetworkExceptions.unauthorisedRequest());
 
     final loginUseCase =
         LoginUseCase(mockRepository, mockStorage, mockGraphQLClientProvider);
@@ -41,10 +39,9 @@ void main() {
     test('When login with invalid credential, it returns Failed', () async {
       final result = await loginUseCase
           .call(LoginCredential(email: 'negative', password: 'meh'));
-
       expect(result, isA<Failed>());
       expect((result as Failed).exception.networkExceptions,
-          NetworkExceptions.unauthorisedRequest());
+          isA<UnauthorisedRequest>());
     });
   });
 }

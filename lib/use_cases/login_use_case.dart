@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:survey/api/graphql/graphql_client_provider.dart';
-import 'package:survey/exception/network_exceptions.dart';
 import 'package:survey/models/auth_token.dart';
 import 'package:survey/preferences/shared_preferences.dart';
 import 'package:survey/repositories/oauth_repository.dart';
@@ -26,12 +25,14 @@ class LoginUseCase extends UseCase<void, LoginCredential> {
       this._graphQLClientProvider);
 
   @override
-  Future<Result<void>> call(LoginCredential credential) {
-    return _repository
-        .login((credential.email), credential.password)
-        .then((value) => _persistTokenData(value))
-        .onError((err, stackTrace) => Failed(
-            UseCaseException(NetworkExceptions.fromDioException(err), err)));
+  Future<Result<void>> call(LoginCredential credential) async {
+    try {
+      final result =
+          await _repository.login((credential.email), credential.password);
+      return _persistTokenData(result);
+    } catch (exception) {
+      return Failed(UseCaseException(exception, null));
+    }
   }
 
   Result<dynamic> _persistTokenData(AuthToken data) {
