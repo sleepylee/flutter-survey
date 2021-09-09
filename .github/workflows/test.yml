@@ -40,7 +40,7 @@ jobs:
         run: flutter test --machine --coverage
 
       - name: Setup lcov and modify the reports
-        run: sudo apt-get install lcov && lcov --remove coverage/lcov.info 'lib/*/*.freezed.dart' 'lib/*/*.g.dart' 'lib/generated/*.dart' 'lib/flavors.dart' -o coverage/lcov.info
+        run: sudo apt-get install lcov && lcov --remove coverage/lcov.info 'lib/*/*.freezed.dart' 'lib/*/*.g.dart' 'lib/generated/*.dart' 'lib/flavors.dart' 'lib/exception/network_exceptions.dart' -o coverage/lcov.info
 
       - uses: codecov/codecov-action@v2
         with:
