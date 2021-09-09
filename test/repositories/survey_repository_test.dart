@@ -54,7 +54,7 @@ main() async {
 
     test('When get Surveys failed, it throws a NetworkException-NotFound',
         () async {
-          when(mockGraphQLClient.query(any))
+      when(mockGraphQLClient.query(any))
           .thenAnswer((_) async => graphql.QueryResult.optimistic(data: null));
 
       expect(() => testedSurveyRepository.getSurveys("", true),
