@@ -1,4 +1,4 @@
-name: Lint and Test
+name: Build and deploy
 
 on:
   # Trigger the workflow on develop push (merged PR)
