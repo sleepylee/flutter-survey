@@ -1,0 +1,13 @@
+{
+  "data": {
+    "id": "8018",
+    "type": "token",
+    "attributes": {
+      "access_token": "access token",
+      "token_type": "Bearer",
+      "expires_in": 7200,
+      "refresh_token": "refresh token",
+      "created_at": 1631012410
+    }
+  }
+}
