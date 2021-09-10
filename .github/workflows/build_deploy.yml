@@ -1,18 +1,16 @@
 name: Lint and Test
 
 on:
-  # Trigger the workflow on push or pull request,
-  # but push action is only for the feature branch
-  pull_request:
-    types: [ opened, synchronize, edited, reopened ]
+  # Trigger the workflow on develop push (merged PR)
   push:
-    branches-ignore:
+    branches:
       - develop
-      - 'release/**'
+
 jobs:
-  lint_and_test:
-    name: Static code analyze & Unit test
+  test:
+    name: Unit test
     runs-on: ubuntu-latest
+    environment: staging
     steps:
       # Setup Java environment in order to build the Android app.
       - uses: actions/checkout@v2.3.2
@@ -29,12 +27,6 @@ jobs:
       - name: Get flutter dependencies.
         run: flutter pub get
 
-      - name: Check for any formatting issues in the code.
-        run: flutter format --set-exit-if-changed .
-
-      - name: Statically analyze the Dart code for any errors.
-        run: flutter analyze .
-
       - name: Run widget tests, unit test for our flutter project.
         run: flutter test --machine --coverage
 
@@ -43,9 +35,11 @@ jobs:
 
       - uses: codecov/codecov-action@v2
         with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/lcov.info
-          flags: unittests # optional
+          flags: unittests
           name: Upload coverage to codecov
           fail_ci_if_error: false
           verbose: true
+
+  # TODO: deploy
