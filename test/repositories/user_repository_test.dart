@@ -53,7 +53,7 @@ main() {
   group('Validate isLoggedIn', () {
     test('When the user has logged in, it returns corresponding status',
         () async {
-          Get.put<TokenStorage<OAuth2Token>>(FakeTokenStorage());
+      Get.put<TokenStorage<OAuth2Token>>(FakeTokenStorage());
       fakeSharedPref.saveRefreshToken("fake refreshToken");
       final result = await testedUserRepository.isLoggedIn();
       expect(result, true);
