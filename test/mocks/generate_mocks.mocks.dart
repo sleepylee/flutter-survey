@@ -1,3 +1,4 @@
+import 'package:dio/src/adapter.dart' as _i7;
 import 'package:graphql/src/graphql_client.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:survey/api/http/api_client.dart' as _i6;
@@ -46,6 +47,15 @@ class MockGetProfileUseCase extends _i1.Mock implements _i5.GetProfileUseCase {
 /// See the documentation for Mockito's code generation for more information.
 class MockApiClient extends _i1.Mock implements _i6.ApiClient {
   MockApiClient() {
+    _i1.throwOnMissingStub(this);
+  }
+}
+
+/// A class which mocks [HttpClientAdapter].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockHttpClientAdapter extends _i1.Mock implements _i7.HttpClientAdapter {
+  MockHttpClientAdapter() {
     _i1.throwOnMissingStub(this);
   }
 }

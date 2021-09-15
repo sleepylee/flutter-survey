@@ -23,6 +23,12 @@ class ApiClientProvider {
     return ApiClientProvider._(dio);
   }
 
+  // A utility method for unit testing, developers can alter the response as expected
+  @visibleForTesting
+  void injectHttpClientAdapter(HttpClientAdapter httpClientAdapter) {
+    _dio.httpClientAdapter = httpClientAdapter;
+  }
+
   ApiClient httpClient() {
     return ApiClient(_dio, baseUrl: F.restApiEndpoint);
   }
