@@ -10,14 +10,13 @@ import 'package:survey/api/http/response/auth_token_response.dart';
 import '../../mocks/generate_mocks.mocks.dart';
 
 main() {
-  group('Validate http ApiClient', () {
-    final testedApiClientProvider = ApiClientProvider();
-    final mockHttpClientAdapter = MockHttpClientAdapter();
+  final testedApiClientProvider = ApiClientProvider();
+  final mockHttpClientAdapter = MockHttpClientAdapter();
+  testedApiClientProvider.injectHttpClientAdapter(mockHttpClientAdapter);
 
-    testedApiClientProvider.injectHttpClientAdapter(mockHttpClientAdapter);
+  final testedHttpApiClient = testedApiClientProvider.httpClient();
 
-    final testedHttpApiClient = testedApiClientProvider.httpClient();
-
+  group('Validate http ApiClient - login', () {
     test('When login successfully, it returns AuthTokenResponseData', () async {
       final oauthJsonFile = File('test/test_resources/oauth.json');
 
@@ -33,7 +32,7 @@ main() {
 
       // Use fromJson for more test coverage
       final result =
-          await testedHttpApiClient.login(OAuthTokenRequest.fromJson({
+      await testedHttpApiClient.login(OAuthTokenRequest.fromJson({
         'grant_type': 'password',
         'email': 'any',
         'password': 'password',
@@ -68,7 +67,8 @@ main() {
                 'client_secret': 'client_secret'
               }));
 
-      expect(result, throwsA(isA<DioError>()));
+      expect(result,
+          throwsA(predicate<DioError>((ex) => ex.response.statusCode == 400)));
     });
   });
 }
