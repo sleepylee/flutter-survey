@@ -32,7 +32,7 @@ main() {
 
       // Use fromJson for more test coverage
       final result =
-      await testedHttpApiClient.login(OAuthTokenRequest.fromJson({
+          await testedHttpApiClient.login(OAuthTokenRequest.fromJson({
         'grant_type': 'password',
         'email': 'any',
         'password': 'password',
