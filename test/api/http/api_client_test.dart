@@ -85,22 +85,22 @@ main() {
           Headers.contentTypeHeader: [Headers.jsonContentType],
         },
       );
-          when(mockHttpClientAdapter.fetch(any, any, any))
-              .thenAnswer((_) async => fakeHttpResponse);
+      when(mockHttpClientAdapter.fetch(any, any, any))
+          .thenAnswer((_) async => fakeHttpResponse);
 
-          // Use fromJson for more test coverage
-          final result =
+      // Use fromJson for more test coverage
+      final result =
           await testedHttpApiClient.refreshToken(RefreshTokenRequest.fromJson({
-            'grant_type': 'refresh',
-            'refresh': 'refresh_token',
-            'client_id': 'client_id',
-            'client_secret': 'client_secret'
-          }));
+        'grant_type': 'refresh',
+        'refresh': 'refresh_token',
+        'client_id': 'client_id',
+        'client_secret': 'client_secret'
+      }));
 
-          expect(result, isA<AuthTokenResponseData>());
-          expect(result.data.type, 'token');
-          expect(result.data.authToken.accessToken, 'access token');
-        });
+      expect(result, isA<AuthTokenResponseData>());
+      expect(result.data.type, 'token');
+      expect(result.data.authToken.accessToken, 'access token');
+    });
 
     test('When refresh token unsuccessfully, it returns DioError', () async {
       final oauthJsonFile = File('test/test_resources/oauth_error.json');
