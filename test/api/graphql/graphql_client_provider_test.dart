@@ -48,9 +48,9 @@ main() {
       );
 
       final authenticatedClient = graphqlClientProvider.client;
-      final result = await authenticatedClient.query(queryOption);
-      print(result);
+      await authenticatedClient.query(queryOption);
       verify(mockApiClient.refreshToken(any)).called(1);
+      graphqlClientProvider.removeAuthToken();
     });
   });
 

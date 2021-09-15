@@ -39,4 +39,26 @@ main() {
       expect(result, throwsA(isA<BadRequest>()));
     });
   });
+
+  group('Validate refresh token', () {
+    test('When refresh successfully, it returns AuthTokenResponse', () async {
+      when(mockApiClient.refreshToken(any)).thenAnswer(
+          (_) async => AuthTokenResponseData.fromJson(oauthJsonData));
+
+      final result = await testedOAuthRepository.refreshToken("refresh token");
+
+      expect(result, isA<AuthTokenResponse>());
+      expect(result.accessToken, "access token");
+    });
+
+    test('When refresh unsuccessfully, it returns a NetworkException',
+        () async {
+      when(mockApiClient.refreshToken(any)).thenThrow(DioError(
+          response: Response(statusCode: 400), type: DioErrorType.RESPONSE));
+      final result = () => testedOAuthRepository.refreshToken("refresh token");
+
+      expect(result, throwsA(isA<NetworkExceptions>()));
+      expect(result, throwsA(isA<BadRequest>()));
+    });
+  });
 }
