@@ -71,7 +71,9 @@ main() {
       expect(result,
           throwsA(predicate<DioError>((ex) => ex.response.statusCode == 400)));
     });
+  });
 
+  group('Validate http ApiClient - refresh token', () {
     test('When refresh token successfully, it returns AuthTokenResponseData',
         () async {
       final oauthJsonFile = File('test/test_resources/oauth.json');
@@ -83,22 +85,22 @@ main() {
           Headers.contentTypeHeader: [Headers.jsonContentType],
         },
       );
-      when(mockHttpClientAdapter.fetch(any, any, any))
-          .thenAnswer((_) async => fakeHttpResponse);
+          when(mockHttpClientAdapter.fetch(any, any, any))
+              .thenAnswer((_) async => fakeHttpResponse);
 
-      // Use fromJson for more test coverage
-      final result =
+          // Use fromJson for more test coverage
+          final result =
           await testedHttpApiClient.refreshToken(RefreshTokenRequest.fromJson({
-        'grant_type': 'refresh',
-        'refresh': 'refresh_token',
-        'client_id': 'client_id',
-        'client_secret': 'client_secret'
-      }));
+            'grant_type': 'refresh',
+            'refresh': 'refresh_token',
+            'client_id': 'client_id',
+            'client_secret': 'client_secret'
+          }));
 
-      expect(result, isA<AuthTokenResponseData>());
-      expect(result.data.type, 'token');
-      expect(result.data.authToken.accessToken, 'access token');
-    });
+          expect(result, isA<AuthTokenResponseData>());
+          expect(result.data.type, 'token');
+          expect(result.data.authToken.accessToken, 'access token');
+        });
 
     test('When refresh token unsuccessfully, it returns DioError', () async {
       final oauthJsonFile = File('test/test_resources/oauth_error.json');
@@ -121,10 +123,8 @@ main() {
                 'client_secret': 'client_secret'
               }));
 
-      expect(
-          result,
-          throwsA(predicate(
-              (ex) => ex is DioError && ex.response.statusCode == 401)));
+      expect(result,
+          throwsA(predicate<DioError>((ex) => ex.response.statusCode == 401)));
     });
   });
 }
