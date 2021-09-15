@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fresh_graphql/fresh_graphql.dart';
 import 'package:get/get.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:survey/api/graphql/graphql_client_provider.dart';
@@ -83,8 +84,11 @@ class _AppState extends State<SurveyApp> {
   }
 
   void _initAppDependencies() {
-    initHiveForFlutter();
-    Get.put<SharedPreferencesStorage>(LocalSharedPreferencesStorage());
+    final localStorage = LocalSharedPreferencesStorage();
+    Get.put<SharedPreferencesStorage>(localStorage);
+    Get.put<TokenStorage<OAuth2Token>>(localStorage);
+    initHiveForFlutter().then((_) => Get.put<Store>(HiveStore()));
+
     Get.put<ApiClient>(ApiClientProvider().httpClient());
     Get.put<GraphQLClientProvider>(GraphQLClientProvider());
     Get.put<AppNavigator>(AppNavigatorImpl());

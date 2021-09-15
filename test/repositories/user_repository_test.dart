@@ -1,4 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fresh_graphql/fresh_graphql.dart';
+import 'package:get/get.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mockito/mockito.dart';
 import 'package:survey/api/graphql/graphql_client_provider.dart';
@@ -7,6 +9,7 @@ import 'package:survey/models/user.dart';
 import 'package:survey/repositories/user_repository.dart';
 
 import '../fakers/fake_shared_preferences_storage.dart';
+import '../fakers/fake_token_storage.dart';
 import '../mocks/generate_mocks.mocks.dart';
 
 main() {
@@ -50,6 +53,7 @@ main() {
   group('Validate isLoggedIn', () {
     test('When the user has logged in, it returns corresponding status',
         () async {
+          Get.put<TokenStorage<OAuth2Token>>(FakeTokenStorage());
       fakeSharedPref.saveRefreshToken("fake refreshToken");
       final result = await testedUserRepository.isLoggedIn();
       expect(result, true);
