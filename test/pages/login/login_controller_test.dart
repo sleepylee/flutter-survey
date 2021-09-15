@@ -46,6 +46,7 @@ void main() {
 
       expect(onFailedCalled, true);
       expect(loginController.isLoading.value, false);
+      loginController.onClose();
     });
   });
 }
