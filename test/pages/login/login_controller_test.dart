@@ -54,9 +54,9 @@ void main() {
       Get.delete<LoginController>(); // onClose() will be invoked
 
       // All the TextEditingListener will no be usable anymore, an error will throw if we try to
-      expect(() => loginController.emailController.hasListeners,
+      expect(() => loginController.emailController.clear(),
           throwsA(isA<FlutterError>()));
-      expect(() => loginController.passwordController.hasListeners,
+      expect(() => loginController.passwordController.clear(),
           throwsA(isA<FlutterError>()));
 
       expect(loginController.hasListeners, false);
