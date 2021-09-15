@@ -17,11 +17,15 @@ class GraphQLClientProvider {
   static CustomAuthLink _customAuthLink;
   static GraphQLClient _client;
 
-  factory GraphQLClientProvider({@nullable GraphQLClient injectedClient}) {
-    _client = injectedClient;
+  factory GraphQLClientProvider() {
     return GraphQLClientProvider._(
       HttpLink(F.graphQLEndpoint),
     );
+  }
+
+  @visibleForTesting
+  void setGraphQLClient(GraphQLClient injectedClient) {
+    _client = injectedClient;
   }
 
   GraphQLClient get client {

@@ -14,8 +14,8 @@ import '../mocks/generate_mocks.mocks.dart';
 
 main() {
   final mockClient = MockGraphQLClient();
-  final graphqlClientProvider =
-      GraphQLClientProvider(injectedClient: mockClient);
+  final graphqlClientProvider = GraphQLClientProvider()
+    ..setGraphQLClient(mockClient);
   final fakeSharedPref = FakeSharedPreferencesStorage();
   TestWidgetsFlutterBinding.ensureInitialized();
 

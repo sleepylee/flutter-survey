@@ -12,7 +12,8 @@ import 'package:survey/use_cases/get_profile_use_case.dart';
   GraphQLClient,
   GetProfileUseCase,
   ApiClient,
-  HttpClientAdapter
+  HttpClientAdapter,
+  QueryManager
 ])
 main() {
   // empty class to generate mock repository classes

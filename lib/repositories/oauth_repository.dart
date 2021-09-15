@@ -47,7 +47,6 @@ class OAuthRepositoryImpl implements OAuthRepository {
           clientSecret: F.basicAuthClientSecret,
         ),
       );
-
       return response.data?.authToken;
     } catch (exception) {
       throw NetworkExceptions.fromDioException(exception);

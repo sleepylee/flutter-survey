@@ -6,10 +6,4 @@ class FakeTokenStorage extends Fake implements TokenStorage<OAuth2Token> {
   Future<OAuth2Token> read() async {
     return OAuth2Token(accessToken: 'fake token');
   }
-
-  @override
-  Future<void> write(OAuth2Token token) {
-    // TODO update later
-    return null;
-  }
 }
