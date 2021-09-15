@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:mockito/annotations.dart';
@@ -16,7 +17,8 @@ void main() {
 
   group('Validate login controller login action', () {
     final mockLoginUseCase = MockLoginUseCase();
-    final loginController = LoginController();
+    Get.lazyPut(() => LoginController());
+    final loginController = Get.find<LoginController>();
     Get.lazyPut<LoginUseCase>(() => mockLoginUseCase);
 
     loginController.emailController.text = 'hello';
@@ -46,7 +48,18 @@ void main() {
 
       expect(onFailedCalled, true);
       expect(loginController.isLoading.value, false);
-      loginController.onClose();
+    });
+
+    test('When LoginController deleted, it invokes onClose()', () {
+      Get.delete<LoginController>(); // onClose() will be invoked
+
+      // All the TextEditingListener will no be usable anymore, an error will throw if we try to
+      expect(() => loginController.emailController.hasListeners,
+          throwsA(isA<FlutterError>()));
+      expect(() => loginController.passwordController.hasListeners,
+          throwsA(isA<FlutterError>()));
+
+      expect(loginController.hasListeners, false);
     });
   });
 }
