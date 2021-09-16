@@ -87,7 +87,7 @@ class _AppState extends State<SurveyApp> {
     final localStorage = LocalSharedPreferencesStorage();
     Get.put<SharedPreferencesStorage>(localStorage);
     Get.put<TokenStorage<OAuth2Token>>(localStorage);
-    initHiveForFlutter().then((_) => Get.put<Store>(HiveStore()));
+    initHiveForFlutter().then((_) => Get.lazyPut<Store>(() => HiveStore()));
 
     Get.put<ApiClient>(ApiClientProvider().httpClient());
     Get.put<GraphQLClientProvider>(GraphQLClientProvider());
