@@ -32,5 +32,6 @@ class LoginController extends GetxController {
   void onClose() {
     emailController.dispose();
     passwordController.dispose();
+    super.onClose();
   }
 }
