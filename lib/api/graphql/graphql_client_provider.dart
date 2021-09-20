@@ -5,8 +5,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:survey/api/graphql/const.dart';
 import 'package:survey/api/graphql/link/custom_auth_link.dart';
 import 'package:survey/api/http/api_client.dart';
-import 'package:survey/api/http/request/refresh_token_request.dart';
-import 'package:survey/preferences/shared_preferences.dart';
+import 'package:survey/repositories/oauth_repository.dart';
 
 import '../../flavors.dart';
 
@@ -18,11 +17,15 @@ class GraphQLClientProvider {
   static CustomAuthLink _customAuthLink;
   static GraphQLClient _client;
 
-  factory GraphQLClientProvider({@nullable GraphQLClient injectedClient}) {
-    _client = injectedClient;
+  factory GraphQLClientProvider() {
     return GraphQLClientProvider._(
       HttpLink(F.graphQLEndpoint),
     );
+  }
+
+  @visibleForTesting
+  void setGraphQLClient(GraphQLClient injectedClient) {
+    _client = injectedClient;
   }
 
   GraphQLClient get client {
@@ -33,8 +36,10 @@ class GraphQLClientProvider {
       } else {
         _allLink = _httpLink;
       }
+
+      final cacheStore = Get.find<Store>();
       _client = GraphQLClient(
-        cache: GraphQLCache(store: HiveStore()),
+        cache: GraphQLCache(store: cacheStore),
         link: _allLink,
       );
     }
@@ -44,8 +49,9 @@ class GraphQLClientProvider {
   /// Call this when you have already set up the token storage, the token header
   /// will be updated automatically
   void tokenIsReadyToUse() {
+    final tokenStorage = Get.find<TokenStorage<OAuth2Token>>();
     _customAuthLink = CustomAuthLink.oAuth2(
-      tokenStorage: LocalSharedPreferencesStorage(),
+      tokenStorage: tokenStorage,
       shouldRefresh: (response) {
         var hasAuthError = response.errors != null &&
             response.errors.any((element) =>
@@ -54,22 +60,15 @@ class GraphQLClientProvider {
       },
       doRefreshToken: (oauth2Token) async {
         final httpClient = Get.find<ApiClient>();
-        final refreshResult = await httpClient.refreshToken(
-          RefreshTokenRequest(
-            refreshToken: oauth2Token.refreshToken,
-            clientId: F.basicAuthClientId,
-            clientSecret: F.basicAuthClientSecret,
-          ),
-        );
+        final oauthRepositoryImpl = OAuthRepositoryImpl(httpClient);
+        final refreshResult =
+            await oauthRepositoryImpl.refreshToken(oauth2Token.refreshToken);
 
-        if (refreshResult.data == null) return null;
-
-        final tokenResponse = refreshResult.data.authToken;
         return OAuth2Token(
-          accessToken: tokenResponse.accessToken,
-          refreshToken: tokenResponse.refreshToken,
-          expiresIn: tokenResponse.expiresIn,
-          tokenType: tokenResponse.tokenType,
+          accessToken: refreshResult.accessToken,
+          refreshToken: refreshResult.refreshToken,
+          expiresIn: refreshResult.expiresIn,
+          tokenType: refreshResult.tokenType,
         );
       },
     );
