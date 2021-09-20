@@ -28,7 +28,7 @@ void main() {
       expect(loginButton, findsOneWidget);
     });
 
-    testWidgets('When login with empty fields, it shows errors',
+    testWidgets('When login with empty or invalid fields, it shows errors',
         (tester) async {
       await tester.pumpWidget(SurveyApp());
       await tester.pumpAndSettle();
