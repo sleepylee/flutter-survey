@@ -10,18 +10,18 @@ class FakeGetSurveysUseCase extends Fake implements GetSurveysUseCase {
       Survey(
         cursor: "id",
         id: "123",
-        title: "How shame are you",
+        title: "Title 1",
         description: "Pretty much",
         coverImageUrl:
-            "https://images.firstpost.com/wp-content/uploads/2020/04/meme02-3805.jpg?impolicy=website&width=800&height=800",
+            "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_",
       ),
       Survey(
         cursor: "id",
-        id: "123",
-        title: "test 2",
+        id: "456",
+        title: "Title 2",
         description: "test 2",
         coverImageUrl:
-            "https://images.hindustantimes.com/rf/image_size_630x354/HT/p2/2020/05/01/Pictures/_6e744fb4-8bc4-11ea-8bae-d48e751bd032.jpg",
+            "https://dhdbhh0jsld0o.cloudfront.net/m/b41c84934fa8e4c34269_",
       ),
     ]);
   }
