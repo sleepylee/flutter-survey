@@ -1,4 +1,5 @@
 # survey
+[![codecov](https://codecov.io/gh/sleepylee/flutter-survey/branch/develop/graph/badge.svg?token=S5YUK2U2IY)](https://codecov.io/gh/sleepylee/flutter-survey)
 
 A survey conducting platform built with Flutter
 
@@ -6,22 +7,26 @@ A survey conducting platform built with Flutter
 
 - Checkout the repository
 - Run the app with the desire app flavor:
-   
-   - Staging: `$ flutter run --flavor staging -t lib/main-staging.dart`
-   
-   - Production: `$ flutter run --flavor production -t lib/main-production.dart`
-   
+
+  - Staging: `$ flutter run --flavor staging -t lib/main-staging.dart`
+
+  - Production: `$ flutter run --flavor production -t lib/main-production.dart`
+
 - When adding a new model, generating the serializer by running:
 
-    - `$ flutter pub run build_runner build --delete-conflicting-outputs`
+  - `$ flutter pub run build_runner build --delete-conflicting-outputs`
 
 - Running unit testing:
 
-    - `$ flutter test test/directory/to/test` 
-    
+  - `$ flutter test .`
+
+- Running integration test with emulator:
+
+  - `flutter drive --driver=test_driver/integration_test_driver.dart --target=integration_test/{test_file}.dart`
+
 - To generate Assets/Font/Image:
-    
-    - `$ flutter pub run build_runner build --delete-conflicting-outputs`    
+
+  - `$ flutter pub run build_runner build --delete-conflicting-outputs`
 
 ## License
 

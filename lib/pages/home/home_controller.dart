@@ -67,14 +67,15 @@ class HomeController extends GetxController {
     final getSurveysUseCase = Get.find<GetSurveysUseCase>();
     // ignore: invalid_use_of_protected_member
     if (_surveys.value.isEmpty) {
-      final surveys = await getSurveysUseCase.call("");
+      final surveys = await getSurveysUseCase.call(GetSurveysInput(cursor: ""));
       if (surveys is Success<List<Survey>>) {
         _surveys.addAll(surveys.value);
       }
     } else {
       // ignore: invalid_use_of_protected_member
       final lastCursor = _surveys.value.last.cursor;
-      final surveys = await getSurveysUseCase.call(lastCursor);
+      final surveys =
+          await getSurveysUseCase.call(GetSurveysInput(cursor: lastCursor));
       if (surveys is Success<List<Survey>>) {
         if (surveys.value.isEmpty) {
           _paginationFinished = true;
@@ -83,6 +84,17 @@ class HomeController extends GetxController {
 
         _surveys.addAll(surveys.value);
       }
+    }
+  }
+
+  void refreshData(Function onComplete) async {
+    final getSurveysUseCase = Get.find<GetSurveysUseCase>();
+    final surveys = await getSurveysUseCase
+        .call(GetSurveysInput(cursor: "", forceNetworkData: true));
+    if (surveys is Success<List<Survey>>) {
+      _surveys.clear();
+      _surveys.addAll(surveys.value);
+      onComplete.call();
     }
   }
 

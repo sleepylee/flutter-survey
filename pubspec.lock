@@ -294,7 +294,7 @@ packages:
     source: hosted
     version: "2.1.2"
   flutter_driver:
-    dependency: transitive
+    dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -362,6 +362,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.0"
+  fresh:
+    dependency: transitive
+    description:
+      name: fresh
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
+  fresh_graphql:
+    dependency: "direct main"
+    description:
+      name: fresh_graphql
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
   fuchsia_remote_debug_protocol:
     dependency: transitive
     description: flutter
@@ -541,7 +555,14 @@ packages:
       name: logging
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "0.11.4"
+  lottie:
+    dependency: "direct main"
+    description:
+      name: lottie
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.7.0+1"
   matcher:
     dependency: transitive
     description:
@@ -724,6 +745,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.8"
+  pull_to_refresh:
+    dependency: "direct main"
+    description:
+      name: pull_to_refresh
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.6.5"
   quiver:
     dependency: transitive
     description:
@@ -1022,7 +1050,7 @@ packages:
       name: webkit_inspection_protocol
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "0.7.5"
   websocket:
     dependency: transitive
     description:
@@ -1060,4 +1088,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.12.0 <3.0.0"
-  flutter: ">=1.24.0-10.1.pre"
+  flutter: ">=2.0.0"

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fresh_graphql/fresh_graphql.dart';
 import 'package:get/get.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:survey/api/graphql/graphql_client_provider.dart';
 import 'package:survey/api/http/api_client_provider.dart';
 import 'package:survey/navigator/navigator.dart';
@@ -16,6 +18,7 @@ import 'package:survey/pages/survey/survey_binding.dart';
 import 'package:survey/pages/survey/survey_page.dart';
 import 'package:survey/pages/survey/survey_question_page.dart';
 import 'package:survey/preferences/shared_preferences.dart';
+import 'package:survey/repositories/user_repository.dart';
 import 'package:survey/themes.dart';
 
 import 'api/http/api_client.dart';
@@ -81,9 +84,15 @@ class _AppState extends State<SurveyApp> {
   }
 
   void _initAppDependencies() {
-    Get.put<SharedPreferencesStorage>(LocalSharedPreferencesStorage());
+    final localStorage = LocalSharedPreferencesStorage();
+    Get.put<SharedPreferencesStorage>(localStorage);
+    Get.put<TokenStorage<OAuth2Token>>(localStorage);
+    initHiveForFlutter().then((_) => Get.lazyPut<Store>(() => HiveStore()));
+
     Get.put<ApiClient>(ApiClientProvider().httpClient());
     Get.put<GraphQLClientProvider>(GraphQLClientProvider());
     Get.put<AppNavigator>(AppNavigatorImpl());
+
+    Get.put<UserRepository>(UserRepositoryImpl(Get.find(), Get.find()));
   }
 }

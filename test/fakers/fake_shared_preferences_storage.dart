@@ -26,4 +26,9 @@ class FakeSharedPreferencesStorage extends Fake
   Future<void> saveRefreshToken(String refreshToken) async {
     _fakeStorage['refresh-token'] = refreshToken;
   }
+
+  @override
+  Future<String> getRefreshToken() async {
+    return _fakeStorage['refresh-token'];
+  }
 }

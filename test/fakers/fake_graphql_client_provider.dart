@@ -3,7 +3,7 @@ import 'package:survey/api/graphql/graphql_client_provider.dart';
 
 class FakeGraphQLClientProvider extends Fake implements GraphQLClientProvider {
   @override
-  void setAuthToken(String token) {
+  void tokenIsReadyToUse() {
     // do nothing for now
   }
 }

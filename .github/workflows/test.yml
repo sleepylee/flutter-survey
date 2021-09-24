@@ -13,7 +13,6 @@ jobs:
   lint_and_test:
     name: Static code analyze & Unit test
     runs-on: ubuntu-latest
-    environment: staging
     steps:
       # Setup Java environment in order to build the Android app.
       - uses: actions/checkout@v2.3.2
@@ -37,4 +36,16 @@ jobs:
         run: flutter analyze .
 
       - name: Run widget tests, unit test for our flutter project.
-        run: flutter test
+        run: flutter test --machine --coverage
+
+      - name: Setup lcov and modify the reports
+        run: sudo apt-get install lcov && lcov --remove coverage/lcov.info 'lib/*/*.freezed.dart' 'lib/*/*.g.dart' 'lib/generated/*.dart' 'lib/flavors.dart' 'lib/exception/network_exceptions.dart' -o coverage/lcov.info
+
+      - uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          files: ./coverage/lcov.info
+          flags: unittests # optional
+          name: Upload coverage to codecov
+          fail_ci_if_error: false
+          verbose: true

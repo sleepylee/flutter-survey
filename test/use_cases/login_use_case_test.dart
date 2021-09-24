@@ -1,18 +1,14 @@
-import 'package:dio/dio.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:survey/exception/network_exceptions.dart';
 import 'package:survey/models/auth_token.dart';
-import 'package:survey/repositories/oauth_repository.dart';
 import 'package:survey/use_cases/base_use_case.dart';
 import 'package:survey/use_cases/login_use_case.dart';
+import 'package:test/test.dart';
 
 import '../fakers/fake_graphql_client_provider.dart';
 import '../fakers/fake_shared_preferences_storage.dart';
-import 'login_use_case_test.mocks.dart';
+import '../mocks/generate_mocks.mocks.dart';
 
-@GenerateMocks([OAuthRepository])
 void main() {
   group('Validate login use case', () {
     final mockRepository = MockOAuthRepository();
@@ -27,9 +23,8 @@ void main() {
           refreshToken: 'refresh token'),
     );
 
-    when(mockRepository.login('negative', any)).thenAnswer((_) => Future.error(
-        DioError(
-            response: Response(statusCode: 400), type: DioErrorType.RESPONSE)));
+    when(mockRepository.login('negative', any))
+        .thenThrow(NetworkExceptions.unauthorisedRequest());
 
     final loginUseCase =
         LoginUseCase(mockRepository, mockStorage, mockGraphQLClientProvider);
@@ -44,10 +39,9 @@ void main() {
     test('When login with invalid credential, it returns Failed', () async {
       final result = await loginUseCase
           .call(LoginCredential(email: 'negative', password: 'meh'));
-
       expect(result, isA<Failed>());
       expect((result as Failed).exception.networkExceptions,
-          NetworkExceptions.unauthorisedRequest());
+          isA<UnauthorisedRequest>());
     });
   });
 }
